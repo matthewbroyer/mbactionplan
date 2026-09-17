@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Plan | Simple, Focused Daily Productivity</title>
+    
+    <link id="favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23151c2c'/><rect x='6' y='6' width='9' height='9' rx='2.5' fill='%2338bdf8'/><rect x='17' y='6' width='9' height='9' rx='2.5' fill='%23818cf8'/><rect x='6' y='17' width='9' height='9' rx='2.5' fill='%2334d399'/><rect x='17' y='17' width='9' height='9' rx='2.5' fill='%23f59e0b'/><circle cx='16' cy='16' r='2' fill='%23e2e8f0'/></svg>" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            950: '#0b0f19',
+                            900: '#111827',
+                            850: '#151c2c',
+                            800: '#1e293b',
+                            750: '#26334d',
+                            700: '#334155',
+                            400: '#94a3b8',
+                            300: '#cbd5e1',
+                            200: '#e2e8f0',
+                        },
+                        brand: {
+                            500: '#38bdf8',
+                            600: '#0284c7',
+                            700: '#0369a1'
+                        }
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(8px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        'toast-in': {
+                            '0%': { opacity: '0', transform: 'translateX(24px) scale(0.96)' },
+                            '100%': { opacity: '1', transform: 'translateX(0) scale(1)' }
+                        },
+                        'check-pop': {
+                            '0%': { transform: 'scale(0.6)' },
+                            '60%': { transform: 'scale(1.15)' },
+                            '100%': { transform: 'scale(1)' }
+                        },
+                        'highlight-pulse': {
+                            '0%, 100%': { boxShadow: '0 0 0 2px #38bdf8, 0 0 20px rgba(56,189,248,0.5)' },
+                            '50%': { boxShadow: '0 0 0 4px #38bdf8, 0 0 30px rgba(56,189,248,0.8)' }
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 0.35s ease-out',
+                        'toast-in': 'toast-in 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'check-pop': 'check-pop 0.3s ease-out',
+                        'highlight-pulse': 'highlight-pulse 1.8s ease-in-out 3'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+
+        button:focus, button:focus-visible, a:focus, select:focus, input:focus, textarea:focus {
+            outline: none !important;
+        }
+        button:focus-visible {
+            box-shadow: 0 0 0 2px #0b0f19, 0 0 0 4px rgba(56, 189, 248, 0.5);
+        }
+
+        input[type="date"], input[type="time"] {
+            color: #0f172a !important;
+            background-color: #f8fafc !important;
+            border: 1px solid #cbd5e1 !important;
+            padding-right: 0.5rem;
+        }
+        .dark input[type="date"], .dark input[type="time"] {
+            color-scheme: dark;
+            color: #f8fafc !important;
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+        }
+        .dark input[type="date"]::-webkit-calendar-picker-indicator,
+        .dark input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.9) brightness(1.2);
+            cursor: pointer;
+            opacity: 1 !important;
+        }
+
+        .card-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .card-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px -12px rgba(0,0,0,0.15);
+        }
+        .dark .card-lift:hover {
+            box-shadow: 0 12px 28px -12px rgba(0,0,0,0.35);
+        }
+        .btn-press {
+            transition: transform 0.12s ease, background-color 0.15s ease, color 0.15s ease;
+        }
+        .btn-press:active { transform: scale(0.96); }
+
+        /* Matrix: one outer scroll on main; quadrants scroll internally */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            min-height: 0;
+        }
+        @media (min-width: 1024px) {
+            .matrix-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                height: calc(100vh - 11.5rem);
+                max-height: calc(100vh - 11.5rem);
+            }
+        }
+        .matrix-quad {
+            min-height: 220px;
+            max-height: none;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        @media (min-width: 1024px) {
+            .matrix-quad {
+                min-height: 0;
+                max-height: 100%;
+            }
+        }
+        .matrix-quad-body {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="h-full bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-300 antialiased selection:bg-sky-500/20 selection:text-sky-700 dark:selection:text-sky-300 transition-colors duration-300">
+    <div id="root" class="h-full"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        const COLOR_PRESETS = [
+            { id: 'sky', label: 'Sky Blue', hex: '#38bdf8' },
+            { id: 'emerald', label: 'Emerald', hex: '#34d399' },
+            { id: 'violet', label: 'Violet', hex: '#a78bfa' },
+            { id: 'amber', label: 'Amber', hex: '#f59e0b' },
+            { id: 'rose', label: 'Rose', hex: '#fb7185' },
+            { id: 'teal', label: 'Teal', hex: '#2dd4bf' },
+            { id: 'fuchsia', label: 'Fuchsia', hex: '#e879f9' }
+        ];
+
+        const RECURRING_OPTIONS = [
+            { value: 'none', label: 'Does not repeat' },
+            { value: 'daily', label: 'Daily' },
+            { value: 'weekdays', label: 'Every weekday (Mon–Fri)' },
+            { value: 'weekends', label: 'Weekends (Sat–Sun)' },
+            { value: 'weekly', label: 'Weekly' },
+            { value: 'biweekly', label: 'Every 2 weeks' },
+            { value: 'monthly', label: 'Monthly' },
+            { value: 'bimonthly', label: 'Every 2 months' },
+            { value: 'quarterly', label: 'Quarterly' },
+            { value: 'semiannual', label: 'Every 6 months' },
+            { value: 'yearly', label: 'Yearly' }
+        ];
+
+        function Icon({ name, className = "w-4 h-4", ...props }) {
+            const spanRef = useRef(null);
+            useEffect(() => {
+                if (spanRef.current && window.lucide) {
+                    spanRef.current.innerHTML = `<i data-lucide="${name}" class="${className}"></i>`;
+                    window.lucide.createIcons({ root: spanRef.current });
+                }
+            }, [name, className]);
+            return <span ref={spanRef} className="inline-flex items-center justify-center" {...props}></span>;
+        }
+
+        const getLocalDateStr = (d = new Date()) => {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${day}`;
+        };
+
+        // CSV helpers: keep rows single-line so import column indices stay correct
+        const csvEscape = (val) => {
+            const s = String(val ?? '')
+                .replace(/\r\n/g, ' ')
+                .replace(/[\r\n]/g, ' ')
+                .replace(/"/g, '""');
+            return `"${s}"`;
+        };
+
+        // Recover dates Excel may have rewritten (M/D/YYYY, D/M/YYYY, etc.)
+        const normalizeImportDate = (raw) => {
+            let s = String(raw ?? '').trim();
+            if (!s) return '';
+            // strip Excel formula/text wrappers: ="2024-01-15" or '2024-01-15
+            s = s.replace(/^=\s*"?|"$/g, '').replace(/^'/, '').trim();
+            if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+            // M/D/YYYY or MM/DD/YYYY
+            let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+            if (m) {
+                return `${m[3]}-${m[1].padStart(2, '0')}-${m[2].padStart(2, '0')}`;
+            }
+            // D-M-YYYY or D.M.YYYY
+            m = s.match(/^(\d{1,2})[-.](\d{1,2})[-.](\d{4})$/);
+            if (m) {
+                return `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`;
+            }
+            const d = new Date(s);
+            if (!isNaN(d.getTime())) return getLocalDateStr(d);
+            return '';
+        };
+
+        const normalizeImportTime = (raw) => {
+            let s = String(raw ?? '').trim();
+            if (!s) return '';
+            s = s.replace(/^=\s*"?|"$/g, '').replace(/^'/, '').trim();
+            // HH:MM or HH:MM:SS
+            let m = s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
+            if (m) {
+                return `${m[1].padStart(2, '0')}:${m[2]}`;
+            }
+            // Excel sometimes exports 2:30 PM
+            m = s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+            if (m) {
+                let h = parseInt(m[1], 10);
+                const min = m[2];
+                const ap = m[3].toUpperCase();
+                if (ap === 'PM' && h < 12) h += 12;
+                if (ap === 'AM' && h === 12) h = 0;
+                return `${String(h).padStart(2, '0')}:${min}`;
+            }
+            return s;
+        };
+
+        const playAlarmSound = (repeat = 3) => {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const playBeep = (freq, type, duration, startTime, volume = 0.3) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = type;
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + startTime);
+                    gain.gain.setValueAtTime(volume, ctx.currentTime + startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + startTime + duration);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + startTime);
+                    osc.stop(ctx.currentTime + startTime + duration);
+                };
+                for (let r = 0; r < repeat; r++) {
+                    const offset = r * 0.8;
+                    playBeep(880, 'triangle', 0.18, offset + 0.0, 0.35);
+                    playBeep(1174.66, 'sine', 0.18, offset + 0.15, 0.4);
+                    playBeep(1396.91, 'square', 0.2, offset + 0.3, 0.3);
+                    playBeep(1760.00, 'sine', 0.35, offset + 0.48, 0.45);
+                }
+            } catch (e) {
+                console.error("Audio playback error:", e);
+            }
+        };
+
+        // Particles only
+        function InteractiveBackground({ theme }) {
+            const canvasRef = useRef(null);
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let animationFrameId;
+                let width = (canvas.width = window.innerWidth);
+                let height = (canvas.height = window.innerHeight);
+
+                const handleResize = () => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                };
+                window.addEventListener('resize', handleResize);
+
+                const particles = Array.from({ length: 45 }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.8,
+                    vy: (Math.random() - 0.5) * 0.8,
+                    size: Math.random() * 2.5 + 1,
+                    alpha: Math.random() * 0.5 + 0.2
+                }));
+
+                let mouseX = -1000, mouseY = -1000;
+                const handleMouseMove = (e) => { mouseX = e.clientX; mouseY = e.clientY; };
+                window.addEventListener('mousemove', handleMouseMove);
+
+                const colorBase = theme === 'light' ? '14, 165, 233' : '56, 189, 248';
+
+                const render = () => {
+                    ctx.clearRect(0, 0, width, height);
+                    particles.forEach((p, idx) => {
+                        p.x += p.vx; p.y += p.vy;
+                        if (p.x < 0 || p.x > width) p.vx *= -1;
+                        if (p.y < 0 || p.y > height) p.vy *= -1;
+                        const dx = p.x - mouseX, dy = p.y - mouseY;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120 && dist > 0) {
+                            p.x += (dx / dist) * 1.5;
+                            p.y += (dy / dist) * 1.5;
+                        }
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${colorBase}, ${p.alpha})`;
+                        ctx.fill();
+                        for (let j = idx + 1; j < particles.length; j++) {
+                            const p2 = particles[j];
+                            const pdx = p.x - p2.x, pdy = p.y - p2.y;
+                            const pdist = Math.sqrt(pdx * pdx + pdy * pdy);
+                            if (pdist < 110) {
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.strokeStyle = `rgba(${colorBase}, ${(1 - pdist / 110) * 0.18})`;
+                                ctx.lineWidth = 0.8;
+                                ctx.stroke();
+                            }
+                        }
+                    });
+                    animationFrameId = requestAnimationFrame(render);
+                };
+                render();
+                return () => {
+                    cancelAnimationFrame(animationFrameId);
+                    window.removeEventListener('resize', handleResize);
+                    window.removeEventListener('mousemove', handleMouseMove);
+                };
+            }, [theme]);
+
+            return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-80" />;
+        }
+
+        const getNextRecurringDate = (currentDateStr, recurringType) => {
+            const base = currentDateStr ? new Date(currentDateStr + 'T12:00:00') : new Date();
+            if (isNaN(base.getTime())) return getLocalDateStr();
+
+            const advanceWeekday = (d) => {
+                do { d.setDate(d.getDate() + 1); } while (d.getDay() === 0 || d.getDay() === 6);
+            };
+            const advanceWeekend = (d) => {
+                do { d.setDate(d.getDate() + 1); } while (d.getDay() !== 0 && d.getDay() !== 6);
+            };
+
+            switch (recurringType) {
+                case 'daily': base.setDate(base.getDate() + 1); break;
+                case 'weekdays': advanceWeekday(base); break;
+                case 'weekends': advanceWeekend(base); break;
+                case 'weekly': base.setDate(base.getDate() + 7); break;
+                case 'biweekly': base.setDate(base.getDate() + 14); break;
+                case 'monthly': base.setMonth(base.getMonth() + 1); break;
+                case 'bimonthly': base.setMonth(base.getMonth() + 2); break;
+                case 'quarterly': base.setMonth(base.getMonth() + 3); break;
+                case 'semiannual': base.setMonth(base.getMonth() + 6); break;
+                case 'yearly': base.setFullYear(base.getFullYear() + 1); break;
+                default: base.setDate(base.getDate() + 1);
+            }
+            return getLocalDateStr(base);
+        };
+
+        const parseCSVLine = (line) => {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const ch = line[i];
+                if (ch === '"') {
+                    if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+                    else inQuotes = !inQuotes;
+                } else if (ch === ',' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else current += ch;
+            }
+            result.push(current);
+            return result;
+        };
+
+        const normalizeTask = (t) => ({
+            ...t,
+            status: t.status || 'Not Started',
+            focusMinutes: t.focusMinutes || 0,
+            isPinned: !!t.isPinned,
+            recurring: t.recurring || 'none',
+            color: t.color || '#38bdf8',
+            dueTime: t.dueTime || '',
+            quadrant: t.quadrant || 'do-first',
+            category: t.category || 'General',
+            dueDate: t.dueDate || '',
+            description: t.description || '',
+            title: t.title || 'Untitled'
+        });
+
+        function App() {
+            const [theme, setTheme] = useState(() => localStorage.getItem('ap_theme_v5') || 'dark');
+            const [activeTab, setActiveTab] = useState('dashboard');
+            const [toast, setToast] = useState(null);
+            const [highlightedTaskId, setHighlightedTaskId] = useState(null);
+            const [selectedProjectId, setSelectedProjectId] = useState('all');
+            const [selectedProjectDetail, setSelectedProjectDetail] = useState(null);
+
+            const [projects, setProjects] = useState(() => {
+                const saved = localStorage.getItem('ap_projects_v5') || localStorage.getItem('ap_projects_v4');
+                if (saved) { try { return JSON.parse(saved); } catch (e) {} }
+                return [
+                    { id: 'p_1', name: 'Work & Projects', description: 'Core deliverables and daily tasks', status: 'Active', code: 'PRJ', color: '#38bdf8' },
+                    { id: 'p_2', name: 'Personal & Life', description: 'Errands, health, and habits', status: 'Active', code: 'LIFE', color: '#34d399' }
+                ];
+            });
+
+            const [tasks, setTasks] = useState(() => {
+                const saved = localStorage.getItem('ap_tasks_v5') || localStorage.getItem('ap_tasks_v4');
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        return Array.isArray(parsed) ? parsed.map(normalizeTask) : [];
+                    } catch (e) {}
+                }
+                return [];
+            });
+
+            // Stable undo/redo history (fixed crash source)
+            const [history, setHistory] = useState(() => [Array.isArray(tasks) ? tasks : []]);
+            const [historyIndex, setHistoryIndex] = useState(0);
+            const historyRef = useRef({ history: [Array.isArray(tasks) ? tasks : []], index: 0 });
+            useEffect(() => {
+                historyRef.current = { history, index: historyIndex };
+            }, [history, historyIndex]);
+
+            const [taskModalOpen, setTaskModalOpen] = useState(false);
+            const [currentTask, setCurrentTask] = useState(null);
+            const [projectModalOpen, setProjectModalOpen] = useState(false);
+            const [currentProject, setCurrentProject] = useState(null);
+            const [shareModalOpen, setShareModalOpen] = useState(false);
+            const [clearModalOpen, setClearModalOpen] = useState(false);
+            const [clearConfirmText, setClearConfirmText] = useState('');
+            const fileInputRef = useRef(null);
+
+            const [isRunning, setIsRunning] = useState(false);
+            const [pomoCycle, setPomoCycle] = useState(0);
+            const [customMinutes, setCustomMinutes] = useState(25);
+            const [timeLeft, setTimeLeft] = useState(25 * 60);
+            const [selectedTaskId, setSelectedTaskId] = useState('');
+            const [wakeLockEnabled, setWakeLockEnabled] = useState(false);
+            const wakeLockSentinel = useRef(null);
+            const isWorkPhase = pomoCycle % 2 === 0;
+            const activeSecondCounterRef = useRef(0);
+
+            useEffect(() => {
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+                localStorage.setItem('ap_theme_v5', theme);
+            }, [theme]);
+
+            useEffect(() => {
+                localStorage.setItem('ap_projects_v5', JSON.stringify(projects));
+            }, [projects]);
+
+            const showToast = useCallback((message, type = 'success') => {
+                setToast({ message, type });
+                setTimeout(() => setToast(null), 3500);
+            }, []);
+
+            const updateTasksWithHistory = useCallback((newTasks, showToastMsg = null) => {
+                const safe = Array.isArray(newTasks) ? newTasks.map(normalizeTask) : [];
+                setHistory(prev => {
+                    const idx = historyRef.current.index;
+                    const next = prev.slice(0, idx + 1);
+                    next.push(safe);
+                    if (next.length > 50) next.shift();
+                    const newIndex = next.length - 1;
+                    historyRef.current = { history: next, index: newIndex };
+                    setHistoryIndex(newIndex);
+                    return next;
+                });
+                setTasks(safe);
+                localStorage.setItem('ap_tasks_v5', JSON.stringify(safe));
+                if (showToastMsg) showToast(showToastMsg);
+            }, [showToast]);
+
+            const handleUndo = useCallback(() => {
+                const { history: h, index } = historyRef.current;
+                if (index <= 0) return;
+                const prevIndex = index - 1;
+                const snapshot = Array.isArray(h[prevIndex]) ? h[prevIndex].map(normalizeTask) : [];
+                historyRef.current = { history: h, index: prevIndex };
+                setHistoryIndex(prevIndex);
+                setTasks(snapshot);
+                localStorage.setItem('ap_tasks_v5', JSON.stringify(snapshot));
+                showToast('Action undone.', 'info');
+            }, [showToast]);
+
+            const handleRedo = useCallback(() => {
+                const { history: h, index } = historyRef.current;
+                if (index >= h.length - 1) return;
+                const nextIndex = index + 1;
+                const snapshot = Array.isArray(h[nextIndex]) ? h[nextIndex].map(normalizeTask) : [];
+                historyRef.current = { history: h, index: nextIndex };
+                setHistoryIndex(nextIndex);
+                setTasks(snapshot);
+                localStorage.setItem('ap_tasks_v5', JSON.stringify(snapshot));
+                showToast('Action redone.', 'info');
+            }, [showToast]);
+
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    const tag = (e.target.tagName || '').toLowerCase();
+                    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+                        e.preventDefault();
+                        if (e.shiftKey) handleRedo();
+                        else handleUndo();
+                    } else if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
+                        e.preventDefault();
+                        handleRedo();
+                    }
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [handleUndo, handleRedo]);
+
+            useEffect(() => {
+                const requestWakeLock = async () => {
+                    if ('wakeLock' in navigator && wakeLockEnabled) {
+                        try {
+                            wakeLockSentinel.current = await navigator.wakeLock.request('screen');
+                        } catch (err) { console.error('Wake Lock error:', err); }
+                    }
+                };
+                if (wakeLockEnabled) requestWakeLock();
+                else if (wakeLockSentinel.current) {
+                    wakeLockSentinel.current.release().catch(() => {});
+                    wakeLockSentinel.current = null;
+                }
+                return () => { if (wakeLockSentinel.current) wakeLockSentinel.current.release().catch(() => {}); };
+            }, [wakeLockEnabled]);
+
+            const incrementTaskFocusTime = (taskId, addedMinutes = 1) => {
+                if (!taskId) return;
+                setTasks(prevTasks => {
+                    const updated = prevTasks.map(t =>
+                        t.id === taskId ? { ...t, focusMinutes: (t.focusMinutes || 0) + addedMinutes } : t
+                    );
+                    localStorage.setItem('ap_tasks_v5', JSON.stringify(updated));
+                    setHistory(prevHistory => {
+                        const newHistory = [...prevHistory];
+                        const idx = historyRef.current.index;
+                        if (idx >= 0 && idx < newHistory.length) newHistory[idx] = updated;
+                        historyRef.current = { ...historyRef.current, history: newHistory };
+                        return newHistory;
+                    });
+                    return updated;
+                });
+            };
+
+            useEffect(() => {
+                let interval = null;
+                if (isRunning) {
+                    interval = setInterval(() => {
+                        setTimeLeft(prev => {
+                            if (prev <= 1) {
+                                handleTimerCompletion();
+                                return 0;
+                            }
+                            return prev - 1;
+                        });
+                        if (selectedTaskId && isWorkPhase) {
+                            activeSecondCounterRef.current += 1;
+                            if (activeSecondCounterRef.current >= 60) {
+                                activeSecondCounterRef.current = 0;
+                                incrementTaskFocusTime(selectedTaskId, 1);
+                            }
+                        }
+                    }, 1000);
+                } else {
+                    activeSecondCounterRef.current = 0;
+                }
+                return () => clearInterval(interval);
+            }, [isRunning, pomoCycle, isWorkPhase, selectedTaskId, customMinutes]);
+
+            const handleTimerCompletion = () => {
+                playAlarmSound(4);
+                activeSecondCounterRef.current = 0;
+                if (isWorkPhase) {
+                    if (selectedTaskId) showToast('Focus session auto-logged to task!', 'success');
+                    const nextCycle = (pomoCycle + 1) % 8;
+                    setPomoCycle(nextCycle);
+                    setTimeLeft(nextCycle === 7 ? 15 * 60 : 5 * 60);
+                    showToast('Focus block finished! Time for a break.', 'success');
+                } else {
+                    showToast('Break complete! Ready for your next focus block.', 'success');
+                    const nextCycle = (pomoCycle + 1) % 8;
+                    setPomoCycle(nextCycle);
+                    setTimeLeft(customMinutes * 60);
+                }
+            };
+
+            const toggleTimer = () => setIsRunning(!isRunning);
+            const resetTimer = () => {
+                setIsRunning(false);
+                activeSecondCounterRef.current = 0;
+                setPomoCycle(0);
+                setTimeLeft(customMinutes * 60);
+            };
+            const formatSeconds = (totalSecs) => {
+                const mins = Math.floor(totalSecs / 60);
+                const secs = totalSecs % 60;
+                return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            };
+
+            const handleDuplicateTask = (taskToDup) => {
+                const dupTask = normalizeTask({
+                    ...taskToDup,
+                    id: 't_' + Math.random().toString(36).substring(2, 11),
+                    title: `${taskToDup.title} (Copy)`,
+                    status: 'Not Started',
+                    focusMinutes: 0
+                });
+                updateTasksWithHistory([...tasks, dupTask], 'Task duplicated!');
+            };
+
+            const handleTogglePin = (taskId) => {
+                const updated = tasks.map(t => t.id === taskId ? { ...t, isPinned: !t.isPinned } : t);
+                updateTasksWithHistory(updated, 'Task pin updated.');
+            };
+
+            const handleToggleComplete = (taskId) => {
+                const targetTask = tasks.find(t => t.id === taskId);
+                if (!targetTask) return;
+                const willComplete = targetTask.status !== 'Completed';
+                if (willComplete && targetTask.recurring && targetTask.recurring !== 'none') {
+                    const nextDate = getNextRecurringDate(targetTask.dueDate, targetTask.recurring);
+                    const updatedTasks = tasks.map(t =>
+                        t.id === taskId
+                            ? { ...t, status: 'Not Started', dueDate: nextDate, isPinned: false }
+                            : t
+                    );
+                    updateTasksWithHistory(updatedTasks, `Recurring task complete! Next due: ${nextDate}.`);
+                } else {
+                    const updatedTasks = tasks.map(t =>
+                        t.id === taskId
+                            ? {
+                                ...t,
+                                status: willComplete ? 'Completed' : 'Not Started',
+                                isPinned: willComplete ? false : t.isPinned
+                            }
+                            : t
+                    );
+                    updateTasksWithHistory(updatedTasks, willComplete ? 'Task marked complete.' : 'Task restored.');
+                }
+            };
+
+            const handleDashboardTaskClick = (taskId) => {
+                setHighlightedTaskId(taskId);
+                setActiveTab('tasks');
+                setTimeout(() => {
+                    const el = document.getElementById(`task-card-${taskId}`);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            };
+
+            const handleDeleteProject = (projectId) => {
+                if (!projectId) return;
+                const name = projects.find(p => p.id === projectId)?.name || 'Project';
+                setProjects(prev => prev.filter(p => p.id !== projectId));
+                updateTasksWithHistory(
+                    tasks.filter(t => t.projectId !== projectId),
+                    `"${name}" and its tasks deleted.`
+                );
+                if (selectedProjectId === projectId) setSelectedProjectId('all');
+                if (selectedProjectDetail?.id === projectId) setSelectedProjectDetail(null);
+                setProjectModalOpen(false);
+                setCurrentProject(null);
+            };
+
+            const filteredTasks = selectedProjectId === 'all'
+                ? tasks
+                : tasks.filter(t => t.projectId === selectedProjectId);
+
+            const generateCSVData = () => {
+                let csv = 'RecordType,ID,ProjectId,Title,Description,QuadrantOrStatus,Category,DueDate,DueTime,FocusMins,Recurring,IsPinned,Color\n';
+                projects.forEach(p => {
+                    csv += [
+                        'Project',
+                        csvEscape(p.id),
+                        csvEscape(''),
+                        csvEscape(p.name || ''),
+                        csvEscape(p.description || ''),
+                        csvEscape(p.status || 'Active'),
+                        csvEscape(p.code || ''),
+                        csvEscape(''),
+                        csvEscape(''),
+                        '0',
+                        csvEscape('none'),
+                        'false',
+                        csvEscape(p.color || '#38bdf8')
+                    ].join(',') + '\n';
+                });
+                tasks.forEach(t => {
+                    const quad = t.quadrant || 'do-first';
+                    // Keep both status and quadrant so matrix placement survives import
+                    const statusStr = t.status === 'Completed' ? `Completed:${quad}` : quad;
+                    csv += [
+                        'Task',
+                        csvEscape(t.id),
+                        csvEscape(t.projectId || ''),
+                        csvEscape(t.title || ''),
+                        csvEscape(t.description || ''),
+                        csvEscape(statusStr),
+                        csvEscape(t.category || ''),
+                        csvEscape(t.dueDate || ''),
+                        csvEscape(t.dueTime || ''),
+                        String(t.focusMinutes || 0),
+                        csvEscape(t.recurring || 'none'),
+                        t.isPinned ? 'true' : 'false',
+                        csvEscape(t.color || '#38bdf8')
+                    ].join(',') + '\n';
+                });
+                return csv;
+            };
+
+            const exportCSVBlob = () => {
+                const csv = generateCSVData();
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.setAttribute('href', url);
+                link.setAttribute('download', `Action_Plan_Backup_${getLocalDateStr()}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                showToast('CSV backup downloaded.', 'success');
+                setShareModalOpen(false);
+            };
+
+            const handleShareOrExport = async () => {
+                const csvData = generateCSVData();
+                const fileName = `Action_Plan_Backup_${getLocalDateStr()}.csv`;
+                const file = new File([csvData], fileName, { type: 'text/csv' });
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            title: 'Action Plan Backup',
+                            text: 'Action Plan productivity backup',
+                            files: [file]
+                        });
+                        showToast('Backup shared successfully!', 'success');
+                    } catch (err) {
+                        if (err.name !== 'AbortError') setShareModalOpen(true);
+                    }
+                } else {
+                    setShareModalOpen(true);
+                }
+            };
+
+            const handleImportCSV = (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    try {
+                        const text = ev.target.result;
+                        const lines = text.split(/\r?\n/).filter(l => l.trim());
+                        if (lines.length < 2) {
+                            showToast('CSV appears empty.', 'error');
+                            return;
+                        }
+                        const importedProjects = [];
+                        const importedTasks = [];
+                        for (let i = 1; i < lines.length; i++) {
+                            const cols = parseCSVLine(lines[i]);
+                            if (cols.length < 2) continue;
+                            const type = (cols[0] || '').trim();
+                            if (type === 'Project') {
+                                importedProjects.push({
+                                    id: (cols[1] || ('p_' + Math.random().toString(36).slice(2, 9))).trim(),
+                                    name: (cols[3] || 'Imported Project').trim(),
+                                    description: (cols[4] || '').trim(),
+                                    status: (cols[5] || 'Active').trim(),
+                                    code: (cols[6] || 'IMP').trim(),
+                                    color: (cols[12] || '#38bdf8').trim()
+                                });
+                            } else if (type === 'Task') {
+                                const qOrS = (cols[5] || 'do-first').trim();
+                                let isCompleted = false;
+                                let quadrant = qOrS;
+                                if (qOrS === 'Completed') {
+                                    isCompleted = true;
+                                    quadrant = 'do-first';
+                                } else if (qOrS.startsWith('Completed:')) {
+                                    isCompleted = true;
+                                    quadrant = qOrS.slice('Completed:'.length) || 'do-first';
+                                }
+                                const validQuads = ['do-first', 'schedule', 'delegate', 'eliminate'];
+                                if (!validQuads.includes(quadrant)) quadrant = 'do-first';
+
+                                importedTasks.push(normalizeTask({
+                                    id: (cols[1] || ('t_' + Math.random().toString(36).slice(2, 9))).trim(),
+                                    projectId: (cols[2] || '').trim(),
+                                    title: (cols[3] || 'Imported Task').trim(),
+                                    description: (cols[4] || '').trim(),
+                                    quadrant: quadrant,
+                                    status: isCompleted ? 'Completed' : 'Not Started',
+                                    category: (cols[6] || 'General').trim(),
+                                    dueDate: normalizeImportDate(cols[7]),
+                                    dueTime: normalizeImportTime(cols[8]),
+                                    focusMinutes: parseInt(cols[9], 10) || 0,
+                                    recurring: (cols[10] || 'none').trim(),
+                                    isPinned: String(cols[11]).toLowerCase() === 'true',
+                                    color: (cols[12] || '#38bdf8').trim()
+                                }));
+                            }
+                        }
+                        if (importedProjects.length) {
+                            setProjects(prev => {
+                                const map = new Map(prev.map(p => [p.id, p]));
+                                importedProjects.forEach(p => map.set(p.id, p));
+                                return Array.from(map.values());
+                            });
+                        }
+                        if (importedTasks.length) {
+                            const map = new Map(tasks.map(t => [t.id, t]));
+                            importedTasks.forEach(t => map.set(t.id, t));
+                            updateTasksWithHistory(Array.from(map.values()), `Imported ${importedTasks.length} tasks, ${importedProjects.length} projects.`);
+                        } else {
+                            showToast(importedProjects.length ? `Imported ${importedProjects.length} projects.` : 'No valid records found.', importedProjects.length ? 'success' : 'error');
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        showToast('Failed to parse CSV.', 'error');
+                    }
+                    if (fileInputRef.current) fileInputRef.current.value = '';
+                };
+                reader.readAsText(file);
+            };
+
+            const handleClearAllData = () => {
+                if (clearConfirmText.trim().toUpperCase() !== 'CLEAR') return;
+                localStorage.removeItem('ap_projects_v5');
+                localStorage.removeItem('ap_tasks_v5');
+                setProjects([]);
+                updateTasksWithHistory([]);
+                setSelectedProjectId('all');
+                setSelectedTaskId('');
+                setSelectedProjectDetail(null);
+                setClearConfirmText('');
+                setClearModalOpen(false);
+                showToast('All saved data removed.', 'success');
+            };
+
+            const canUndo = historyIndex > 0;
+            const canRedo = historyIndex < history.length - 1;
+
+            return (
+                <div className="h-full flex flex-col relative overflow-hidden transition-colors duration-300">
+                    <InteractiveBackground theme={theme} />
+
+                    {toast && (
+                        <div className={`fixed top-16 right-5 z-50 px-4 py-3 rounded-xl shadow-2xl border text-xs font-semibold flex items-center space-x-2 animate-toast-in ${
+                            toast.type === 'error' ? 'bg-rose-100 border-rose-300 text-rose-800 dark:bg-rose-950/90 dark:border-rose-800 dark:text-rose-200' :
+                            toast.type === 'info' ? 'bg-indigo-100 border-indigo-300 text-indigo-800 dark:bg-indigo-950/90 dark:border-indigo-800 dark:text-indigo-200' :
+                            'bg-white border-slate-200 text-slate-800 dark:bg-slate-850 dark:border-slate-700 dark:text-slate-200'
+                        }`}>
+                            <Icon name={toast.type === 'error' ? 'alert-circle' : toast.type === 'info' ? 'info' : 'check-circle-2'} className="w-4 h-4 text-sky-500" />
+                            <span>{toast.message}</span>
+                        </div>
+                    )}
+
+                    <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-3 shadow-sm z-10 relative">
+                        <div className="flex items-center space-x-3">
+                            <div className="flex items-center space-x-3">
+                                <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 p-1.5 flex items-center justify-center shadow-md">
+                                    <svg viewBox="0 0 32 32" className="w-full h-full">
+                                        <rect width="32" height="32" rx="8" className="fill-slate-900 dark:fill-[#151c2c]"/>
+                                        <rect x="6" y="6" width="9" height="9" rx="2.5" fill="#38bdf8"/>
+                                        <rect x="17" y="6" width="9" height="9" rx="2.5" fill="#818cf8"/>
+                                        <rect x="6" y="17" width="9" height="9" rx="2.5" fill="#34d399"/>
+                                        <rect x="17" y="17" width="9" height="9" rx="2.5" fill="#f59e0b"/>
+                                        <circle cx="16" cy="16" r="2" fill="#e2e8f0"/>
+                                    </svg>
+                                </div>
+                                <div className="hidden xs:block sm:block">
+                                    <h1 className="text-base font-extrabold tracking-tight text-slate-900 dark:text-slate-200 leading-none">Action Plan</h1>
+                                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-1">Simple, Focused Daily Productivity</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={() => { setCurrentTask(null); setTaskModalOpen(true); }}
+                                className="hidden sm:flex items-center justify-center space-x-1.5 bg-sky-500 hover:bg-sky-600 text-white px-4 py-1.5 rounded-xl text-xs font-bold shadow-md shadow-sky-500/20 transition-all btn-press"
+                            >
+                                <Icon name="plus" className="w-4 h-4" />
+                                <span>Add Task</span>
+                            </button>
+                        </div>
+
+                        <nav className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex-wrap">
+                            {[
+                                { id: 'dashboard', label: 'Dashboard', icon: 'layout-dashboard' },
+                                { id: 'projects', label: 'Projects', icon: 'folder-kanban' },
+                                { id: 'tasks', label: 'Tasks', icon: 'grid' },
+                                { id: 'calendar', label: 'Calendar', icon: 'calendar' },
+                                { id: 'pomodoro', label: 'Focus Timer', icon: 'timer' }
+                            ].map(tab => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all btn-press ${
+                                        activeTab === tab.id
+                                            ? 'bg-white text-slate-900 dark:bg-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm'
+                                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-900 border border-transparent'
+                                    }`}
+                                >
+                                    <Icon name={tab.icon} className="w-3.5 h-3.5" />
+                                    <span className="hidden md:inline">{tab.label}</span>
+                                </button>
+                            ))}
+                        </nav>
+
+                        <div className="flex items-center space-x-1.5 flex-wrap">
+                            <input ref={fileInputRef} type="file" accept=".csv,text/csv" className="hidden" onChange={handleImportCSV} />
+                            <button
+                                onClick={() => fileInputRef.current?.click()}
+                                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition btn-press"
+                                title="Import CSV"
+                            >
+                                <Icon name="upload" className="w-3.5 h-3.5" />
+                                <span className="hidden sm:inline">Import</span>
+                            </button>
+                            <button
+                                onClick={handleShareOrExport}
+                                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold shadow-sm shadow-sky-500/20 transition btn-press"
+                                title="Export / Share CSV"
+                            >
+                                <Icon name="share-2" className="w-3.5 h-3.5" />
+                                <span>Export</span>
+                            </button>
+
+                            <button
+                                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                                className="p-2 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition btn-press"
+                                title="Toggle Theme"
+                            >
+                                <Icon name={theme === 'dark' ? 'sun' : 'moon'} className="w-4 h-4" />
+                            </button>
+
+                            <div className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 p-1 rounded-xl">
+                                <button
+                                    onClick={handleUndo}
+                                    disabled={!canUndo}
+                                    className={`p-1.5 rounded-lg transition btn-press ${canUndo ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800' : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'}`}
+                                    title="Undo (Ctrl+Z)"
+                                >
+                                    <Icon name="undo-2" className="w-3.5 h-3.5" />
+                                </button>
+                                <button
+                                    onClick={handleRedo}
+                                    disabled={!canRedo}
+                                    className={`p-1.5 rounded-lg transition btn-press ${canRedo ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800' : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'}`}
+                                    title="Redo (Ctrl+Y)"
+                                >
+                                    <Icon name="redo-2" className="w-3.5 h-3.5" />
+                                </button>
+                            </div>
+
+                            <button
+                                onClick={() => setClearModalOpen(true)}
+                                className="p-2 rounded-xl bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-900/80 text-rose-600 dark:text-rose-300 hover:bg-rose-200 dark:hover:bg-rose-900 transition btn-press"
+                                title="Clear stored data"
+                            >
+                                <Icon name="trash-2" className="w-3.5 h-3.5" />
+                            </button>
+                        </div>
+                    </header>
+
+                    <main className={`flex-1 overflow-y-auto p-4 sm:p-6 max-w-7xl w-full mx-auto z-10 relative ${activeTab === 'tasks' ? 'lg:overflow-hidden flex flex-col min-h-0' : 'space-y-6'}`}>
+                        {activeTab === 'dashboard' && (
+                            <DashboardView
+                                projects={projects}
+                                tasks={filteredTasks}
+                                setActiveTab={setActiveTab}
+                                selectedProjectId={selectedProjectId}
+                                setSelectedProjectId={setSelectedProjectId}
+                                onTaskClick={handleDashboardTaskClick}
+                                onTogglePin={handleTogglePin}
+                                onToggleComplete={handleToggleComplete}
+                            />
+                        )}
+                        {activeTab === 'projects' && (
+                            <ProjectsView
+                                projects={projects}
+                                tasks={tasks}
+                                selectedProjectDetail={selectedProjectDetail}
+                                setSelectedProjectDetail={setSelectedProjectDetail}
+                                onEditProject={(p) => { setCurrentProject(p); setProjectModalOpen(true); }}
+                                onNewProject={() => { setCurrentProject(null); setProjectModalOpen(true); }}
+                                onNewTaskForProject={(projectId) => { setCurrentTask({ projectId, title: '', quadrant: 'do-first', recurring: 'none' }); setTaskModalOpen(true); }}
+                                onToggleComplete={handleToggleComplete}
+                                onTogglePin={handleTogglePin}
+                                onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
+                            />
+                        )}
+                        {activeTab === 'tasks' && (
+                            <TasksMatrixView
+                                projects={projects}
+                                tasks={filteredTasks}
+                                onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
+                                onDuplicateTask={handleDuplicateTask}
+                                onTogglePin={handleTogglePin}
+                                onToggleComplete={handleToggleComplete}
+                                onDeleteTask={(id) => updateTasksWithHistory(tasks.filter(t => t.id !== id), 'Task deleted.')}
+                                highlightedTaskId={highlightedTaskId}
+                            />
+                        )}
+                        {activeTab === 'calendar' && (
+                            <CalendarView
+                                tasks={filteredTasks}
+                                projects={projects}
+                                onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
+                                onNewTaskForDate={(dateStr) => { setCurrentTask({ dueDate: dateStr, title: '', quadrant: 'do-first', recurring: 'none' }); setTaskModalOpen(true); }}
+                            />
+                        )}
+                        {activeTab === 'pomodoro' && (
+                            <PomodoroView
+                                tasks={filteredTasks.filter(t => t.status !== 'Completed')}
+                                selectedTaskId={selectedTaskId}
+                                setSelectedTaskId={setSelectedTaskId}
+                                pomoCycle={pomoCycle}
+                                isWorkPhase={isWorkPhase}
+                                timeLeft={timeLeft}
+                                isRunning={isRunning}
+                                toggleTimer={toggleTimer}
+                                resetTimer={resetTimer}
+                                customMinutes={customMinutes}
+                                setCustomMinutes={(val) => {
+                                    setCustomMinutes(val);
+                                    if (!isRunning && isWorkPhase) setTimeLeft(val * 60);
+                                }}
+                                formatSeconds={formatSeconds}
+                                wakeLockEnabled={wakeLockEnabled}
+                                setWakeLockEnabled={setWakeLockEnabled}
+                            />
+                        )}
+                    </main>
+
+                    {taskModalOpen && (
+                        <TaskModal
+                            task={currentTask}
+                            projects={projects}
+                            defaultProjectId={selectedProjectId !== 'all' ? selectedProjectId : (selectedProjectDetail?.id || projects[0]?.id)}
+                            onClose={() => setTaskModalOpen(false)}
+                            onOpenProjectModal={() => { setTaskModalOpen(false); setCurrentProject(null); setProjectModalOpen(true); }}
+                            onSave={(savedTask) => {
+                                if (currentTask && currentTask.id) {
+                                    updateTasksWithHistory(
+                                        tasks.map(t => t.id === savedTask.id ? normalizeTask({ ...t, ...savedTask }) : t),
+                                        'Task updated.'
+                                    );
+                                } else {
+                                    const newTask = normalizeTask({
+                                        ...savedTask,
+                                        id: 't_' + Math.random().toString(36).substring(2, 11),
+                                        status: 'Not Started'
+                                    });
+                                    updateTasksWithHistory([...tasks, newTask], 'Task created.');
+                                }
+                                setTaskModalOpen(false);
+                            }}
+                            onDuplicate={() => {
+                                if (currentTask?.id) {
+                                    handleDuplicateTask(currentTask);
+                                    setTaskModalOpen(false);
+                                }
+                            }}
+                        />
+                    )}
+
+                    {projectModalOpen && (
+                        <ProjectModal
+                            project={currentProject}
+                            onClose={() => setProjectModalOpen(false)}
+                            onSave={(savedP) => {
+                                if (currentProject) {
+                                    setProjects(prev => prev.map(p => p.id === savedP.id ? savedP : p));
+                                    showToast('Project updated successfully.');
+                                } else {
+                                    setProjects(prev => [...prev, { ...savedP, id: 'p_' + Math.random().toString(36).substring(2, 11) }]);
+                                    showToast('Project created.');
+                                }
+                                setProjectModalOpen(false);
+                            }}
+                            onDelete={currentProject?.id ? () => handleDeleteProject(currentProject.id) : null}
+                        />
+                    )}
+
+                    {shareModalOpen && (
+                        <div className="fixed inset-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 animate-fade-in-up">
+                                <div className="flex items-center justify-between">
+                                    <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                                        <Icon name="share-2" className="w-4 h-4 text-sky-500" />
+                                        Export Backup
+                                    </h3>
+                                    <button onClick={() => setShareModalOpen(false)} className="p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-slate-200">
+                                        <Icon name="x" className="w-5 h-5" />
+                                    </button>
+                                </div>
+                                <p className="text-xs text-slate-600 dark:text-slate-400">
+                                    Native share isn’t available here. Download a CSV backup instead.
+                                </p>
+                                <button
+                                    onClick={exportCSVBlob}
+                                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold btn-press"
+                                >
+                                    <Icon name="download" className="w-4 h-4" />
+                                    Download CSV
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {clearModalOpen && (
+                        <div className="fixed inset-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-5 animate-fade-in-up">
+                                <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                                    <div className="flex items-center space-x-2 text-rose-500">
+                                        <Icon name="alert-triangle" className="w-5 h-5" />
+                                        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">Clear All Saved Data</h3>
+                                    </div>
+                                    <button onClick={() => { setClearModalOpen(false); setClearConfirmText(''); }} className="p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-slate-200">
+                                        <Icon name="x" className="w-5 h-5" />
+                                    </button>
+                                </div>
+                                <p className="text-xs text-slate-700 dark:text-slate-300">Remove all saved projects and tasks?</p>
+                                <div className="space-y-1.5">
+                                    <label className="block text-slate-600 dark:text-slate-400 text-xs font-semibold">
+                                        Type <span className="text-rose-500 font-bold font-mono">CLEAR</span> to confirm:
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value={clearConfirmText}
+                                        onChange={(e) => setClearConfirmText(e.target.value)}
+                                        placeholder="Type CLEAR"
+                                        className="w-full bg-slate-100 dark:bg-slate-850 border border-slate-300 dark:border-slate-750 rounded-xl px-4 py-2.5 text-xs font-mono uppercase focus:border-rose-500"
+                                    />
+                                </div>
+                                <div className="flex justify-end gap-3">
+                                    <button onClick={() => { setClearModalOpen(false); setClearConfirmText(''); }} className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-850 btn-press">Cancel</button>
+                                    <button
+                                        disabled={clearConfirmText.trim().toUpperCase() !== 'CLEAR'}
+                                        onClick={handleClearAllData}
+                                        className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 btn-press ${
+                                            clearConfirmText.trim().toUpperCase() === 'CLEAR'
+                                                ? 'bg-rose-600 hover:bg-rose-500 text-white'
+                                                : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
+                                        }`}
+                                    >
+                                        <Icon name="trash-2" className="w-3.5 h-3.5" />
+                                        Delete All Data
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        function DashboardView({ projects, tasks, setActiveTab, selectedProjectId, setSelectedProjectId, onTaskClick, onTogglePin, onToggleComplete }) {
+            const activeTasks = tasks.filter(t => t.status !== 'Completed');
+            const pinnedTasks = tasks.filter(t => t.isPinned);
+            const completedTasks = tasks.filter(t => t.status === 'Completed').length;
+            const totalFocusMins = tasks.reduce((acc, t) => acc + (t.focusMinutes || 0), 0);
+            const completionRate = tasks.length ? Math.round((completedTasks / tasks.length) * 100) : 0;
+
+            return (
+                <div className="space-y-6 animate-fade-in-up">
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 card-lift">
+                        <div className="space-y-2 w-full md:w-auto">
+                            <select
+                                value={selectedProjectId}
+                                onChange={(e) => setSelectedProjectId(e.target.value)}
+                                className="bg-slate-100 dark:bg-slate-800 text-sky-600 dark:text-sky-400 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider border border-slate-300 dark:border-slate-700 cursor-pointer"
+                            >
+                                <option value="all">All Active Projects</option>
+                                {projects.map(p => <option key={p.id} value={p.id}>Project: {p.name}</option>)}
+                            </select>
+                            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight mt-2">Daily Overview</h2>
+                            <p className="text-slate-600 dark:text-slate-400 text-xs max-w-xl">
+                                {activeTasks.length === 0 ? "You're all caught up! Enjoy your day." : `You have ${activeTasks.length} active tasks remaining.`}
+                            </p>
+                        </div>
+                        <div className="flex flex-col items-end gap-3 shrink-0 bg-slate-50 dark:bg-slate-850 p-4 rounded-xl border border-slate-200 dark:border-slate-750 w-full md:w-auto">
+                            <div className="text-right flex items-center space-x-4">
+                                <div>
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Completion Rate</div>
+                                    <div className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">{completionRate}%</div>
+                                </div>
+                                <div className="w-12 h-12 rounded-full border-[4px] border-slate-200 dark:border-slate-700 flex items-center justify-center relative">
+                                    <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#38bdf8" strokeWidth="4" strokeDasharray={`${completionRate}, 100`} />
+                                    </svg>
+                                    <Icon name="check-circle" className="w-5 h-5 text-sky-500 relative z-10" />
+                                </div>
+                            </div>
+                            <div className="flex gap-4 text-xs font-semibold text-slate-600 dark:text-slate-400">
+                                <div>Completed: <span className="text-emerald-600 dark:text-emerald-400">{completedTasks}</span></div>
+                                <div>Focus Time: <span className="text-sky-600 dark:text-sky-400">{totalFocusMins}m</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                                    <Icon name="pin" className="w-4 h-4 text-sky-500" />
+                                    Pinned Priority Tasks
+                                </h3>
+                                <button onClick={() => setActiveTab('tasks')} className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline">View Matrix →</button>
+                            </div>
+                            {pinnedTasks.length === 0 ? (
+                                <div className="bg-white/50 dark:bg-slate-900/50 border border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-8 text-center">
+                                    <Icon name="pin-off" className="w-8 h-8 text-slate-300 dark:text-slate-600 mb-3 mx-auto" />
+                                    <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">No pinned tasks.</p>
+                                </div>
+                            ) : (
+                                <div className="space-y-3">
+                                    {pinnedTasks.map(task => (
+                                        <TaskCard key={task.id} task={task} project={projects.find(p => p.id === task.projectId)} onClick={() => onTaskClick(task.id)} onTogglePin={() => onTogglePin(task.id)} onToggleComplete={() => onToggleComplete(task.id)} />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <div className="space-y-4">
+                            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                                <Icon name="zap" className="w-4 h-4 text-amber-500" />
+                                Recent Activity
+                            </h3>
+                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+                                {activeTasks.slice(0, 5).map(task => (
+                                    <div key={task.id} className="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0">
+                                        <div>
+                                            <span className="text-sm font-bold text-slate-800 dark:text-slate-200 cursor-pointer hover:text-sky-500" onClick={() => onTaskClick(task.id)}>{task.title}</span>
+                                            <div className="flex items-center gap-2 mt-1">
+                                                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center gap-1">
+                                                    <Icon name="timer" className="w-3 h-3" />{task.focusMinutes || 0}m
+                                                </span>
+                                                {task.dueDate && <span className="text-[10px] text-slate-400">{task.dueDate} {task.dueTime}</span>}
+                                            </div>
+                                        </div>
+                                        <button onClick={() => onToggleComplete(task.id)} className="w-6 h-6 rounded-md border-2 border-slate-300 dark:border-slate-600 hover:border-emerald-500" />
+                                    </div>
+                                ))}
+                                {activeTasks.length === 0 && <p className="text-xs text-slate-500 text-center py-4">No active tasks.</p>}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function ProjectsView({ projects, tasks, selectedProjectDetail, setSelectedProjectDetail, onEditProject, onNewProject, onNewTaskForProject, onToggleComplete, onTogglePin, onEditTask }) {
+            if (selectedProjectDetail) {
+                const projectTasks = tasks.filter(t => t.projectId === selectedProjectDetail.id);
+                return (
+                    <div className="space-y-6 animate-fade-in-up">
+                        <button onClick={() => setSelectedProjectDetail(null)} className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 flex items-center gap-1.5">
+                            <Icon name="arrow-left" className="w-3.5 h-3.5" /> Back to Projects
+                        </button>
+                        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <div className="flex items-center gap-2 mb-1">
+                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded border" style={{ backgroundColor: `${selectedProjectDetail.color || '#38bdf8'}20`, borderColor: selectedProjectDetail.color || '#38bdf8' }}>{selectedProjectDetail.code}</span>
+                                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border uppercase ${selectedProjectDetail.status === 'Active' ? 'bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-slate-100 text-slate-600 dark:bg-slate-800'}`}>{selectedProjectDetail.status}</span>
+                                </div>
+                                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">{selectedProjectDetail.name}</h2>
+                                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">{selectedProjectDetail.description}</p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <button onClick={() => onEditProject(selectedProjectDetail)} className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-semibold">Edit</button>
+                                <button onClick={() => onNewTaskForProject(selectedProjectDetail.id)} className="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold flex items-center gap-1.5">
+                                    <Icon name="plus" className="w-3.5 h-3.5" /> Add Task
+                                </button>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {projectTasks.length === 0 ? (
+                                <div className="col-span-full text-center p-8 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-slate-500">No tasks in this project yet.</div>
+                            ) : projectTasks.map(t => (
+                                <TaskCard key={t.id} task={t} project={selectedProjectDetail} onClick={() => onEditTask(t)} onTogglePin={() => onTogglePin(t.id)} onToggleComplete={() => onToggleComplete(t.id)} />
+                            ))}
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="space-y-6 animate-fade-in-up">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                            <Icon name="folder-kanban" className="w-5 h-5 text-sky-500" />
+                            Projects & Areas
+                        </h2>
+                        <button onClick={onNewProject} className="flex items-center space-x-1.5 bg-slate-900 dark:bg-slate-800 text-white px-3 py-1.5 rounded-xl text-xs font-bold btn-press">
+                            <Icon name="plus" className="w-4 h-4" />
+                            <span>New Project</span>
+                        </button>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {projects.map(project => {
+                            const pTasks = tasks.filter(t => t.projectId === project.id);
+                            const activeCount = pTasks.filter(t => t.status !== 'Completed').length;
+                            const compCount = pTasks.length - activeCount;
+                            const prog = pTasks.length ? Math.round((compCount / pTasks.length) * 100) : 0;
+                            const barColor = project.color || '#38bdf8';
+                            return (
+                                <div key={project.id} onClick={() => setSelectedProjectDetail(project)} className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 cursor-pointer card-lift shadow-sm hover:border-sky-300 dark:hover:border-slate-600 relative overflow-hidden flex flex-col h-full">
+                                    <div className="flex justify-between items-start mb-3">
+                                        <span className="text-[10px] font-bold px-2 py-0.5 rounded border" style={{ backgroundColor: `${barColor}20`, borderColor: barColor }}>{project.code}</span>
+                                        <button onClick={(e) => { e.stopPropagation(); onEditProject(project); }} className="text-slate-400 hover:text-sky-500 opacity-0 group-hover:opacity-100 p-1">
+                                            <Icon name="edit-3" className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                    <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 mb-1">{project.name}</h3>
+                                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 flex-1">{project.description}</p>
+                                    <div className="space-y-2 mt-auto">
+                                        <div className="flex items-center justify-between text-[11px] font-semibold">
+                                            <span className="text-slate-600 dark:text-slate-300">{activeCount} active · {pTasks.length} total</span>
+                                            <span className="text-slate-500">{prog}%</span>
+                                        </div>
+                                        <div className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                            <div
+                                                className="h-full rounded-full transition-all duration-700"
+                                                style={{
+                                                    width: prog > 0 ? `${Math.max(prog, 3)}%` : '0%',
+                                                    backgroundColor: barColor,
+                                                    minWidth: prog > 0 ? '6px' : 0
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                        {projects.length === 0 && (
+                            <div className="col-span-full text-center p-10 border border-dashed rounded-2xl text-slate-500 text-sm">No projects yet. Create one to get started.</div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        function TasksMatrixView({ projects, tasks, onEditTask, onDuplicateTask, onTogglePin, onToggleComplete, onDeleteTask, highlightedTaskId }) {
+            const getTasksByQuad = (quad) => tasks.filter(t => (t.quadrant || 'do-first') === quad && t.status !== 'Completed');
+
+            const renderQuadrant = (id, title, desc, icon, bgClass, borderClass, textClass) => {
+                const quadTasks = getTasksByQuad(id);
+                return (
+                    <div className={`matrix-quad rounded-2xl p-4 border ${borderClass} ${bgClass} shadow-sm`}>
+                        <div className="flex items-center justify-between mb-3 shrink-0">
+                            <div className="flex items-center space-x-2">
+                                <div className={`p-1.5 rounded-lg bg-white/50 dark:bg-slate-900/50 ${textClass}`}>
+                                    <Icon name={icon} className="w-4 h-4" />
+                                </div>
+                                <div>
+                                    <h3 className={`text-sm font-extrabold ${textClass}`}>{title}</h3>
+                                    <p className="text-[10px] text-slate-600 dark:text-slate-400">{desc}</p>
+                                </div>
+                            </div>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/60 dark:bg-slate-900/60 border ${textClass}`}>{quadTasks.length}</span>
+                        </div>
+                        <div className="matrix-quad-body space-y-3 pr-1">
+                            {quadTasks.length === 0 ? (
+                                <div className="py-8 flex items-center justify-center text-xs text-slate-400 border-2 border-dashed border-slate-300/50 dark:border-slate-700/50 rounded-xl">Empty</div>
+                            ) : quadTasks.map(t => (
+                                <TaskCard
+                                    key={t.id}
+                                    task={t}
+                                    project={projects.find(p => p.id === t.projectId)}
+                                    onClick={() => onEditTask(t)}
+                                    onTogglePin={() => onTogglePin(t.id)}
+                                    onToggleComplete={() => onToggleComplete(t.id)}
+                                    onDuplicate={() => onDuplicateTask(t)}
+                                    onDelete={() => onDeleteTask(t.id)}
+                                    highlighted={highlightedTaskId === t.id}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                );
+            };
+
+            return (
+                <div className="animate-fade-in-up flex flex-col min-h-0 h-full gap-3">
+                    <div className="shrink-0">
+                        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                            <Icon name="grid" className="w-5 h-5 text-sky-500" />
+                            Tasks Matrix
+                        </h2>
+                        <p className="text-xs text-slate-500 mt-0.5">Eisenhower method — scroll inside each quadrant on large screens.</p>
+                    </div>
+                    <div className="matrix-grid flex-1 min-h-0">
+                        {renderQuadrant('do-first', 'Do First', 'Urgent & Important', 'alert-circle', 'bg-rose-50/50 dark:bg-rose-950/10', 'border-rose-200 dark:border-rose-900/30', 'text-rose-700 dark:text-rose-400')}
+                        {renderQuadrant('schedule', 'Schedule', 'Important, Not Urgent', 'calendar-clock', 'bg-sky-50/50 dark:bg-sky-950/10', 'border-sky-200 dark:border-sky-900/30', 'text-sky-700 dark:text-sky-400')}
+                        {renderQuadrant('delegate', 'Delegate', 'Urgent, Not Important', 'users', 'bg-amber-50/50 dark:bg-amber-950/10', 'border-amber-200 dark:border-amber-900/30', 'text-amber-700 dark:text-amber-400')}
+                        {renderQuadrant('eliminate', 'Eliminate', 'Neither', 'trash-2', 'bg-slate-100/50 dark:bg-slate-900/30', 'border-slate-200 dark:border-slate-800', 'text-slate-700 dark:text-slate-400')}
+                    </div>
+                </div>
+            );
+        }
+
+        function CalendarView({ tasks, projects, onEditTask, onNewTaskForDate }) {
+            const [viewMode, setViewMode] = useState('month');
+            const [currentDate, setCurrentDate] = useState(new Date());
+            const [dayFocus, setDayFocus] = useState(new Date());
+
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const startDay = startOfMonth.getDay();
+            const daysInMonth = endOfMonth.getDate();
+            const days = [];
+            for (let i = 0; i < startDay; i++) days.push(null);
+            for (let i = 1; i <= daysInMonth; i++) days.push(new Date(currentDate.getFullYear(), currentDate.getMonth(), i));
+
+            const isToday = (d) => {
+                if (!d) return false;
+                const t = new Date();
+                return d.getDate() === t.getDate() && d.getMonth() === t.getMonth() && d.getFullYear() === t.getFullYear();
+            };
+
+            const goToday = () => {
+                const now = new Date();
+                setCurrentDate(now);
+                setDayFocus(now);
+                setViewMode('day');
+            };
+
+            const dayStr = getLocalDateStr(dayFocus);
+            const dayTasks = tasks
+                .filter(t => t.dueDate === dayStr && t.status !== 'Completed')
+                .sort((a, b) => (a.dueTime || '99:99').localeCompare(b.dueTime || '99:99'));
+
+            const shiftDay = (delta) => {
+                const d = new Date(dayFocus);
+                d.setDate(d.getDate() + delta);
+                setDayFocus(d);
+                setCurrentDate(d);
+            };
+
+            const taskColor = (t) => {
+                const p = projects.find(proj => proj.id === t.projectId);
+                return p?.color || t.color || '#38bdf8';
+            };
+
+            if (viewMode === 'day') {
+                return (
+                    <div className="space-y-5 animate-fade-in-up">
+                        <div className="flex flex-wrap items-center justify-between gap-3">
+                            <div className="flex items-center gap-3 flex-wrap">
+                                <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                                    <Icon name="calendar-days" className="w-5 h-5 text-sky-500" />
+                                    {weekdayNames[dayFocus.getDay()]}, {monthNames[dayFocus.getMonth()]} {dayFocus.getDate()}
+                                </h2>
+                                {isToday(dayFocus) && (
+                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-500 text-white">Today</span>
+                                )}
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <button onClick={() => shiftDay(-1)} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">
+                                    <Icon name="chevron-left" className="w-4 h-4" />
+                                </button>
+                                <button onClick={goToday} className="px-3 py-1 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800">Today</button>
+                                <button onClick={() => shiftDay(1)} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">
+                                    <Icon name="chevron-right" className="w-4 h-4" />
+                                </button>
+                                <button onClick={() => setViewMode('month')} className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold border border-slate-200 dark:border-slate-700">
+                                    Month view
+                                </button>
+                                <button onClick={() => onNewTaskForDate(dayStr)} className="px-3 py-1.5 rounded-lg bg-sky-500 text-white text-xs font-bold flex items-center gap-1">
+                                    <Icon name="plus" className="w-3.5 h-3.5" /> Add
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+                            {dayTasks.length === 0 ? (
+                                <div className="p-12 text-center text-slate-500 text-sm">
+                                    <Icon name="calendar-off" className="w-10 h-10 mx-auto mb-3 text-slate-300 dark:text-slate-600" />
+                                    No tasks scheduled for this day.
+                                    <div className="mt-4">
+                                        <button onClick={() => onNewTaskForDate(dayStr)} className="text-sky-500 font-semibold text-xs hover:underline">Create a task for {dayStr}</button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="divide-y divide-slate-100 dark:divide-slate-800">
+                                    {dayTasks.map(t => {
+                                        const p = projects.find(proj => proj.id === t.projectId);
+                                        const color = taskColor(t);
+                                        return (
+                                            <div
+                                                key={t.id}
+                                                onClick={() => onEditTask(t)}
+                                                className="flex items-start gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition"
+                                            >
+                                                <div className="w-16 shrink-0 text-right pt-0.5">
+                                                    <span className="text-xs font-mono font-bold text-slate-500">{t.dueTime || 'All day'}</span>
+                                                </div>
+                                                <div className="w-1 self-stretch rounded-full shrink-0" style={{ backgroundColor: color }} />
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="text-sm font-bold text-slate-900 dark:text-slate-100">{t.title}</div>
+                                                    {t.description && <p className="text-xs text-slate-500 mt-0.5 line-clamp-2">{t.description}</p>}
+                                                    <div className="flex gap-2 mt-1.5">
+                                                        {p && <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded border" style={{ color: color, borderColor: `${color}40` }}>{p.code}</span>}
+                                                        {t.recurring && t.recurring !== 'none' && <Icon name="repeat" className="w-3 h-3 text-sky-500" />}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="space-y-6 animate-fade-in-up">
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                        <div className="flex items-center gap-3">
+                            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                                <Icon name="calendar" className="w-5 h-5 text-sky-500" />
+                                {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+                            </h2>
+                            <button onClick={goToday} className="px-3 py-1 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                                Today
+                            </button>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <button onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1))} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">
+                                <Icon name="chevron-left" className="w-4 h-4" />
+                            </button>
+                            <button onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1))} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">
+                                <Icon name="chevron-right" className="w-4 h-4" />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+                        <div className="grid grid-cols-7 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                                <div key={day} className="p-3 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">{day}</div>
+                            ))}
+                        </div>
+                        <div className="grid grid-cols-7 auto-rows-[minmax(100px,auto)]">
+                            {days.map((date, idx) => {
+                                if (!date) return <div key={`empty-${idx}`} className="p-2 border-r border-b border-slate-100 dark:border-slate-800/50 bg-slate-50/50 dark:bg-slate-950/20" />;
+                                const dateStr = getLocalDateStr(date);
+                                const dayTasks = tasks.filter(t => t.dueDate === dateStr && t.status !== 'Completed');
+                                const isCurrentDay = isToday(date);
+                                return (
+                                    <div
+                                        key={dateStr}
+                                        className={`p-2 border-r border-b border-slate-100 dark:border-slate-800/50 min-h-[110px] group relative ${isCurrentDay ? 'bg-sky-50/30 dark:bg-sky-950/20' : 'hover:bg-slate-50 dark:hover:bg-slate-800/30'}`}
+                                    >
+                                        <div className="flex justify-between items-start mb-2">
+                                            <button
+                                                onClick={() => { setDayFocus(date); setViewMode('day'); }}
+                                                className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full ${isCurrentDay ? 'bg-sky-500 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'}`}
+                                            >
+                                                {date.getDate()}
+                                            </button>
+                                            <button onClick={() => onNewTaskForDate(dateStr)} className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-sky-500" title="Add task">
+                                                <Icon name="plus" className="w-3.5 h-3.5" />
+                                            </button>
+                                        </div>
+                                        <div className="space-y-1.5 max-h-[140px] overflow-y-auto">
+                                            {dayTasks.map(t => {
+                                                const color = taskColor(t);
+                                                return (
+                                                    <div
+                                                        key={t.id}
+                                                        onClick={() => onEditTask(t)}
+                                                        className="text-[10px] font-semibold truncate px-2 py-1.5 rounded-lg border cursor-pointer bg-white dark:bg-slate-800"
+                                                        style={{ borderColor: color, borderLeftWidth: '3px' }}
+                                                    >
+                                                        <span className="text-slate-800 dark:text-slate-200">
+                                                            {t.dueTime && <span className="mr-1 text-slate-400">{t.dueTime}</span>}
+                                                            {t.title}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function PomodoroView({ tasks, selectedTaskId, setSelectedTaskId, pomoCycle, isWorkPhase, timeLeft, isRunning, toggleTimer, resetTimer, customMinutes, setCustomMinutes, formatSeconds, wakeLockEnabled, setWakeLockEnabled }) {
+            const breakMins = pomoCycle === 7 ? 15 : 5;
+            const progressPercent = isWorkPhase
+                ? ((customMinutes * 60 - timeLeft) / (customMinutes * 60)) * 100
+                : ((breakMins * 60 - timeLeft) / (breakMins * 60)) * 100;
+
+            const cycleDots = [];
+            for (let i = 0; i < 4; i++) {
+                const step = i * 2;
+                cycleDots.push(
+                    <div key={i} className={`w-3 h-3 rounded-full border-2 transition-colors ${pomoCycle > step ? 'bg-sky-500 border-sky-500' : pomoCycle === step ? 'border-sky-500 animate-pulse' : 'border-slate-300 dark:border-slate-700'}`} />
+                );
+            }
+
+            return (
+                <div className="flex items-center justify-center min-h-[calc(100vh-140px)] animate-fade-in-up p-4">
+                    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 p-8 rounded-3xl shadow-2xl max-w-md w-full flex flex-col items-center">
+                        <div className="text-center mb-6">
+                            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center justify-center gap-2">
+                                <Icon name="timer" className="w-5 h-5 text-sky-500" /> Focus Timer
+                            </h2>
+                            <p className="text-xs text-slate-500 mt-1 uppercase tracking-widest font-bold">
+                                {isWorkPhase ? 'Focus Session' : (pomoCycle === 7 ? 'Long Break' : 'Short Break')}
+                            </p>
+                        </div>
+                        <div className="relative w-56 h-56 flex items-center justify-center mb-8">
+                            <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="3" className="text-slate-200 dark:text-slate-800" />
+                                <circle cx="50" cy="50" r="45" fill="none" stroke={isWorkPhase ? '#38bdf8' : '#34d399'} strokeWidth="5" strokeLinecap="round" strokeDasharray={`${Math.max(0, Math.min(100, progressPercent)) * 2.827}, 282.7`} className="transition-all duration-1000 ease-linear" />
+                            </svg>
+                            <div className="text-5xl font-mono font-extrabold text-slate-900 dark:text-slate-100 relative z-10 tracking-tighter">{formatSeconds(timeLeft)}</div>
+                        </div>
+                        <div className="flex justify-center gap-4 mb-8">{cycleDots}</div>
+                        <div className="flex items-center justify-center gap-4 mb-8">
+                            <button onClick={toggleTimer} className={`w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg btn-press ${isRunning ? 'bg-rose-500 hover:bg-rose-600' : 'bg-sky-500 hover:bg-sky-600'}`}>
+                                <Icon name={isRunning ? 'pause' : 'play'} className="w-6 h-6 ml-0.5" />
+                            </button>
+                            <button onClick={resetTimer} className="w-12 h-12 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 btn-press">
+                                <Icon name="rotate-ccw" className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <div className="w-full space-y-4 border-t border-slate-200 dark:border-slate-800 pt-6">
+                            <div className="space-y-1.5">
+                                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex justify-between">
+                                    <span>Track Focus to Task</span><span>(Auto-logged)</span>
+                                </label>
+                                <select value={selectedTaskId} onChange={(e) => setSelectedTaskId(e.target.value)} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2.5 text-xs font-semibold">
+                                    <option value="">-- No task selected --</option>
+                                    {tasks.map(t => <option key={t.id} value={t.id}>{t.title}</option>)}
+                                </select>
+                            </div>
+                            <div className="flex items-center justify-between gap-4 pt-2">
+                                <div className="flex-1 space-y-1.5">
+                                    <label className="text-[10px] font-bold text-slate-500 uppercase">Work Interval: {customMinutes}m</label>
+                                    <input type="range" min="5" max="60" step="5" value={customMinutes} onChange={(e) => setCustomMinutes(parseInt(e.target.value, 10))} className="w-full h-1 accent-sky-500" disabled={isRunning} />
+                                </div>
+                                <button onClick={() => setWakeLockEnabled(!wakeLockEnabled)} className={`p-2 rounded-xl border text-xs font-bold ${wakeLockEnabled ? 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 border-amber-300' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 border-slate-300 dark:border-slate-700'}`} title="Keep screen awake">
+                                    <Icon name={wakeLockEnabled ? 'sun' : 'moon'} className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function TaskModal({ task, projects, defaultProjectId, onClose, onOpenProjectModal, onSave, onDuplicate }) {
+            const [formData, setFormData] = useState({
+                id: task?.id || null,
+                projectId: task?.projectId || defaultProjectId || '',
+                title: task?.title || '',
+                description: task?.description || '',
+                quadrant: task?.quadrant || 'do-first',
+                category: task?.category || 'General',
+                dueDate: task?.dueDate || '',
+                dueTime: task?.dueTime || '',
+                focusMinutes: task?.focusMinutes || 0,
+                recurring: task?.recurring || 'none',
+                isPinned: task?.isPinned || false,
+                color: task?.color || '#38bdf8'
+            });
+            const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+            return (
+                <div className="fixed inset-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl flex flex-col max-h-[90vh] animate-fade-in-up">
+                        <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 shrink-0">
+                            <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                                <Icon name={formData.id ? 'edit-3' : 'plus-circle'} className="w-5 h-5 text-sky-500" />
+                                {formData.id ? 'Edit Task' : 'Create Task'}
+                            </h3>
+                            <button onClick={onClose} className="p-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-slate-200">
+                                <Icon name="x" className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <div className="flex-1 overflow-y-auto py-5 space-y-5 pr-1">
+                            <div className="space-y-1.5">
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Project Focus</label>
+                                <div className="flex gap-2">
+                                    <select name="projectId" value={formData.projectId} onChange={handleChange} className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2.5 text-xs font-semibold">
+                                        <option value="" disabled>Select Project...</option>
+                                        {projects.map(p => <option key={p.id} value={p.id}>[{p.code}] {p.name}</option>)}
+                                    </select>
+                                    <button onClick={onOpenProjectModal} type="button" className="px-3 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-750 rounded-xl" title="New Project">
+                                        <Icon name="folder-plus" className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Title <span className="text-rose-500">*</span></label>
+                                <input type="text" name="title" value={formData.title} onChange={handleChange} autoFocus placeholder="What needs to be done?" className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-4 py-3 text-sm font-bold" />
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Details</label>
+                                <textarea name="description" value={formData.description} onChange={handleChange} rows="3" placeholder="Context, links, steps..." className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-4 py-3 text-xs resize-none" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1.5">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1"><Icon name="calendar" className="w-3.5 h-3.5" /> Due Date</label>
+                                    <input type="date" name="dueDate" value={formData.dueDate} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2 text-xs" />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1"><Icon name="clock" className="w-3.5 h-3.5" /> Time</label>
+                                    <input type="time" name="dueTime" value={formData.dueTime} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2 text-xs" />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1.5">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Priority</label>
+                                    <select name="quadrant" value={formData.quadrant} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2.5 text-xs font-semibold">
+                                        <option value="do-first">Do First (Urgent & Important)</option>
+                                        <option value="schedule">Schedule (Important)</option>
+                                        <option value="delegate">Delegate (Urgent)</option>
+                                        <option value="eliminate">Eliminate (Neither)</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Recurring</label>
+                                    <select name="recurring" value={formData.recurring} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2.5 text-xs font-semibold">
+                                        {RECURRING_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between shrink-0">
+                            {formData.id && (
+                                <button type="button" onClick={onDuplicate} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-600 hover:text-sky-600 btn-press" title="Duplicate">
+                                    <Icon name="copy" className="w-4 h-4" />
+                                </button>
+                            )}
+                            <div className="flex gap-3 ml-auto">
+                                <button type="button" onClick={onClose} className="px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 btn-press">Cancel</button>
+                                <button
+                                    type="button"
+                                    onClick={() => formData.title.trim() && onSave(formData)}
+                                    disabled={!formData.title.trim()}
+                                    className={`px-5 py-2.5 rounded-xl text-xs font-extrabold flex items-center gap-2 btn-press ${formData.title.trim() ? 'bg-sky-500 hover:bg-sky-600 text-white shadow-lg' : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'}`}
+                                >
+                                    <Icon name="check" className="w-4 h-4" />
+                                    Save Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function ProjectModal({ project, onClose, onSave, onDelete }) {
+            const [formData, setFormData] = useState({
+                id: project?.id || null,
+                name: project?.name || '',
+                code: project?.code || '',
+                description: project?.description || '',
+                status: project?.status || 'Active',
+                color: project?.color || '#38bdf8'
+            });
+            const [confirmDelete, setConfirmDelete] = useState(false);
+            const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+            return (
+                <div className="fixed inset-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-5 animate-fade-in-up">
+                        <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+                            <h3 className="text-lg font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                                <Icon name="folder-kanban" className="w-5 h-5 text-sky-500" />
+                                {formData.id ? 'Edit Project' : 'New Project'}
+                            </h3>
+                            <button onClick={onClose} className="p-1 rounded-lg bg-slate-100 dark:bg-slate-800">
+                                <Icon name="x" className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <div className="space-y-4">
+                            <div className="grid grid-cols-3 gap-3">
+                                <div className="col-span-2 space-y-1.5">
+                                    <label className="text-[10px] font-bold text-slate-500 uppercase">Project Name *</label>
+                                    <input type="text" name="name" value={formData.name} onChange={handleChange} autoFocus className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2 text-sm font-bold" />
+                                </div>
+                                <div className="col-span-1 space-y-1.5">
+                                    <label className="text-[10px] font-bold text-slate-500 uppercase">Code</label>
+                                    <input type="text" name="code" value={formData.code} onChange={handleChange} maxLength="5" className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2 text-sm font-bold uppercase text-center" />
+                                </div>
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="text-[10px] font-bold text-slate-500 uppercase">Description</label>
+                                <textarea name="description" value={formData.description} onChange={handleChange} rows="2" className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2 text-xs resize-none" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1.5">
+                                    <label className="text-[10px] font-bold text-slate-500 uppercase">Status</label>
+                                    <select name="status" value={formData.status} onChange={handleChange} className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-750 rounded-xl px-3 py-2 text-xs font-semibold">
+                                        <option value="Active">Active</option>
+                                        <option value="On Hold">On Hold</option>
+                                        <option value="Archived">Archived</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[10px] font-bold text-slate-500 uppercase">Color Theme</label>
+                                    <div className="flex items-center gap-1.5 flex-wrap pt-1">
+                                        {COLOR_PRESETS.map(c => (
+                                            <button key={c.id} type="button" onClick={() => setFormData({ ...formData, color: c.hex })} className={`w-6 h-6 rounded-full ${formData.color === c.hex ? 'scale-125 ring-2 ring-offset-2 ring-slate-800 dark:ring-slate-300 ring-offset-white dark:ring-offset-slate-900' : 'hover:scale-110'}`} style={{ backgroundColor: c.hex }} title={c.label} />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="pt-2 flex items-center justify-between gap-3">
+                            {onDelete ? (
+                                confirmDelete ? (
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            type="button"
+                                            onClick={onDelete}
+                                            className="px-3 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white btn-press"
+                                        >
+                                            Confirm delete
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setConfirmDelete(false)}
+                                            className="px-3 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        onClick={() => setConfirmDelete(true)}
+                                        className="px-3 py-2 rounded-xl text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 flex items-center gap-1.5 btn-press"
+                                    >
+                                        <Icon name="trash-2" className="w-3.5 h-3.5" />
+                                        Delete project
+                                    </button>
+                                )
+                            ) : <span />}
+                            <div className="flex gap-3 ml-auto">
+                                <button type="button" onClick={onClose} className="px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</button>
+                                <button type="button" onClick={() => formData.name.trim() && onSave(formData)} disabled={!formData.name.trim()} className={`px-4 py-2 rounded-xl text-xs font-extrabold btn-press ${formData.name.trim() ? 'bg-sky-500 hover:bg-sky-600 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-400'}`}>Save Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function TaskCard({ task, project, onClick, onTogglePin, onToggleComplete, onDuplicate, onDelete, highlighted }) {
+            if (!task) return null;
+            const isCompleted = task.status === 'Completed';
+            const todayStr = getLocalDateStr();
+            const isPastDue = !!(task.dueDate && task.dueDate < todayStr && !isCompleted);
+            const dateBadgeClasses = isPastDue
+                ? 'text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/30'
+                : 'text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800';
+
+            return (
+                <div
+                    id={`task-card-${task.id}`}
+                    className={`group relative bg-white dark:bg-slate-900 border ${highlighted ? 'border-sky-500 dark:border-sky-400 animate-highlight-pulse shadow-lg' : 'border-slate-200 dark:border-slate-800 shadow-sm'} rounded-xl p-3 sm:p-4 hover:border-slate-400 dark:hover:border-slate-600 transition-all card-lift flex flex-col`}
+                >
+                    <div className="flex justify-between items-start gap-3">
+                        <div className="flex items-start gap-3 w-full min-w-0">
+                            <button
+                                onClick={(e) => { e.stopPropagation(); onToggleComplete(); }}
+                                className={`shrink-0 w-6 h-6 rounded-md border-2 mt-0.5 flex items-center justify-center btn-press ${isCompleted ? 'bg-emerald-500 border-emerald-500 animate-check-pop' : 'border-slate-300 dark:border-slate-600 hover:border-emerald-500'}`}
+                            >
+                                {isCompleted && <Icon name="check" className="w-3.5 h-3.5 text-white" />}
+                            </button>
+                            <div className="flex-1 min-w-0 cursor-pointer" onClick={onClick}>
+                                <h4 className={`text-sm font-extrabold leading-tight truncate ${isCompleted ? 'text-slate-400 line-through' : 'text-slate-900 dark:text-slate-100'}`}>{task.title}</h4>
+                                <div className="flex items-center flex-wrap gap-1.5 mt-1.5">
+                                    {project && (
+                                        <span className="text-[9px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded border" style={{ backgroundColor: `${project.color || '#38bdf8'}15`, borderColor: `${project.color || '#38bdf8'}40`, color: project.color || '#38bdf8' }}>{project.code}</span>
+                                    )}
+                                    {task.dueDate && (
+                                        <span className={`flex items-center gap-1 text-[10px] font-semibold px-1.5 py-0.5 rounded ${dateBadgeClasses}`}>
+                                            <Icon name="calendar" className="w-3 h-3" /> {task.dueDate}
+                                            {task.dueTime && <span className="ml-1 opacity-80">{task.dueTime}</span>}
+                                        </span>
+                                    )}
+                                    {(task.focusMinutes || 0) > 0 && (
+                                        <span className="flex items-center gap-1 text-[10px] font-semibold text-slate-500 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">
+                                            <Icon name="timer" className="w-3 h-3" /> {task.focusMinutes}m
+                                        </span>
+                                    )}
+                                    {task.recurring && task.recurring !== 'none' && (
+                                        <Icon name="repeat" className="w-3 h-3 text-sky-500" title={`Recurs ${task.recurring}`} />
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-1 shrink-0 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onClick={(e) => { e.stopPropagation(); onTogglePin(); }} className={`p-1.5 rounded-lg btn-press ${task.isPinned ? 'text-sky-500 bg-sky-50 dark:bg-sky-950/40' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}`}>
+                                <Icon name="pin" className="w-3.5 h-3.5" />
+                            </button>
+                            {onDuplicate && (
+                                <button onClick={(e) => { e.stopPropagation(); onDuplicate(); }} className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hidden sm:block btn-press">
+                                    <Icon name="copy" className="w-3.5 h-3.5" />
+                                </button>
+                            )}
+                            {onDelete && (
+                                <button onClick={(e) => { e.stopPropagation(); onDelete(); }} className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 hidden sm:block btn-press">
+                                    <Icon name="trash-2" className="w-3.5 h-3.5" />
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
