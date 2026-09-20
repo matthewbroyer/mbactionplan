@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Action Plan | by Matthew Broyer</title>
+    <title>Action Plan | Simple, Focused Daily Productivity</title>
 
     <!--
         Security note: this is a purely client-side app (no backend, no accounts).
@@ -173,7 +173,7 @@
         }
 
         .matrix-quad-body {
-            min-height: 0;
+            flex: 0 0 auto; /* never shrink below its cards */
         }
 
     </style>
@@ -1225,7 +1225,7 @@
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                URL.revokeObjectURL(url);
+                setTimeout(() => URL.revokeObjectURL(url), 1000); // revoking immediately can cancel the download
                 showToast('CSV backup downloaded.', 'success');
                 setShareModalOpen(false);
             };
@@ -1234,6 +1234,10 @@
                 const csvData = generateCSVData();
                 const fileName = `Action_Plan_Backup_${getLocalDateStr()}.csv`;
                 const file = new File([csvData], fileName, { type: 'text/csv' });
+                // Desktop (mouse/trackpad): download directly. Windows Chrome/Edge claim file-share support
+                // and would otherwise pop the OS share sheet instead of saving the file.
+                const isTouchDevice = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+                if (!isTouchDevice) { exportCSVBlob(); return; }
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     try {
                         await navigator.share({ title: 'Action Plan Backup', text: 'Action Plan productivity backup', files: [file] });
@@ -1366,12 +1370,12 @@
 
                     {/* Sticky Header */}
                     <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/85 dark:bg-slate-900/85 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-3 shadow-sm transition-colors duration-300">
-                        <div className="flex items-center space-x-3">
-                            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={isMobileMenuOpen} className="lg:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
+                        <div className="flex items-center gap-3">
+                            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={isMobileMenuOpen} className="lg:hidden h-9 w-9 shrink-0 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
                                 <Icon name={isMobileMenuOpen ? "x" : "menu"} className="w-4 h-4 text-slate-700 dark:text-slate-300" />
                             </button>
                             <div className="flex items-center space-x-3">
-                                <div className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 p-1.5 flex items-center justify-center shadow-md">
+                                <div className="w-9 h-9 shrink-0 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 p-1 flex items-center justify-center shadow-md">
                                     <svg viewBox="0 0 32 32" className="w-full h-full">
                                         <rect width="32" height="32" rx="8" className="fill-slate-900 dark:fill-[#151c2c]"/>
                                         <rect x="6" y="6" width="9" height="9" rx="2.5" fill="#38bdf8"/>
@@ -1383,12 +1387,12 @@
                                 </div>
                                 <div className="hidden xs:block sm:block">
                                     <h1 className="text-base font-extrabold tracking-tight text-slate-900 dark:text-slate-200 leading-none">Action Plan</h1>
-                                    <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-1">by Matthew Broyer</p>
+                                    <p className="hidden md:block text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-1">Simple, Focused Daily Productivity</p>
                                 </div>
                             </div>
                             <button
                                 onClick={() => { setCurrentTask(null); setTaskModalOpen(true); }}
-                                className="hidden sm:flex items-center justify-center space-x-1.5 bg-sky-500 hover:bg-sky-600 text-white px-4 py-1.5 rounded-xl text-xs font-bold shadow-md shadow-sky-500/20 transition-all btn-press"
+                                className="hidden sm:flex h-9 shrink-0 items-center justify-center gap-1.5 bg-sky-500 hover:bg-sky-600 text-white px-3.5 rounded-xl text-xs font-bold shadow-md shadow-sky-500/20 transition-all btn-press"
                             >
                                 <Icon name="plus" className="w-4 h-4" />
                                 <span>Add Task</span>
@@ -1396,7 +1400,7 @@
                         </div>
 
                         {/* Navigation (Desktop) */}
-                        <nav aria-label="Main" className="hidden lg:flex items-center space-x-1 bg-slate-100 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <nav aria-label="Main" className="hidden lg:flex lg:order-last lg:basis-full items-center gap-1 bg-slate-100 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
                             {[
                                 { id: 'dashboard', label: 'Dashboard', icon: 'layout-dashboard' },
                                 { id: 'projects', label: 'Projects', icon: 'folder-kanban' },
@@ -1408,7 +1412,7 @@
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
                                     aria-current={activeTab === tab.id ? 'page' : undefined}
-                                    className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all btn-press ${
+                                    className={`flex-1 h-8 flex items-center justify-center gap-2 px-3 rounded-lg text-xs font-semibold transition-all btn-press ${
                                         activeTab === tab.id
                                             ? 'bg-white text-slate-900 dark:bg-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm'
                                             : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-900 border border-transparent'
@@ -1420,7 +1424,7 @@
                             ))}
                         </nav>
 
-                        <div className="flex items-center space-x-2 flex-wrap justify-end flex-1 lg:flex-none">
+                        <div className="flex items-center gap-2 justify-end flex-1">
                             {/* Full Site Search */}
                             <div className="relative hidden md:block">
                                 <Icon name="search" className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
@@ -1430,18 +1434,18 @@
                                     placeholder="Search tasks..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="pl-9 pr-4 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-xs font-semibold focus:border-sky-500 w-48 transition-all"
+                                    className="h-9 pl-9 pr-4 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-xs font-semibold focus:border-sky-500 w-48 transition-all"
                                 />
                             </div>
 
                             <input ref={fileInputRef} type="file" accept=".csv,text/csv" className="hidden" onChange={handleImportCSV} />
                             
-                            <div className="flex items-center space-x-1.5 bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 p-1 rounded-xl hidden sm:flex">
+                            <div className="h-9 items-center gap-0.5 bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 px-0.5 rounded-xl hidden sm:flex">
                                 <button
                                     onClick={handleUndo}
                                     disabled={!canUndo}
                                     aria-label="Undo"
-                                    className={`p-1.5 rounded-lg transition btn-press ${canUndo ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'}`}
+                                    className={`h-7 w-7 flex items-center justify-center rounded-lg transition btn-press ${canUndo ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'}`}
                                     title="Undo (Ctrl+Z)"
                                 >
                                     <Icon name="undo-2" className="w-3.5 h-3.5" />
@@ -1450,7 +1454,7 @@
                                     onClick={handleRedo}
                                     disabled={!canRedo}
                                     aria-label="Redo"
-                                    className={`p-1.5 rounded-lg transition btn-press ${canRedo ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'}`}
+                                    className={`h-7 w-7 flex items-center justify-center rounded-lg transition btn-press ${canRedo ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'}`}
                                     title="Redo (Ctrl+Y)"
                                 >
                                     <Icon name="redo-2" className="w-3.5 h-3.5" />
@@ -1460,37 +1464,37 @@
                             <button
                                 onClick={() => fileInputRef.current?.click()}
                                 aria-label="Import CSV"
-                                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition btn-press"
+                                className="hidden sm:flex h-9 min-w-9 items-center justify-center gap-1.5 px-2.5 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition btn-press"
                                 title="Import CSV"
                             >
                                 <Icon name="upload" className="w-3.5 h-3.5" />
-                                <span>Import</span>
+                                <span className="hidden md:inline">Import</span>
                             </button>
 
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-2">
                                 <button
                                     onClick={handleShareOrExport}
                                     aria-label="Export or share CSV backup"
-                                    className="p-2 sm:px-2.5 sm:py-1.5 flex items-center gap-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold shadow-sm shadow-sky-500/20 transition btn-press"
+                                    className="h-9 min-w-9 px-2.5 flex items-center justify-center gap-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold shadow-sm shadow-sky-500/20 transition btn-press"
                                     title="Export / Share CSV"
                                 >
                                     <Icon name="download" className="w-3.5 h-3.5" />
-                                    <span className="hidden sm:inline">Export</span>
+                                    <span className="hidden md:inline">Export</span>
                                 </button>
 
                                 <button
                                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                                     aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-                                    className="p-2 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition btn-press ml-1"
+                                    className="h-9 w-9 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition btn-press"
                                     title="Toggle Theme"
                                 >
-                                    <Icon name={theme === 'dark' ? 'sun' : 'moon'} className="w-4 h-4" />
+                                    <Icon name={theme === 'dark' ? 'sun' : 'moon'} className="w-3.5 h-3.5" />
                                 </button>
 
                                 <button
                                     onClick={() => setClearModalOpen(true)}
                                     aria-label="Clear all stored data"
-                                    className="p-2 rounded-xl bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-900/80 text-rose-600 dark:text-rose-300 hover:bg-rose-200 dark:hover:bg-rose-800 transition btn-press ml-1 hidden sm:block"
+                                    className="p-2 rounded-xl bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-900/80 text-rose-600 dark:text-rose-300 hover:bg-rose-200 dark:hover:bg-rose-800 transition btn-press h-9 w-9 items-center justify-center hidden sm:flex"
                                     title="Clear stored data"
                                 >
                                     <Icon name="trash-2" className="w-3.5 h-3.5" />
@@ -2021,7 +2025,7 @@
             };
 
             return (
-                <div className="animate-fade-in-up flex flex-col min-h-0 h-full gap-3">
+                <div className="animate-fade-in-up flex flex-col gap-3 shrink-0">
                     <div className="shrink-0 flex items-center justify-between">
                         <div>
                             <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
@@ -2031,7 +2035,7 @@
                             <p className="text-xs text-slate-500 mt-0.5 hidden sm:block">Eisenhower method — quadrants expand to show their tasks.</p>
                         </div>
                     </div>
-                    <div className="matrix-grid flex-1 min-h-0">
+                    <div className="matrix-grid">
                         {renderQuadrant('do-first', 'Do First', 'Urgent & Important', 'alert-circle', 'bg-rose-50/50 dark:bg-rose-950/10', 'border-rose-200 dark:border-rose-900/30', 'text-rose-700 dark:text-rose-400')}
                         {renderQuadrant('schedule', 'Schedule', 'Important, Not Urgent', 'calendar-clock', 'bg-sky-50/50 dark:bg-sky-950/10', 'border-sky-200 dark:border-sky-900/30', 'text-sky-700 dark:text-sky-400')}
                         {renderQuadrant('delegate', 'Delegate', 'Urgent, Not Important', 'users', 'bg-amber-50/50 dark:bg-amber-950/10', 'border-amber-200 dark:border-amber-900/30', 'text-amber-700 dark:text-amber-400')}
