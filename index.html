@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Action Plan | Simple, Focused Daily Productivity</title>
+    <title>mbactionplan.online | Simple, Focused Daily Productivity</title>
 
     <!--
         Security note: this is a purely client-side app (no backend, no accounts).
@@ -802,7 +802,7 @@
                                 <>
                                     <h3 className="font-bold text-slate-900 dark:text-slate-100">Privacy Policy</h3>
                                     <p className="text-xs text-slate-500">Last updated: this reflects how the app's code actually works, not a generic template.</p>
-                                    <p>Action Plan is a free, single-page tool. There is no server, no account system, and no database behind it. Specifically:</p>
+                                    <p>mbactionplan.online is a free, single-page tool. There is no server, no account system, and no database behind it. Specifically:</p>
                                     <p><strong>What's stored, and where.</strong> Your projects, tasks, focus-timer minutes, and theme choice are saved only in this browser's local storage, on this device. Nothing you type into a task or project is sent to us or to anyone else. We have no way to see your data — it never leaves your browser unless you export or share it yourself.</p>
                                     <p><strong>What does leave your device.</strong> When the page loads, your browser fetches a few third-party files needed to run the app: the React, Babel, Tailwind, and Lucide-icon libraries from unpkg.com and cdn.tailwindcss.com. (Text uses your device's built-in system fonts, so no font service is contacted.) Loading these tells those services your IP address and basic browser info, the same as visiting any website that uses them — they do not receive your tasks, projects, or any content you enter. We don't control those third parties' own practices.</p>
                                     <p><strong>Cookies and tracking.</strong> This app sets no cookies and includes no analytics, advertising, or tracking scripts of any kind.</p>
@@ -816,8 +816,8 @@
                             {activeTab === 'terms' && (
                                 <>
                                     <h3 className="font-bold text-slate-900 dark:text-slate-100">Terms of Use</h3>
-                                    <p>By using Action Plan, you agree to the following:</p>
-                                    <p><strong>What this is.</strong> Action Plan is a free personal productivity tool (task list, priority matrix, calendar, and focus timer) provided as-is by an individual developer, for ordinary personal or small-business organizational use.</p>
+                                    <p>By using mbactionplan.online, you agree to the following:</p>
+                                    <p><strong>What this is.</strong> mbactionplan.online is a free personal productivity tool (task list, priority matrix, calendar, and focus timer) provided as-is by an individual developer, for ordinary personal or small-business organizational use.</p>
                                     <p><strong>No warranty.</strong> The app is provided "as is," without warranties of any kind, express or implied, including fitness for a particular purpose. It is not guaranteed to be error-free, uninterrupted, or permanently available, and it is not a substitute for professional project-management, scheduling, or record-keeping systems where reliability is critical.</p>
                                     <p><strong>Your responsibility.</strong> You are responsible for the content you enter and for backing up anything important using the Export feature. Because all data lives in your browser only, clearing site data, switching browsers or devices, or a browser bug can result in permanent data loss with no way for us to recover it.</p>
                                     <p><strong>Acceptable use.</strong> Don't use this app for any unlawful purpose, or to store or process content you don't have the right to store.</p>
@@ -829,7 +829,7 @@
                             {activeTab === 'disclaimer' && (
                                 <>
                                     <h3 className="font-bold text-slate-900 dark:text-slate-100">Disclaimer</h3>
-                                    <p><strong>Not professional advice.</strong> Action Plan is a general-purpose organizational tool. It does not provide medical, legal, financial, tax, or other professional advice, and nothing in the app should be relied on as such.</p>
+                                    <p><strong>Not professional advice.</strong> mbactionplan.online is a general-purpose organizational tool. It does not provide medical, legal, financial, tax, or other professional advice, and nothing in the app should be relied on as such.</p>
                                     <p><strong>No data-safety guarantee.</strong> This app is not a certified or audited secure storage system. While it doesn't transmit your data anywhere on its own, "local-only" storage is not the same as "backed up" or "unhackable" — anyone with access to your unlocked device and browser could see the same data you can. Don't store highly sensitive information here.</p>
                                     <p><strong>Accuracy of calculations.</strong> Completion percentages, focus-time totals, and recurring-task dates are computed automatically from what you enter; they're provided for convenience and haven't been certified for any regulatory, billing, or compliance purpose.</p>
                                 </>
@@ -1228,7 +1228,7 @@
                 if (!isTouchDevice) { exportCSVBlob(); return; }
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     try {
-                        await navigator.share({ title: 'Action Plan Backup', text: 'Action Plan productivity backup', files: [file] });
+                        await navigator.share({ title: 'mbactionplan.online Backup', text: 'mbactionplan.online productivity backup', files: [file] });
                         showToast('Backup shared successfully!', 'success');
                     } catch (err) {
                         if (err.name !== 'AbortError') setShareModalOpen(true);
@@ -1329,7 +1329,7 @@
                 return (
                     <div className="h-full flex items-center justify-center flex-col gap-3">
                         <div className="loader"></div>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">Loading Action Plan…</p>
+                        <p className="text-sm text-slate-500 dark:text-slate-400">Loading mbactionplan.online…</p>
                     </div>
                 );
             }
@@ -1378,7 +1378,7 @@
                                     <rect x="17" y="17" width="8" height="8" rx="1.5" className="fill-white dark:fill-slate-950" fillOpacity=".3"/>
                                 </svg>
                                 <div className="min-w-0 leading-tight">
-                                    <h1 className="text-[15px] font-bold text-slate-900 dark:text-slate-100 truncate">Action Plan</h1>
+                                    <h1 className="text-[15px] font-bold text-slate-900 dark:text-slate-100 truncate">mbactionplan.online</h1>
                                     <p className="hidden xl:block whitespace-nowrap text-[11px] text-slate-500 dark:text-slate-400">Simple, focused daily productivity</p>
                                 </div>
                             </div>
@@ -1567,7 +1567,7 @@
                             )}
 
                             <footer className="pt-8 pb-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
-                                <span>Action Plan — a free, local-only productivity app.</span>
+                                <span>mbactionplan.online — a free, local-only productivity app.</span>
                                 <button type="button" onClick={() => { setLegalTab('privacy'); setLegalModalOpen(true); }} className="underline hover:text-sky-600 dark:hover:text-sky-400">Privacy Policy</button>
                                 <button type="button" onClick={() => { setLegalTab('terms'); setLegalModalOpen(true); }} className="underline hover:text-sky-600 dark:hover:text-sky-400">Terms of Use</button>
                                 <button type="button" onClick={() => { setLegalTab('disclaimer'); setLegalModalOpen(true); }} className="underline hover:text-sky-600 dark:hover:text-sky-400">Disclaimer</button>
