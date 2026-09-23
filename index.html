@@ -8,76 +8,68 @@
     <!--
         Security note: this is a purely client-side app (no backend, no accounts).
         The CSP below restricts the page to only the external hosts it actually
-        needs (Google Fonts + the pinned CDN libraries loaded below) as
-        defense-in-depth against injected/rogue third-party scripts. If you
-        self-host these libraries instead of using CDNs, tighten this further.
+        needs (the pinned CDN libraries loaded below) as defense-in-depth against
+        injected/rogue third-party scripts. Fonts are the system UI stack, so no
+        font host is contacted. If you self-host the libraries, tighten this further.
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self';">
 
-    <link id="favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23151c2c'/><rect x='6' y='6' width='9' height='9' rx='2.5' fill='%2338bdf8'/><rect x='17' y='6' width='9' height='9' rx='2.5' fill='%23818cf8'/><rect x='6' y='17' width='9' height='9' rx='2.5' fill='%2334d399'/><rect x='17' y='17' width='9' height='9' rx='2.5' fill='%23f59e0b'/><circle cx='16' cy='16' r='2' fill='%23e2e8f0'/></svg>" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link id="favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='1.5' fill='%23ffffff'/><rect x='17' y='7' width='8' height='8' rx='1.5' fill='%23ffffff' fill-opacity='.55'/><rect x='7' y='17' width='8' height='8' rx='1.5' fill='%23ffffff' fill-opacity='.55'/><rect x='17' y='17' width='8' height='8' rx='1.5' fill='%23ffffff' fill-opacity='.3'/></svg>" />
 
     <!-- Libraries are pinned to exact versions (not @latest) so the app can't change or break under you without notice. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        /* "Utility" theme mapped onto Tailwind:
+           - slate  -> neutral desktop-software greys (shared across the app family)
+           - sky    -> this app's accent (indigo). Driven by CSS vars so it shifts for dark mode.
+           - radii, shadows, weights and motion flattened to the shared system. */
+        const __apAccent = (n) => `rgb(var(--acc-${n}) / <alpha-value>)`;
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['"Segoe UI Variable Text"', '"Segoe UI"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                        mono: ['ui-monospace', '"Cascadia Mono"', 'Consolas', '"SF Mono"', 'Menlo', 'monospace'],
                     },
+                    fontWeight: { bold: '600', extrabold: '650' },
                     colors: {
                         slate: {
-                            950: '#0b0f19',
-                            900: '#111827',
-                            850: '#151c2c',
-                            800: '#1e293b',
-                            750: '#26334d',
-                            700: '#334155',
-                            400: '#94a3b8',
-                            300: '#cbd5e1',
-                            200: '#e2e8f0',
+                            50: '#f6f7f9', 100: '#eceef2', 200: '#dfe2e7', 300: '#c6cbd3', 400: '#8e97a3',
+                            500: '#5f6773', 600: '#48505c', 700: '#3a4049', 750: '#30353c', 800: '#2a2e34',
+                            850: '#25292f', 900: '#1e2126', 950: '#16181c'
                         },
-                        brand: {
-                            500: '#38bdf8',
-                            600: '#0284c7',
-                            700: '#0369a1'
-                        }
+                        sky: {
+                            50: __apAccent(50), 100: __apAccent(100), 200: __apAccent(200), 300: __apAccent(300), 400: __apAccent(400),
+                            500: __apAccent(500), 600: __apAccent(600), 700: __apAccent(700), 800: __apAccent(800), 900: __apAccent(900), 950: __apAccent(950)
+                        },
+                        brand: { 500: __apAccent(500), 600: __apAccent(600), 700: __apAccent(700) }
+                    },
+                    borderRadius: {
+                        DEFAULT: '4px', sm: '3px', md: '4px', lg: '6px', xl: '6px', '2xl': '6px', '3xl': '8px'
+                    },
+                    boxShadow: {
+                        sm: '0 1px 2px rgba(20,24,31,.06)',
+                        DEFAULT: '0 1px 2px rgba(20,24,31,.06)',
+                        md: '0 1px 3px rgba(20,24,31,.10)',
+                        lg: '0 4px 12px -4px rgba(20,24,31,.16)',
+                        xl: '0 8px 24px -6px rgba(20,24,31,.22), 0 1px 3px rgba(20,24,31,.08)',
+                        '2xl': '0 8px 24px -6px rgba(20,24,31,.22), 0 1px 3px rgba(20,24,31,.08)'
                     },
                     keyframes: {
-                        'fade-in-up': {
-                            '0%': { opacity: '0', transform: 'translateY(8px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        'fade-in': {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        'toast-in': {
-                            '0%': { opacity: '0', transform: 'translateX(24px) scale(0.96)' },
-                            '100%': { opacity: '1', transform: 'translateX(0) scale(1)' }
-                        },
-                        'check-pop': {
-                            '0%': { transform: 'scale(0.6)' },
-                            '60%': { transform: 'scale(1.15)' },
-                            '100%': { transform: 'scale(1)' }
-                        },
+                        'fade-in-up': { '0%': { opacity: '0', transform: 'translateY(3px)' }, '100%': { opacity: '1', transform: 'none' } },
+                        'fade-in': { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        'toast-in': { '0%': { opacity: '0', transform: 'translateY(-4px)' }, '100%': { opacity: '1', transform: 'none' } },
                         'highlight-pulse': {
-                            '0%, 100%': { boxShadow: '0 0 0 2px #38bdf8, 0 0 20px rgba(56,189,248,0.5)' },
-                            '50%': { boxShadow: '0 0 0 4px #38bdf8, 0 0 30px rgba(56,189,248,0.8)' }
+                            '0%, 100%': { boxShadow: '0 0 0 2px rgb(var(--acc-500))' },
+                            '50%': { boxShadow: '0 0 0 4px rgb(var(--acc-500) / .45)' }
                         }
                     },
                     animation: {
-                        'fade-in-up': 'fade-in-up 0.35s ease-out',
-                        'fade-in': 'fade-in 0.5s ease-out',
-                        'toast-in': 'toast-in 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-                        'check-pop': 'check-pop 0.3s ease-out',
-                        'highlight-pulse': 'highlight-pulse 1.8s ease-in-out 3'
+                        'fade-in-up': 'fade-in-up 0.14s ease-out',
+                        'fade-in': 'fade-in 0.12s ease-out',
+                        'toast-in': 'toast-in 0.14s ease-out',
+                        'highlight-pulse': 'highlight-pulse 1s ease-in-out 3'
                     }
                 }
             }
@@ -90,95 +82,160 @@
     <script src="https://unpkg.com/lucide@1.47.0"></script>
 
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+        /* ---- theme: "Utility" — neutral desktop-software palette, one indigo accent, light + dark ---- */
+        :root{
+            color-scheme:light;
+            --font:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
+            --mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+            --r:6px; --r-sm:4px; --ctl:38px; --ctl-sm:32px; --ease:120ms ease;
+            --bg:#f3f4f6; --surface:#ffffff; --surface-2:#f6f7f9; --surface-3:#eceef2;
+            --ink:#1b1f24; --ink-2:#48505c; --muted:#5f6773;
+            --border:#dfe2e7; --border-strong:#c6cbd3;
+            --accent:#4f46e5; --accent-hover:#4338ca; --accent-ink:#ffffff;
+            --accent-soft:rgba(79,70,229,.09); --accent-line:rgba(79,70,229,.38);
+            --good:#16a34a; --good-ink:#0b7a35; --warn:#e5a100; --warn-ink:#8a5a00; --crit:#c9302c;
+            --shadow:0 1px 2px rgba(20,24,31,.06);
+            --shadow-pop:0 8px 24px -6px rgba(20,24,31,.22),0 1px 3px rgba(20,24,31,.08);
+            /* accent scale (RGB channels) consumed by Tailwind's "sky" palette */
+            --acc-50:238 240 253; --acc-100:224 227 251; --acc-200:199 203 247; --acc-300:165 172 242;
+            --acc-400:111 115 238; --acc-500:79 70 229; --acc-600:67 56 202; --acc-700:55 48 163;
+            --acc-800:49 46 129; --acc-900:30 27 75; --acc-950:20 18 54;
+        }
+        .dark{
+            color-scheme:dark;
+            --bg:#16181c; --surface:#1e2126; --surface-2:#25292f; --surface-3:#2d3238;
+            --ink:#e9ecf0; --ink-2:#b4bbc5; --muted:#8e97a3;
+            --border:#30353c; --border-strong:#434a53;
+            --accent:#818cf8; --accent-hover:#a5b4fc; --accent-ink:#0d0b2a;
+            --accent-soft:rgba(129,140,248,.13); --accent-line:rgba(129,140,248,.45);
+            --good:#22c55e; --good-ink:#4ade80; --warn:#f0b429; --warn-ink:#f5c95c; --crit:#ff6b6b;
+            --shadow:0 1px 2px rgba(0,0,0,.3);
+            --shadow-pop:0 10px 28px -6px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03);
+            --acc-300:199 210 254; --acc-400:165 180 252; --acc-500:129 140 248; --acc-600:99 102 241; --acc-700:165 180 252;
+        }
 
-        button:focus, button:focus-visible, a:focus, select:focus, input:focus, textarea:focus, [tabindex]:focus {
-            outline: none !important;
-        }
-        button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
-            box-shadow: 0 0 0 2px #0b0f19, 0 0 0 4px rgba(56, 189, 248, 0.5);
+        body{font-family:var(--font);font-size:14px;line-height:1.45;background:var(--bg);color:var(--ink)}
+        .font-mono{font-family:var(--mono)}
+        ::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)}
+        .tabular{font-variant-numeric:tabular-nums}
+
+        ::-webkit-scrollbar{width:10px;height:10px}
+        ::-webkit-scrollbar-track{background:transparent}
+        ::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:5px;border:3px solid var(--bg)}
+
+        /* ---- focus: one visible accent ring everywhere ---- */
+        button:focus, a:focus, select:focus, input:focus, textarea:focus, [tabindex]:focus{outline:none}
+        button:focus-visible, a:focus-visible, [role="button"]:focus-visible, [role="tab"]:focus-visible, summary:focus-visible{
+            outline:2px solid var(--accent)!important; outline-offset:1px;
         }
 
-        input[type="date"], input[type="time"] {
-            color: #0f172a !important;
-            background-color: #f8fafc !important;
-            border: 1px solid #cbd5e1 !important;
-            padding-right: 0.5rem;
+        /* ---- form controls (id selector outranks Tailwind utilities; horizontal padding left to markup) ---- */
+        #root input[type=text], #root input[type=number], #root input[type=date], #root input[type=time],
+        #root input[type=search], #root select, #root textarea{
+            background-color:var(--surface); border:1px solid var(--border-strong); border-radius:var(--r-sm);
+            color:var(--ink); font-size:14px; font-weight:400; box-shadow:none;
+            transition:border-color var(--ease), box-shadow var(--ease);
         }
-        .dark input[type="date"], .dark input[type="time"] {
-            color-scheme: dark;
-            color: #f8fafc !important;
-            background-color: #1e293b !important;
-            border: 1px solid #334155 !important;
+        #root input[type=text], #root input[type=number], #root input[type=date], #root input[type=time],
+        #root input[type=search], #root select{min-height:var(--ctl); padding-top:0; padding-bottom:0}
+        #root textarea{padding-top:8px; padding-bottom:8px; line-height:1.45}
+        #root input:hover:not(:focus):not(:disabled), #root select:hover:not(:focus), #root textarea:hover:not(:focus){
+            border-color:color-mix(in srgb,var(--ink) 35%,var(--border-strong));
         }
+        #root input:focus, #root select:focus, #root textarea:focus{border-color:var(--accent); box-shadow:0 0 0 1px var(--accent)}
+        #root input::placeholder, #root textarea::placeholder{color:var(--muted); opacity:.85}
+        #root input[type=checkbox]{accent-color:var(--accent); width:16px; height:16px; margin:0; cursor:pointer}
         .dark input[type="date"]::-webkit-calendar-picker-indicator,
-        .dark input[type="time"]::-webkit-calendar-picker-indicator {
-            filter: invert(0.9) brightness(1.2);
-            cursor: pointer;
-            opacity: 1 !important;
-        }
+        .dark input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(.85); cursor:pointer}
+        .fld-label{display:block; font-size:12.5px; font-weight:600; color:var(--ink-2); margin-bottom:4px}
+        .space-y-1\.5 > .fld-label, .space-y-1\.5 > div > .fld-label{margin-bottom:0}
 
-        .card-lift {
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        /* ---- buttons: primary / secondary / ghost / danger ---- */
+        /* display lives in :where() so Tailwind's hidden / lg:inline-flex always win */
+        :where(.btn){display:inline-flex}
+        .btn{
+            align-items:center; justify-content:center; gap:6px;
+            min-height:var(--ctl); padding:0 14px; border-radius:var(--r-sm);
+            font-size:13.5px; font-weight:600; line-height:1; white-space:nowrap; cursor:pointer;
+            background:var(--surface); color:var(--ink); border:1px solid var(--border-strong);
+            transition:background-color var(--ease), border-color var(--ease), color var(--ease);
         }
-        .card-lift:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px -12px rgba(0,0,0,0.15);
-        }
-        .dark .card-lift:hover {
-            box-shadow: 0 12px 28px -12px rgba(0,0,0,0.35);
-        }
-        .btn-press {
-            transition: transform 0.12s ease, background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
-        }
-        .btn-press:active { transform: scale(0.96); }
-        .btn-press:hover { filter: brightness(1.1); }
+        .btn:hover{background:var(--surface-2); border-color:color-mix(in srgb,var(--ink) 30%,var(--border-strong))}
+        .btn:active{background:var(--surface-3)}
+        .btn.sm{min-height:var(--ctl-sm); padding:0 10px; font-size:13px}
+        .btn.icon{padding:0; width:var(--ctl)}
+        .btn.sm.icon{width:var(--ctl-sm)}
+        .btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+        .btn.primary:hover{background:var(--accent-hover); border-color:var(--accent-hover)}
+        .btn.primary:active{filter:brightness(.94)}
+        .btn.success{background:var(--good); border-color:var(--good); color:#fff}
+        .dark .btn.success{color:#06180d}
+        .btn.success:hover{filter:brightness(.95)}
+        .btn.danger{color:var(--crit); border-color:color-mix(in srgb,var(--crit) 45%,var(--border-strong)); background:var(--surface)}
+        .btn.danger:hover{background:color-mix(in srgb,var(--crit) 8%,var(--surface)); border-color:var(--crit)}
+        .btn.danger.solid{background:var(--crit); border-color:var(--crit); color:#fff}
+        .dark .btn.danger.solid{color:#1a0505}
+        .btn.ghost{background:transparent; border-color:transparent; color:var(--ink-2)}
+        .btn.ghost:hover{background:var(--surface-2); color:var(--ink)}
+        .btn.ghost.danger:hover{background:color-mix(in srgb,var(--crit) 10%,transparent); color:var(--crit)}
+        .btn:disabled, .btn:disabled:hover{background:var(--surface-2); border-color:var(--border); color:var(--muted); filter:none; cursor:not-allowed; opacity:.7}
+        .btn.ghost:disabled{background:transparent; border-color:transparent}
+        .btn.primary:disabled, .btn.danger.solid:disabled{background:var(--surface-3); border-color:var(--border); color:var(--muted)}
+        .link{color:var(--accent); font-weight:600; font-size:13px}
+        .link:hover{text-decoration:underline}
 
-        /* Loader */
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #38bdf8;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        .dark .loader { border: 3px solid #1e293b; border-top: 3px solid #38bdf8; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* ---- panels ---- */
+        .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow)}
+        .panel-h{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:10px 14px; border-bottom:1px solid var(--border)}
+        .panel-h h3{font-size:14px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:8px}
+        .sect-t{font-size:11.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+        .tile{background:var(--surface); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--shadow); padding:12px 14px}
+        .tile .lbl{font-size:12px; font-weight:600; color:var(--ink-2)}
+        .tile .val{font-size:22px; font-weight:650; letter-spacing:-.01em; margin-top:2px; color:var(--ink); font-variant-numeric:tabular-nums}
+        .tile .note{font-size:12px; color:var(--muted)}
+        .meter{height:8px; background:var(--surface-3); border-radius:2px; overflow:hidden}
+        .meter > i{display:block; height:100%; background:var(--accent); border-radius:2px; transition:width .2s ease}
+        .empty{padding:24px 16px; text-align:center; color:var(--muted); font-size:13.5px}
+        .empty b{display:block; color:var(--ink); font-weight:600; margin-bottom:2px}
+        .badge{display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:600; line-height:1; padding:3px 6px; border-radius:3px; border:1px solid var(--border); background:var(--surface-2); color:var(--ink-2)}
+        .swatch{display:inline-block; width:8px; height:8px; border-radius:2px; flex:none}
 
-        /* Matrix: quadrants expand with their content; the page handles scrolling */
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            align-items: start;
-        }
-        @media (min-width: 1024px) {
-            .matrix-grid {
-                grid-template-columns: 1fr 1fr;
-                grid-auto-rows: auto;
-            }
-        }
+        /* ---- header nav: underline tabs ---- */
+        .tabs button{position:relative; display:inline-flex; align-items:center; gap:7px; min-height:40px; padding:0 12px; font-size:13.5px; font-weight:500; color:var(--ink-2); border-radius:0; transition:background-color var(--ease), color var(--ease)}
+        .tabs button:hover{background:var(--surface-2); color:var(--ink)}
+        .tabs button[aria-current="page"], .tabs button[aria-selected="true"]{color:var(--accent); font-weight:600; box-shadow:inset 0 -2px 0 var(--accent)}
+        .tabs button:focus-visible{outline-offset:-2px!important}
 
-        .matrix-quad {
-            min-height: 220px;
-            display: flex;
-            flex-direction: column;
-            overflow: visible;
-        }
+        /* ---- legacy helpers from the original build: keep hooks, drop the theatrics ---- */
+        .card-lift{transition:border-color var(--ease), background-color var(--ease)}
+        .card-lift:hover{border-color:var(--border-strong)}
+        .btn-press{transition:background-color var(--ease), border-color var(--ease), color var(--ease)}
 
-        .matrix-quad-body {
-            flex: 0 0 auto; /* never shrink below its cards */
-        }
+        .loader{width:28px; height:28px; border:3px solid var(--surface-3); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
 
+        /* ---- matrix: quadrants expand with their content; the page handles scrolling ---- */
+        .matrix-grid{display:grid; grid-template-columns:1fr; gap:12px; align-items:start}
+        @media (min-width:1024px){.matrix-grid{grid-template-columns:1fr 1fr; grid-auto-rows:auto}}
+        .matrix-quad{min-height:200px; display:flex; flex-direction:column; overflow:visible; border-top:3px solid var(--qc,var(--border-strong))}
+        .matrix-quad-body{flex:0 0 auto}
+
+        /* ---- touch & small screens: 44px targets ---- */
+        @media (pointer:coarse), (max-width:700px){
+            :root{--ctl:44px; --ctl-sm:40px}
+            .tabs button{min-height:44px}
+        }
+        /* touch screens have no hover: keep task quick-actions visible */
+        @media (hover:none){
+            .task-actions{opacity:1!important}
+            .task-card-title{padding-right:84px}
+        }
+        @media (prefers-reduced-motion:reduce){
+            *{animation-duration:1ms!important; animation-iteration-count:1!important; transition-duration:1ms!important; scroll-behavior:auto!important}
+        }
     </style>
 </head>
-<body class="h-full bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-300 antialiased selection:bg-sky-500/20 selection:text-sky-700 dark:selection:text-sky-300 transition-colors duration-300">
+<body class="h-full antialiased">
     <div id="root" class="h-full"></div>
 
     <script type="text/babel">
@@ -350,80 +407,6 @@
             }
         };
 
-        function InteractiveBackground({ theme }) {
-            const canvasRef = useRef(null);
-            useEffect(() => {
-                const canvas = canvasRef.current;
-                if (!canvas) return;
-                const ctx = canvas.getContext('2d');
-                let animationFrameId;
-                let width = (canvas.width = window.innerWidth);
-                let height = (canvas.height = window.innerHeight);
-
-                const handleResize = () => {
-                    width = canvas.width = window.innerWidth;
-                    height = canvas.height = window.innerHeight;
-                };
-                window.addEventListener('resize', handleResize);
-
-                const particles = Array.from({ length: 45 }, () => ({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.8,
-                    vy: (Math.random() - 0.5) * 0.8,
-                    size: Math.random() * 2.5 + 1,
-                    alpha: Math.random() * 0.5 + 0.2
-                }));
-
-                let mouseX = -1000, mouseY = -1000;
-                const handleMouseMove = (e) => { mouseX = e.clientX; mouseY = e.clientY; };
-                window.addEventListener('mousemove', handleMouseMove);
-
-                const colorBase = theme === 'light' ? '14, 165, 233' : '56, 189, 248';
-
-                const render = () => {
-                    ctx.clearRect(0, 0, width, height);
-                    particles.forEach((p, idx) => {
-                        p.x += p.vx; p.y += p.vy;
-                        if (p.x < 0 || p.x > width) p.vx *= -1;
-                        if (p.y < 0 || p.y > height) p.vy *= -1;
-                        const dx = p.x - mouseX, dy = p.y - mouseY;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 120 && dist > 0) {
-                            p.x += (dx / dist) * 1.5;
-                            p.y += (dy / dist) * 1.5;
-                        }
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(${colorBase}, ${p.alpha})`;
-                        ctx.fill();
-                        for (let j = idx + 1; j < particles.length; j++) {
-                            const p2 = particles[j];
-                            const pdx = p.x - p2.x, pdy = p.y - p2.y;
-                            const pdist = Math.sqrt(pdx * pdx + pdy * pdy);
-                            if (pdist < 110) {
-                                ctx.beginPath();
-                                ctx.moveTo(p.x, p.y);
-                                ctx.lineTo(p2.x, p2.y);
-                                ctx.strokeStyle = `rgba(${colorBase}, ${(1 - pdist / 110) * 0.18})`;
-                                ctx.lineWidth = 0.8;
-                                ctx.stroke();
-                            }
-                        }
-                    });
-                    animationFrameId = requestAnimationFrame(render);
-                };
-                render();
-                return () => {
-                    cancelAnimationFrame(animationFrameId);
-                    window.removeEventListener('resize', handleResize);
-                    window.removeEventListener('mousemove', handleMouseMove);
-                };
-            }, [theme]);
-
-            return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-80" />;
-        }
-
         const getNextRecurringDate = (currentDateStr, recurringType) => {
             const base = currentDateStr ? new Date(currentDateStr + 'T12:00:00') : new Date();
             if (isNaN(base.getTime())) return getLocalDateStr();
@@ -493,60 +476,62 @@
                     tabIndex={0}
                     aria-label={`Open task: ${task.title}`}
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }}
-                    className={`relative bg-white dark:bg-slate-800 p-4 rounded-xl border ${highlighted ? 'animate-highlight-pulse border-sky-500' : 'border-slate-200 dark:border-slate-700'} hover:shadow-md transition card-lift group focus-within:shadow-md cursor-pointer flex flex-col`}
+                    className={`relative bg-white dark:bg-slate-850 px-3 py-2.5 rounded-lg border ${highlighted ? 'animate-highlight-pulse border-sky-500' : 'border-slate-200 dark:border-slate-750'} transition card-lift group cursor-pointer flex flex-col`}
                     onClick={onClick}
                 >
                     <div className="flex items-start gap-3">
                         <button
                             onClick={(e) => { e.stopPropagation(); onToggleComplete(); }}
                             aria-label={task.status === 'Completed' ? `Mark "${task.title}" as not started` : `Mark "${task.title}" as complete`}
-                            className="w-5 h-5 mt-0.5 shrink-0 rounded border-2 border-slate-300 dark:border-slate-600 hover:border-emerald-500 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center justify-center transition btn-press"
+                            className={`w-5 h-5 mt-0.5 shrink-0 rounded border-2 flex items-center justify-center transition btn-press ${task.status === 'Completed' ? 'bg-emerald-600 border-emerald-600' : 'border-slate-300 dark:border-slate-600 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'}`}
                         >
-                            {task.status === 'Completed' && <Icon name="check" className="w-3 h-3 text-emerald-500" />}
+                            {task.status === 'Completed' && <Icon name="check" className="w-3 h-3 text-white" />}
                         </button>
                         <div className="flex-1 min-w-0">
-                            <h4 className={`text-sm font-bold truncate ${task.status === 'Completed' ? 'text-slate-400 line-through' : 'text-slate-900 dark:text-slate-100'}`}>
+                            <h4 className={`task-card-title text-sm font-semibold truncate pr-2 ${task.status === 'Completed' ? 'text-slate-400 line-through' : 'text-slate-900 dark:text-slate-100'}`}>
                                 {task.title}
                             </h4>
                             {task.description && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{task.description}</p>}
                         </div>
                     </div>
                     
-                    <div className="flex items-center flex-wrap gap-2 mt-3 pl-8">
+                    <div className="flex items-center flex-wrap gap-1.5 mt-2 pl-8 empty:hidden">
                         {project && (
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded border uppercase flex items-center gap-1" style={{ color: project.color || '#38bdf8', borderColor: `${project.color || '#38bdf8'}40`, backgroundColor: `${project.color || '#38bdf8'}10` }}>
-                                {project.code}
+                            <span className="badge uppercase" style={{ borderColor: `${project.color || '#38bdf8'}66` }}>
+                                <i className="swatch" style={{ backgroundColor: project.color || '#38bdf8' }}></i>{project.code}
                             </span>
                         )}
                         {task.dueDate && (
-                            <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded flex items-center gap-1 bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400`}>
-                                <Icon name="calendar" className="w-3 h-3" /> {task.dueDate}
+                            <span className="badge tabular">
+                                <Icon name="calendar" className="w-3 h-3" /> {task.dueDate}{task.dueTime ? ` ${task.dueTime}` : ''}
                             </span>
                         )}
                         {task.focusMinutes > 0 && (
-                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded flex items-center gap-1 bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400">
+                            <span className="badge tabular text-sky-700 dark:text-sky-400">
                                 <Icon name="timer" className="w-3 h-3" /> {task.focusMinutes}m
                             </span>
                         )}
                         {task.recurring && task.recurring !== 'none' && (
-                            <Icon name="repeat" className="w-3.5 h-3.5 text-sky-500" title={`Recurs: ${task.recurring}`} />
+                            <span className="badge" title={`Recurs: ${task.recurring}`}>
+                                <Icon name="repeat" className="w-3 h-3" /> {task.recurring}
+                            </span>
                         )}
                     </div>
                     
                     {/* Action Menu — visible on hover AND on keyboard focus (focus-within) */}
-                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition flex items-center gap-1 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-lg p-1 border border-slate-200 dark:border-slate-700 shadow-sm" onClick={e => e.stopPropagation()}>
+                    <div className="task-actions absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition flex items-center gap-0.5 bg-white dark:bg-slate-850 rounded p-0.5 border border-slate-200 dark:border-slate-750 shadow-md" onClick={e => e.stopPropagation()}>
                         {onTogglePin && (
-                            <button onClick={onTogglePin} aria-label={task.isPinned ? `Unpin "${task.title}"` : `Pin "${task.title}"`} className={`p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 btn-press ${task.isPinned ? 'text-sky-500' : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'}`} title={task.isPinned ? 'Unpin' : 'Pin'}>
+                            <button onClick={onTogglePin} aria-label={task.isPinned ? `Unpin "${task.title}"` : `Pin "${task.title}"`} className={`p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-750 btn-press ${task.isPinned ? 'text-sky-600 dark:text-sky-400' : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100'}`} title={task.isPinned ? 'Unpin' : 'Pin'}>
                                 <Icon name="pin" className="w-3.5 h-3.5" />
                             </button>
                         )}
                         {onDuplicate && (
-                            <button onClick={onDuplicate} aria-label={`Duplicate "${task.title}"`} className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-sky-500 btn-press" title="Duplicate">
+                            <button onClick={onDuplicate} aria-label={`Duplicate "${task.title}"`} className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-750 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 btn-press" title="Duplicate">
                                 <Icon name="copy" className="w-3.5 h-3.5" />
                             </button>
                         )}
                         {onDelete && (
-                            <button onClick={onDelete} aria-label={`Delete "${task.title}"`} className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-rose-500 btn-press" title="Delete">
+                            <button onClick={onDelete} aria-label={`Delete "${task.title}"`} className="p-1.5 rounded hover:bg-rose-50 dark:hover:bg-rose-950/40 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 btn-press" title="Delete">
                                 <Icon name="trash-2" className="w-3.5 h-3.5" />
                             </button>
                         )}
@@ -586,42 +571,42 @@
             };
 
             return (
-                <div className="fixed inset-0 z-50 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
+                <div className="fixed inset-0 z-50 bg-slate-950/45 dark:bg-black/60 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
                     <div role="dialog" aria-modal="true" aria-labelledby={titleId} onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl animate-fade-in-up">
-                        <div className="flex items-center justify-between p-5 border-b border-slate-200 dark:border-slate-800">
-                            <h2 id={titleId} className="text-lg font-extrabold text-slate-900 dark:text-slate-100">{task?.id ? 'Edit Task' : 'New Task'}</h2>
+                        <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800">
+                            <h2 id={titleId} className="text-base font-semibold text-slate-900 dark:text-slate-100">{task?.id ? 'Edit Task' : 'New Task'}</h2>
                             <div className="flex items-center gap-2">
                                 {task?.id && onDuplicate && (
-                                    <button onClick={onDuplicate} type="button" aria-label="Duplicate Task" className="p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press" title="Duplicate Task">
+                                    <button onClick={onDuplicate} type="button" aria-label="Duplicate Task" className="btn ghost icon sm" title="Duplicate Task">
                                         <Icon name="copy" className="w-4 h-4" />
                                     </button>
                                 )}
-                                <button onClick={onClose} aria-label="Close" className="p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
-                                    <Icon name="x" className="w-5 h-5" />
+                                <button onClick={onClose} aria-label="Close" className="btn ghost icon sm">
+                                    <Icon name="x" className="w-4 h-4" />
                                 </button>
                             </div>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-5 space-y-5">
+                        <form id="task-form" onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-5 space-y-4">
                             <div className="space-y-1.5">
-                                <label htmlFor="task-title-input" className="text-xs font-bold text-slate-600 dark:text-slate-400">Task Title</label>
-                                <input id="task-title-input" autoFocus type="text" name="title" value={formData.title} onChange={handleChange} placeholder="What needs to be done?" required className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm font-semibold focus:border-sky-500 text-slate-900 dark:text-slate-100" />
+                                <label htmlFor="task-title-input" className="fld-label">Task Title</label>
+                                <input id="task-title-input" autoFocus type="text" name="title" value={formData.title} onChange={handleChange} placeholder="What needs to be done?" required className="w-full px-3" />
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
                                     <div className="flex justify-between items-center">
-                                        <label htmlFor="task-project-select" className="text-xs font-bold text-slate-600 dark:text-slate-400">Project</label>
-                                        <button type="button" onClick={onOpenProjectModal} className="text-[10px] font-bold text-sky-500 hover:underline">New Project</button>
+                                        <label htmlFor="task-project-select" className="fld-label">Project</label>
+                                        <button type="button" onClick={onOpenProjectModal} className="link text-xs">+ New project</button>
                                     </div>
-                                    <select id="task-project-select" name="projectId" value={formData.projectId} onChange={handleChange} className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-semibold focus:border-sky-500">
+                                    <select id="task-project-select" name="projectId" value={formData.projectId} onChange={handleChange} className="w-full px-3">
                                         <option value="">No Project</option>
                                         {projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                                     </select>
                                 </div>
                                 <div className="space-y-1.5">
-                                    <label htmlFor="task-quadrant-select" className="text-xs font-bold text-slate-600 dark:text-slate-400">Priority Quadrant</label>
-                                    <select id="task-quadrant-select" name="quadrant" value={formData.quadrant} onChange={handleChange} className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-semibold focus:border-sky-500">
+                                    <label htmlFor="task-quadrant-select" className="fld-label">Priority Quadrant</label>
+                                    <select id="task-quadrant-select" name="quadrant" value={formData.quadrant} onChange={handleChange} className="w-full px-3">
                                         <option value="do-first">Do First (Urgent & Important)</option>
                                         <option value="schedule">Schedule (Important, Not Urgent)</option>
                                         <option value="delegate">Delegate (Urgent, Not Important)</option>
@@ -630,56 +615,53 @@
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <div className="space-y-1.5">
-                                    <label htmlFor="task-due-date" className="text-xs font-bold text-slate-600 dark:text-slate-400">Due Date</label>
-                                    <input id="task-due-date" type="date" name="dueDate" value={formData.dueDate} onChange={handleChange} className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-semibold focus:border-sky-500" />
+                                    <label htmlFor="task-due-date" className="fld-label">Due Date</label>
+                                    <input id="task-due-date" type="date" name="dueDate" value={formData.dueDate} onChange={handleChange} className="w-full px-3" />
                                 </div>
                                 <div className="space-y-1.5">
-                                    <label htmlFor="task-due-time" className="text-xs font-bold text-slate-600 dark:text-slate-400">Time (Optional)</label>
-                                    <input id="task-due-time" type="time" name="dueTime" value={formData.dueTime} onChange={handleChange} className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-semibold focus:border-sky-500" />
+                                    <label htmlFor="task-due-time" className="fld-label">Time (Optional)</label>
+                                    <input id="task-due-time" type="time" name="dueTime" value={formData.dueTime} onChange={handleChange} className="w-full px-3" />
                                 </div>
                                 <div className="space-y-1.5">
-                                    <label htmlFor="task-recurring-select" className="text-xs font-bold text-slate-600 dark:text-slate-400">Recurring</label>
-                                    <select id="task-recurring-select" name="recurring" value={formData.recurring} onChange={handleChange} className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm font-semibold focus:border-sky-500">
+                                    <label htmlFor="task-recurring-select" className="fld-label">Recurring</label>
+                                    <select id="task-recurring-select" name="recurring" value={formData.recurring} onChange={handleChange} className="w-full px-3">
                                         {RECURRING_OPTIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                                     </select>
                                 </div>
                             </div>
 
                             <div className="space-y-1.5">
-                                <label htmlFor="task-description" className="text-xs font-bold text-slate-600 dark:text-slate-400">Description / Notes</label>
-                                <textarea id="task-description" name="description" value={formData.description} onChange={handleChange} rows="3" className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:border-sky-500 text-slate-900 dark:text-slate-100 resize-none"></textarea>
-                                <p className="text-[11px] text-slate-400 dark:text-slate-500">This is saved only in your browser. Avoid entering passwords, SSNs, card numbers, or other highly sensitive information.</p>
+                                <label htmlFor="task-description" className="fld-label">Description / Notes</label>
+                                <textarea id="task-description" name="description" value={formData.description} onChange={handleChange} rows="3" className="w-full px-3 resize-none"></textarea>
+                                <p className="text-xs text-slate-500 dark:text-slate-400">This is saved only in your browser. Avoid entering passwords, SSNs, card numbers, or other highly sensitive information.</p>
                             </div>
 
-                            <label className="flex items-center gap-3 cursor-pointer group">
-                                <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${formData.isPinned ? 'bg-sky-500 border-sky-500' : 'border-slate-300 dark:border-slate-600 group-hover:border-sky-400'}`}>
-                                    {formData.isPinned && <Icon name="check" className="w-4 h-4 text-white" />}
-                                </div>
-                                <input type="checkbox" name="isPinned" checked={formData.isPinned} onChange={handleChange} className="hidden" />
-                                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">Pin task to Dashboard</span>
+                            <label className="inline-flex items-center gap-2.5 cursor-pointer min-h-[32px]">
+                                <input type="checkbox" name="isPinned" checked={!!formData.isPinned} onChange={handleChange} />
+                                <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Pin to Dashboard</span>
                             </label>
                         </form>
 
-                        <div className="p-5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
+                        <div className="px-5 py-3.5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0 bg-slate-50 dark:bg-slate-900 rounded-b-3xl">
                             <div>
                                 {task?.id && onCompleteTask && task.status !== 'Completed' && (
-                                    <button type="button" onClick={onCompleteTask} className="px-4 py-2.5 rounded-xl text-sm font-bold bg-emerald-500 text-white hover:bg-emerald-600 shadow-md shadow-emerald-500/20 btn-press flex items-center gap-2">
+                                    <button type="button" onClick={onCompleteTask} className="btn success">
                                         <Icon name="check-circle-2" className="w-4 h-4" />
                                         Complete Task
                                     </button>
                                 )}
                                 {task?.id && onCompleteTask && task.status === 'Completed' && (
-                                    <button type="button" onClick={onCompleteTask} className="px-4 py-2.5 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 btn-press flex items-center gap-2">
+                                    <button type="button" onClick={onCompleteTask} className="btn">
                                         <Icon name="rotate-ccw" className="w-4 h-4" />
                                         Restore Task
                                     </button>
                                 )}
                             </div>
-                            <div className="flex items-center gap-3">
-                                <button type="button" onClick={onClose} className="px-5 py-2.5 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 btn-press">Cancel</button>
-                                <button onClick={handleSubmit} className="px-5 py-2.5 rounded-xl text-sm font-bold bg-sky-500 text-white hover:bg-sky-600 shadow-lg shadow-sky-500/20 btn-press">Save Task</button>
+                            <div className="flex items-center gap-2">
+                                <button type="button" onClick={onClose} className="btn">Cancel</button>
+                                <button type="submit" form="task-form" className="btn primary">Save Task</button>
                             </div>
                         </div>
                     </div>
@@ -709,29 +691,29 @@
             };
 
             return (
-                <div className="fixed inset-0 z-50 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
+                <div className="fixed inset-0 z-50 bg-slate-950/45 dark:bg-black/60 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
                     <div role="dialog" aria-modal="true" aria-labelledby={titleId} onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg shadow-2xl animate-fade-in-up">
-                        <div className="flex items-center justify-between p-5 border-b border-slate-200 dark:border-slate-800">
-                            <h2 id={titleId} className="text-lg font-extrabold text-slate-900 dark:text-slate-100">{project ? 'Edit Project' : 'New Project'}</h2>
-                            <button onClick={onClose} aria-label="Close" className="p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
-                                <Icon name="x" className="w-5 h-5" />
+                        <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800">
+                            <h2 id={titleId} className="text-base font-semibold text-slate-900 dark:text-slate-100">{project ? 'Edit Project' : 'New Project'}</h2>
+                            <button onClick={onClose} aria-label="Close" className="btn ghost icon sm">
+                                <Icon name="x" className="w-4 h-4" />
                             </button>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="p-5 space-y-5">
+                        <form id="project-form" onSubmit={handleSubmit} className="p-5 space-y-4">
                             <div className="space-y-1.5">
-                                <label htmlFor="project-name-input" className="text-xs font-bold text-slate-600 dark:text-slate-400">Project Name</label>
-                                <input id="project-name-input" autoFocus type="text" name="name" value={formData.name} onChange={handleChange} required className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm font-semibold focus:border-sky-500" />
+                                <label htmlFor="project-name-input" className="fld-label">Project Name</label>
+                                <input id="project-name-input" autoFocus type="text" name="name" value={formData.name} onChange={handleChange} required className="w-full px-3" />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-5">
+                            <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
-                                    <label htmlFor="project-code-input" className="text-xs font-bold text-slate-600 dark:text-slate-400">Short Code (2-4 letters)</label>
-                                    <input id="project-code-input" type="text" name="code" value={formData.code} onChange={handleChange} maxLength="4" placeholder="e.g. PRJ" className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm font-mono uppercase focus:border-sky-500" />
+                                    <label htmlFor="project-code-input" className="fld-label">Short Code (2-4 letters)</label>
+                                    <input id="project-code-input" type="text" name="code" value={formData.code} onChange={handleChange} maxLength="4" placeholder="e.g. PRJ" className="w-full px-3 font-mono uppercase" />
                                 </div>
                                 <div className="space-y-1.5">
-                                    <label htmlFor="project-status-select" className="text-xs font-bold text-slate-600 dark:text-slate-400">Status</label>
-                                    <select id="project-status-select" name="status" value={formData.status} onChange={handleChange} className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm font-semibold focus:border-sky-500">
+                                    <label htmlFor="project-status-select" className="fld-label">Status</label>
+                                    <select id="project-status-select" name="status" value={formData.status} onChange={handleChange} className="w-full px-3">
                                         <option value="Active">Active</option>
                                         <option value="Archived">Archived</option>
                                     </select>
@@ -739,29 +721,29 @@
                             </div>
 
                             <div className="space-y-1.5">
-                                <span className="text-xs font-bold text-slate-600 dark:text-slate-400" id="project-color-label">Theme Color</span>
+                                <span className="fld-label" id="project-color-label">Theme Color</span>
                                 <div className="flex flex-wrap gap-2" role="group" aria-labelledby="project-color-label">
                                     {COLOR_PRESETS.map(c => (
-                                        <button type="button" key={c.id} onClick={() => setFormData({ ...formData, color: c.hex })} aria-pressed={formData.color === c.hex} aria-label={c.label} className={`w-8 h-8 rounded-full border-2 transition btn-press ${formData.color === c.hex ? 'border-slate-900 dark:border-white scale-110' : 'border-transparent'}`} style={{ backgroundColor: c.hex }} title={c.label} />
+                                        <button type="button" key={c.id} onClick={() => setFormData({ ...formData, color: c.hex })} aria-pressed={formData.color === c.hex} aria-label={c.label} className={`w-8 h-8 rounded border-2 transition btn-press ${formData.color === c.hex ? 'border-slate-900 dark:border-white' : 'border-transparent'}`} style={{ backgroundColor: c.hex }} title={c.label} />
                                     ))}
                                 </div>
                             </div>
 
                             <div className="space-y-1.5">
-                                <label htmlFor="project-description" className="text-xs font-bold text-slate-600 dark:text-slate-400">Description</label>
-                                <textarea id="project-description" name="description" value={formData.description} onChange={handleChange} rows="2" className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:border-sky-500 resize-none"></textarea>
+                                <label htmlFor="project-description" className="fld-label">Description</label>
+                                <textarea id="project-description" name="description" value={formData.description} onChange={handleChange} rows="2" className="w-full px-3 resize-none"></textarea>
                             </div>
                         </form>
 
-                        <div className="p-5 border-t border-slate-200 dark:border-slate-800 flex justify-between gap-3 bg-slate-50 dark:bg-slate-900/50 rounded-b-3xl">
+                        <div className="px-5 py-3.5 border-t border-slate-200 dark:border-slate-800 flex justify-between gap-3 bg-slate-50 dark:bg-slate-900 rounded-b-3xl">
                             {onDelete ? (
-                                <button type="button" onClick={onDelete} className="px-4 py-2.5 rounded-xl text-sm font-bold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/50 btn-press flex items-center gap-2">
+                                <button type="button" onClick={onDelete} className="btn ghost danger">
                                     <Icon name="trash-2" className="w-4 h-4" /> Delete
                                 </button>
                             ) : <div></div>}
                             <div className="flex gap-2">
-                                <button type="button" onClick={onClose} className="px-5 py-2.5 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 btn-press">Cancel</button>
-                                <button onClick={handleSubmit} className="px-5 py-2.5 rounded-xl text-sm font-bold bg-sky-500 text-white hover:bg-sky-600 shadow-md shadow-sky-500/20 btn-press">Save Project</button>
+                                <button type="button" onClick={onClose} className="btn">Cancel</button>
+                                <button type="submit" form="project-form" className="btn primary">Save Project</button>
                             </div>
                         </div>
                     </div>
@@ -781,7 +763,7 @@
                 { id: 'disclaimer', label: 'Disclaimer', icon: 'scale' }
             ];
             return (
-                <div className="fixed inset-0 z-50 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
+                <div className="fixed inset-0 z-50 bg-slate-950/45 dark:bg-black/60 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
                     <div
                         role="dialog"
                         aria-modal="true"
@@ -789,20 +771,20 @@
                         onClick={(e) => e.stopPropagation()}
                         className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl animate-fade-in-up"
                     >
-                        <div className="flex items-center justify-between p-5 border-b border-slate-200 dark:border-slate-800 shrink-0">
-                            <h2 id={titleId} className="text-lg font-extrabold text-slate-900 dark:text-slate-100">About &amp; Legal</h2>
-                            <button onClick={onClose} aria-label="Close" className="p-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
-                                <Icon name="x" className="w-5 h-5" />
+                        <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 shrink-0">
+                            <h2 id={titleId} className="text-base font-semibold text-slate-900 dark:text-slate-100">About &amp; Legal</h2>
+                            <button onClick={onClose} aria-label="Close" className="btn ghost icon sm">
+                                <Icon name="x" className="w-4 h-4" />
                             </button>
                         </div>
-                        <div className="flex gap-1 p-2 border-b border-slate-200 dark:border-slate-800 shrink-0" role="tablist" aria-label="Legal information">
+                        <div className="tabs flex px-3 border-b border-slate-200 dark:border-slate-800 shrink-0 overflow-x-auto" role="tablist" aria-label="Legal information">
                             {tabs.map(t => (
                                 <button
                                     key={t.id}
                                     role="tab"
                                     aria-selected={activeTab === t.id}
                                     onClick={() => setActiveTab(t.id)}
-                                    className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition btn-press ${activeTab === t.id ? 'bg-sky-500 text-white' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+                                    type="button"
                                 >
                                     <Icon name={t.icon} className="w-3.5 h-3.5" />
                                     {t.label}
@@ -816,7 +798,7 @@
                                     <p className="text-xs text-slate-500">Last updated: this reflects how the app's code actually works, not a generic template.</p>
                                     <p>Action Plan is a free, single-page tool. There is no server, no account system, and no database behind it. Specifically:</p>
                                     <p><strong>What's stored, and where.</strong> Your projects, tasks, focus-timer minutes, and theme choice are saved only in this browser's local storage, on this device. Nothing you type into a task or project is sent to us or to anyone else. We have no way to see your data — it never leaves your browser unless you export or share it yourself.</p>
-                                    <p><strong>What does leave your device.</strong> When the page loads, your browser fetches a few third-party files needed to run the app: Google Fonts (fonts.googleapis.com / fonts.gstatic.com), and the React, Babel, Tailwind, and Lucide-icon libraries from unpkg.com and cdn.tailwindcss.com. Loading these tells those services your IP address and basic browser info, the same as visiting any website that uses them — they do not receive your tasks, projects, or any content you enter. We don't control those third parties' own practices.</p>
+                                    <p><strong>What does leave your device.</strong> When the page loads, your browser fetches a few third-party files needed to run the app: the React, Babel, Tailwind, and Lucide-icon libraries from unpkg.com and cdn.tailwindcss.com. (Text uses your device's built-in system fonts, so no font service is contacted.) Loading these tells those services your IP address and basic browser info, the same as visiting any website that uses them — they do not receive your tasks, projects, or any content you enter. We don't control those third parties' own practices.</p>
                                     <p><strong>Cookies and tracking.</strong> This app sets no cookies and includes no analytics, advertising, or tracking scripts of any kind.</p>
                                     <p><strong>Exporting and sharing.</strong> The Export button creates a CSV file from your data, either downloaded directly or handed to your device's native share sheet if you choose that option — that only goes wherever you personally direct it. Importing a CSV reads the file locally in your browser; it is never uploaded anywhere.</p>
                                     <p><strong>Deleting your data.</strong> The "Clear stored data" option permanently erases everything saved in this browser. Clearing your browser's site data, or using a different browser or device, will also mean your data isn't there — there is no backup copy anywhere else, so export a CSV first if you want one.</p>
@@ -918,7 +900,7 @@
 
             // Initial Loading Timeout
             useEffect(() => {
-                const timer = setTimeout(() => setIsInitialLoading(false), 600);
+                const timer = setTimeout(() => setIsInitialLoading(false), 150);
                 return () => clearTimeout(timer);
             }, []);
 
@@ -1339,290 +1321,265 @@
 
             if (isInitialLoading) {
                 return (
-                    <div className="h-full flex items-center justify-center flex-col bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-                        <div className="loader mb-4"></div>
-                        <h2 className="text-sm font-bold text-slate-500 animate-pulse">Loading Action Plan...</h2>
+                    <div className="h-full flex items-center justify-center flex-col gap-3">
+                        <div className="loader"></div>
+                        <p className="text-sm text-slate-500 dark:text-slate-400">Loading Action Plan…</p>
                     </div>
                 );
             }
+
+            const NAV_TABS = [
+                { id: 'dashboard', label: 'Dashboard', short: 'Home', icon: 'layout-dashboard' },
+                { id: 'projects', label: 'Projects', short: 'Projects', icon: 'folder-kanban' },
+                { id: 'tasks', label: 'Tasks Matrix', short: 'Matrix', icon: 'grid' },
+                { id: 'calendar', label: 'Calendar', short: 'Calendar', icon: 'calendar' },
+                { id: 'pomodoro', label: 'Focus Timer', short: 'Focus', icon: 'timer' }
+            ];
 
             const canUndo = historyIndex > 0;
             const canRedo = historyIndex < history.length - 1;
 
             return (
-                <div className="h-full flex flex-col relative overflow-hidden transition-colors duration-300 animate-fade-in">
-                    <InteractiveBackground theme={theme} />
+                <div className="h-full flex flex-col relative overflow-hidden">
                     
                     {/* Scroll Progress Bar */}
-                    <div className="fixed top-0 left-0 h-1 bg-sky-500 z-50 transition-all duration-75" style={{ width: `${scrollProgress}%` }}></div>
+                    <div className="fixed top-0 left-0 h-0.5 bg-sky-500 z-50" style={{ width: `${scrollProgress}%` }} aria-hidden="true"></div>
 
                     {/* Toast Notification */}
                     {toast && (
-                        <div className={`fixed top-16 right-5 z-50 px-4 py-3 rounded-xl shadow-2xl border text-xs font-semibold flex items-center space-x-2 animate-toast-in ${
-                            toast.type === 'error' ? 'bg-rose-100 border-rose-300 text-rose-800 dark:bg-rose-950/90 dark:border-rose-800 dark:text-rose-200' :
-                            toast.type === 'info' ? 'bg-indigo-100 border-indigo-300 text-indigo-800 dark:bg-indigo-950/90 dark:border-indigo-800 dark:text-indigo-200' :
-                            'bg-white border-slate-200 text-slate-800 dark:bg-slate-850 dark:border-slate-700 dark:text-slate-200'
+                        <div role="status" aria-live="polite" className={`fixed top-16 right-4 left-4 sm:left-auto z-50 sm:max-w-sm pl-3 pr-4 py-2.5 rounded-lg shadow-xl border border-l-[3px] text-sm font-medium flex items-center gap-2.5 animate-toast-in bg-white dark:bg-slate-850 text-slate-800 dark:text-slate-100 border-slate-200 dark:border-slate-750 ${
+                            toast.type === 'error' ? '!border-l-rose-600 dark:!border-l-rose-400' :
+                            toast.type === 'info' ? '!border-l-sky-500' :
+                            '!border-l-emerald-600 dark:!border-l-emerald-400'
                         }`}>
-                            <Icon name={toast.type === 'error' ? 'alert-circle' : toast.type === 'info' ? 'info' : 'check-circle-2'} className="w-4 h-4 text-sky-500" />
+                            <Icon name={toast.type === 'error' ? 'alert-circle' : toast.type === 'info' ? 'info' : 'check-circle-2'} className={`w-4 h-4 ${toast.type === 'error' ? 'text-rose-600 dark:text-rose-400' : toast.type === 'info' ? 'text-sky-600 dark:text-sky-400' : 'text-emerald-600 dark:text-emerald-400'}`} />
                             <span>{toast.message}</span>
                         </div>
                     )}
 
-                    {/* Sticky Header */}
-                    <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/85 dark:bg-slate-900/85 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-3 shadow-sm transition-colors duration-300">
-                        <div className="flex items-center gap-3">
-                            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={isMobileMenuOpen} className="lg:hidden h-9 w-9 shrink-0 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
-                                <Icon name={isMobileMenuOpen ? "x" : "menu"} className="w-4 h-4 text-slate-700 dark:text-slate-300" />
+                    {/* App bar */}
+                    <header className="sticky top-0 z-40 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="max-w-7xl mx-auto px-3 sm:px-6 h-14 flex items-center gap-2 sm:gap-3">
+                            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label={isMobileMenuOpen ? 'Close tools menu' : 'Open tools menu'} aria-expanded={isMobileMenuOpen} className="btn ghost icon lg:hidden -ml-1">
+                                <Icon name={isMobileMenuOpen ? "x" : "menu"} className="w-4 h-4" />
                             </button>
-                            <div className="flex items-center space-x-3">
-                                <div className="w-9 h-9 shrink-0 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 p-1 flex items-center justify-center shadow-md">
-                                    <svg viewBox="0 0 32 32" className="w-full h-full">
-                                        <rect width="32" height="32" rx="8" className="fill-slate-900 dark:fill-[#151c2c]"/>
-                                        <rect x="6" y="6" width="9" height="9" rx="2.5" fill="#38bdf8"/>
-                                        <rect x="17" y="6" width="9" height="9" rx="2.5" fill="#818cf8"/>
-                                        <rect x="6" y="17" width="9" height="9" rx="2.5" fill="#34d399"/>
-                                        <rect x="17" y="17" width="9" height="9" rx="2.5" fill="#f59e0b"/>
-                                        <circle cx="16" cy="16" r="2" fill="#e2e8f0"/>
-                                    </svg>
-                                </div>
-                                <div className="hidden xs:block sm:block">
-                                    <h1 className="text-base font-extrabold tracking-tight text-slate-900 dark:text-slate-200 leading-none">Action Plan</h1>
-                                    <p className="hidden md:block text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-1">Simple, Focused Daily Productivity</p>
+                            <div className="flex items-center gap-2.5 min-w-0">
+                                <svg viewBox="0 0 32 32" className="w-7 h-7 shrink-0" aria-hidden="true">
+                                    <rect width="32" height="32" rx="6" className="fill-sky-500"/>
+                                    <rect x="7" y="7" width="8" height="8" rx="1.5" className="fill-white dark:fill-slate-950"/>
+                                    <rect x="17" y="7" width="8" height="8" rx="1.5" className="fill-white dark:fill-slate-950" fillOpacity=".55"/>
+                                    <rect x="7" y="17" width="8" height="8" rx="1.5" className="fill-white dark:fill-slate-950" fillOpacity=".55"/>
+                                    <rect x="17" y="17" width="8" height="8" rx="1.5" className="fill-white dark:fill-slate-950" fillOpacity=".3"/>
+                                </svg>
+                                <div className="min-w-0 leading-tight">
+                                    <h1 className="text-[15px] font-bold text-slate-900 dark:text-slate-100 truncate">Action Plan</h1>
+                                    <p className="hidden md:block text-[11px] text-slate-500 dark:text-slate-400">Simple, focused daily productivity</p>
                                 </div>
                             </div>
-                            <button
-                                onClick={() => { setCurrentTask(null); setTaskModalOpen(true); }}
-                                className="hidden sm:flex h-9 shrink-0 items-center justify-center gap-1.5 bg-sky-500 hover:bg-sky-600 text-white px-3.5 rounded-xl text-xs font-bold shadow-md shadow-sky-500/20 transition-all btn-press"
-                            >
-                                <Icon name="plus" className="w-4 h-4" />
-                                <span>Add Task</span>
-                            </button>
-                        </div>
 
-                        {/* Navigation (Desktop) */}
-                        <nav aria-label="Main" className="hidden lg:flex lg:order-last lg:basis-full items-center gap-1 bg-slate-100 dark:bg-slate-950/80 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
-                            {[
-                                { id: 'dashboard', label: 'Dashboard', icon: 'layout-dashboard' },
-                                { id: 'projects', label: 'Projects', icon: 'folder-kanban' },
-                                { id: 'tasks', label: 'Tasks', icon: 'grid' },
-                                { id: 'calendar', label: 'Calendar', icon: 'calendar' },
-                                { id: 'pomodoro', label: 'Focus Timer', icon: 'timer' }
-                            ].map(tab => (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    aria-current={activeTab === tab.id ? 'page' : undefined}
-                                    className={`flex-1 h-8 flex items-center justify-center gap-2 px-3 rounded-lg text-xs font-semibold transition-all btn-press ${
-                                        activeTab === tab.id
-                                            ? 'bg-white text-slate-900 dark:bg-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm'
-                                            : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-900 border border-transparent'
-                                    }`}
-                                >
-                                    <Icon name={tab.icon} className="w-3.5 h-3.5" />
-                                    <span>{tab.label}</span>
-                                </button>
-                            ))}
-                        </nav>
+                            <div className="flex-1"></div>
 
-                        <div className="flex items-center gap-2 justify-end flex-1">
                             {/* Full Site Search */}
                             <div className="relative hidden md:block">
-                                <Icon name="search" className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
+                                <Icon name="search" className="w-4 h-4 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                                 <input
-                                    type="text"
+                                    type="search"
                                     aria-label="Search tasks"
-                                    placeholder="Search tasks..."
+                                    placeholder="Search tasks…"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="h-9 pl-9 pr-4 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-xs font-semibold focus:border-sky-500 w-48 transition-all"
+                                    className="pl-8 pr-3 w-44 lg:w-56"
+                                    style={{ minHeight: 'var(--ctl-sm)' }}
                                 />
                             </div>
 
                             <input ref={fileInputRef} type="file" accept=".csv,text/csv" className="hidden" onChange={handleImportCSV} />
-                            
-                            <div className="h-9 items-center gap-0.5 bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 px-0.5 rounded-xl hidden sm:flex">
-                                <button
-                                    onClick={handleUndo}
-                                    disabled={!canUndo}
-                                    aria-label="Undo"
-                                    className={`h-7 w-7 flex items-center justify-center rounded-lg transition btn-press ${canUndo ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'}`}
-                                    title="Undo (Ctrl+Z)"
-                                >
-                                    <Icon name="undo-2" className="w-3.5 h-3.5" />
+
+                            <div className="hidden lg:flex items-center gap-0.5" role="group" aria-label="History">
+                                <button onClick={handleUndo} disabled={!canUndo} aria-label="Undo" className="btn ghost sm icon" title="Undo (Ctrl+Z)">
+                                    <Icon name="undo-2" className="w-4 h-4" />
                                 </button>
-                                <button
-                                    onClick={handleRedo}
-                                    disabled={!canRedo}
-                                    aria-label="Redo"
-                                    className={`h-7 w-7 flex items-center justify-center rounded-lg transition btn-press ${canRedo ? 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'}`}
-                                    title="Redo (Ctrl+Y)"
-                                >
-                                    <Icon name="redo-2" className="w-3.5 h-3.5" />
+                                <button onClick={handleRedo} disabled={!canRedo} aria-label="Redo" className="btn ghost sm icon" title="Redo (Ctrl+Y)">
+                                    <Icon name="redo-2" className="w-4 h-4" />
                                 </button>
                             </div>
 
-                            <button
-                                onClick={() => fileInputRef.current?.click()}
-                                aria-label="Import CSV"
-                                className="hidden sm:flex h-9 min-w-9 items-center justify-center gap-1.5 px-2.5 rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition btn-press"
-                                title="Import CSV"
-                            >
-                                <Icon name="upload" className="w-3.5 h-3.5" />
-                                <span className="hidden md:inline">Import</span>
+                            <div className="hidden lg:block w-px h-6 bg-slate-200 dark:bg-slate-750" aria-hidden="true"></div>
+
+                            <button onClick={() => fileInputRef.current?.click()} aria-label="Import CSV" className="btn sm hidden lg:inline-flex" title="Import CSV backup">
+                                <Icon name="upload" className="w-4 h-4" />
+                                <span>Import</span>
                             </button>
-
-                            <div className="flex items-center gap-2">
-                                <button
-                                    onClick={handleShareOrExport}
-                                    aria-label="Export or share CSV backup"
-                                    className="h-9 min-w-9 px-2.5 flex items-center justify-center gap-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold shadow-sm shadow-sky-500/20 transition btn-press"
-                                    title="Export / Share CSV"
-                                >
-                                    <Icon name="download" className="w-3.5 h-3.5" />
-                                    <span className="hidden md:inline">Export</span>
-                                </button>
-
-                                <button
-                                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                                    aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-                                    className="h-9 w-9 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-850 border border-slate-200 dark:border-slate-750 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition btn-press"
-                                    title="Toggle Theme"
-                                >
-                                    <Icon name={theme === 'dark' ? 'sun' : 'moon'} className="w-3.5 h-3.5" />
-                                </button>
-
-                                <button
-                                    onClick={() => setClearModalOpen(true)}
-                                    aria-label="Clear all stored data"
-                                    className="p-2 rounded-xl bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-900/80 text-rose-600 dark:text-rose-300 hover:bg-rose-200 dark:hover:bg-rose-800 transition btn-press h-9 w-9 items-center justify-center hidden sm:flex"
-                                    title="Clear stored data"
-                                >
-                                    <Icon name="trash-2" className="w-3.5 h-3.5" />
-                                </button>
-                            </div>
+                            <button onClick={handleShareOrExport} aria-label="Export or share CSV backup" className="btn sm" title="Export / Share CSV backup">
+                                <Icon name="download" className="w-4 h-4" />
+                                <span className="hidden sm:inline">Export</span>
+                            </button>
+                            <button
+                                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                                aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+                                className="btn ghost sm icon"
+                                title={theme === 'dark' ? 'Light theme' : 'Dark theme'}
+                            >
+                                <Icon name={theme === 'dark' ? 'sun' : 'moon'} className="w-4 h-4" />
+                            </button>
+                            <button onClick={() => setClearModalOpen(true)} aria-label="Clear all stored data" className="btn ghost danger sm icon hidden lg:inline-flex" title="Clear stored data">
+                                <Icon name="trash-2" className="w-4 h-4" />
+                            </button>
+                            <button onClick={() => { setCurrentTask(null); setTaskModalOpen(true); }} className="btn primary sm">
+                                <Icon name="plus" className="w-4 h-4" />
+                                <span>Add<span className="hidden sm:inline"> Task</span></span>
+                            </button>
                         </div>
 
-                        {/* Mobile Menu Dropdown */}
-                        {isMobileMenuOpen && (
-                            <div className="lg:hidden w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl mt-2 p-2 shadow-lg flex flex-col gap-1 animate-fade-in-up">
-                                <input 
-                                    type="text" 
-                                    placeholder="Search tasks..." 
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="md:hidden w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-semibold focus:border-sky-500 mb-2"
-                                />
-                                {[
-                                    { id: 'dashboard', label: 'Dashboard', icon: 'layout-dashboard' },
-                                    { id: 'projects', label: 'Projects', icon: 'folder-kanban' },
-                                    { id: 'tasks', label: 'Tasks Matrix', icon: 'grid' },
-                                    { id: 'calendar', label: 'Calendar', icon: 'calendar' },
-                                    { id: 'pomodoro', label: 'Focus Timer', icon: 'timer' }
-                                ].map(tab => (
-                                    <button
-                                        key={tab.id}
-                                        onClick={() => { setActiveTab(tab.id); setIsMobileMenuOpen(false); }}
-                                        className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-bold transition-all ${
-                                            activeTab === tab.id
-                                                ? 'bg-sky-100 dark:bg-sky-900/30 text-sky-700 dark:text-sky-400'
-                                                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
-                                        }`}
-                                    >
+                        {/* Navigation (Desktop): underline tabs */}
+                        <nav aria-label="Main" className="hidden lg:block">
+                            <div className="tabs max-w-7xl mx-auto px-3 sm:px-6 flex -mb-px">
+                                {NAV_TABS.map(tab => (
+                                    <button key={tab.id} onClick={() => setActiveTab(tab.id)} aria-current={activeTab === tab.id ? 'page' : undefined}>
                                         <Icon name={tab.icon} className="w-4 h-4" />
                                         <span>{tab.label}</span>
                                     </button>
                                 ))}
-                                <div className="border-t border-slate-200 dark:border-slate-800 my-1 pt-1">
-                                    <button onClick={() => { setCurrentTask(null); setTaskModalOpen(true); setIsMobileMenuOpen(false); }} className="w-full flex items-center justify-start space-x-3 bg-sky-500 hover:bg-sky-600 text-white px-4 py-3 rounded-lg text-sm font-bold">
-                                        <Icon name="plus" className="w-4 h-4" />
-                                        <span>Add Task</span>
+                            </div>
+                        </nav>
+
+                        {/* Mobile tools menu (navigation lives in the bottom bar) */}
+                        {isMobileMenuOpen && (
+                            <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 sm:px-6 py-3 space-y-3 animate-fade-in">
+                                <div className="relative md:hidden">
+                                    <Icon name="search" className="w-4 h-4 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                                    <input
+                                        type="search"
+                                        aria-label="Search tasks"
+                                        placeholder="Search tasks…"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        className="w-full pl-8 pr-3"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <button onClick={handleUndo} disabled={!canUndo} className="btn">
+                                        <Icon name="undo-2" className="w-4 h-4" /> Undo
+                                    </button>
+                                    <button onClick={handleRedo} disabled={!canRedo} className="btn">
+                                        <Icon name="redo-2" className="w-4 h-4" /> Redo
+                                    </button>
+                                    <button onClick={() => { fileInputRef.current?.click(); setIsMobileMenuOpen(false); }} className="btn">
+                                        <Icon name="upload" className="w-4 h-4" /> Import CSV
+                                    </button>
+                                    <button onClick={() => { setClearModalOpen(true); setIsMobileMenuOpen(false); }} className="btn danger">
+                                        <Icon name="trash-2" className="w-4 h-4" /> Clear data
                                     </button>
                                 </div>
                             </div>
                         )}
                     </header>
 
-                    <main ref={mainRef} onScroll={handleScroll} className={`flex-1 overflow-y-auto p-4 sm:p-6 max-w-7xl w-full mx-auto z-10 relative scroll-smooth ${activeTab === 'tasks' ? 'flex flex-col min-h-0' : 'space-y-6'}`}>
-                        {activeTab === 'dashboard' && (
-                            <DashboardView
-                                projects={projects}
-                                tasks={filteredTasks}
-                                setActiveTab={setActiveTab}
-                                selectedProjectId={selectedProjectId}
-                                setSelectedProjectId={setSelectedProjectId}
-                                onTaskClick={handleDashboardTaskClick}
-                                onTogglePin={handleTogglePin}
-                                onToggleComplete={handleToggleComplete}
-                            />
-                        )}
-                        {activeTab === 'projects' && (
-                            <ProjectsView
-                                projects={projects}
-                                tasks={filteredTasks}
-                                selectedProjectDetail={selectedProjectDetail}
-                                setSelectedProjectDetail={setSelectedProjectDetail}
-                                onEditProject={(p) => { setCurrentProject(p); setProjectModalOpen(true); }}
-                                onNewProject={() => { setCurrentProject(null); setProjectModalOpen(true); }}
-                                onNewTaskForProject={(projectId) => { setCurrentTask({ projectId, title: '', quadrant: 'do-first', recurring: 'none' }); setTaskModalOpen(true); }}
-                                onToggleComplete={handleToggleComplete}
-                                onTogglePin={handleTogglePin}
-                                onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
-                            />
-                        )}
-                        {activeTab === 'tasks' && (
-                            <TasksMatrixView
-                                projects={projects}
-                                tasks={filteredTasks}
-                                onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
-                                onDuplicateTask={handleDuplicateTask}
-                                onTogglePin={handleTogglePin}
-                                onToggleComplete={handleToggleComplete}
-                                onDeleteTask={(id) => {
-                                    const t = tasks.find(x => x.id === id);
-                                    if (t && !window.confirm(`Delete "${t.title}"? This can be undone with Ctrl+Z until you leave the app.`)) return;
-                                    updateTasksWithHistory(tasks.filter(x => x.id !== id), 'Task deleted.');
-                                }}
-                                highlightedTaskId={highlightedTaskId}
-                            />
-                        )}
-                        {activeTab === 'calendar' && (
-                            <CalendarView
-                                tasks={filteredTasks}
-                                projects={projects}
-                                onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
-                                onNewTaskForDate={(dateStr) => { setCurrentTask({ dueDate: dateStr, title: '', quadrant: 'do-first', recurring: 'none' }); setTaskModalOpen(true); }}
-                                onToggleComplete={handleToggleComplete}
-                            />
-                        )}
-                        {activeTab === 'pomodoro' && (
-                            <PomodoroView
-                                tasks={filteredTasks.filter(t => t.status !== 'Completed')}
-                                selectedTaskId={selectedTaskId}
-                                setSelectedTaskId={setSelectedTaskId}
-                                pomoCycle={pomoCycle}
-                                isWorkPhase={isWorkPhase}
-                                timeLeft={timeLeft}
-                                isRunning={isRunning}
-                                toggleTimer={toggleTimer}
-                                resetTimer={resetTimer}
-                                customMinutes={customMinutes}
-                                setCustomMinutes={(val) => {
-                                    setCustomMinutes(val);
-                                    if (!isRunning && isWorkPhase) setTimeLeft(val * 60);
-                                }}
-                                formatSeconds={formatSeconds}
-                                wakeLockEnabled={wakeLockEnabled}
-                                setWakeLockEnabled={setWakeLockEnabled}
-                            />
-                        )}
+                    <main ref={mainRef} onScroll={handleScroll} className="flex-1 overflow-y-auto relative z-10 pb-20 lg:pb-0">
+                        <div className={`max-w-7xl w-full mx-auto p-3 sm:p-6 ${activeTab === 'tasks' ? 'flex flex-col' : 'space-y-5'}`}>
+                            {searchQuery.trim() && (
+                                <div className="flex items-center justify-between gap-3 px-3 py-2 rounded-lg border border-sky-500/40 bg-sky-500/10 text-sm text-slate-700 dark:text-slate-200 mb-4">
+                                    <span className="flex items-center gap-2 min-w-0"><Icon name="search" className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" /><span className="truncate">Filtering by “{searchQuery}” — {filteredTasks.length} matching task{filteredTasks.length === 1 ? '' : 's'}</span></span>
+                                    <button onClick={() => setSearchQuery('')} className="btn ghost sm">Clear</button>
+                                </div>
+                            )}
+                            {activeTab === 'dashboard' && (
+                                <DashboardView
+                                    projects={projects}
+                                    tasks={filteredTasks}
+                                    setActiveTab={setActiveTab}
+                                    selectedProjectId={selectedProjectId}
+                                    setSelectedProjectId={setSelectedProjectId}
+                                    onTaskClick={handleDashboardTaskClick}
+                                    onTogglePin={handleTogglePin}
+                                    onToggleComplete={handleToggleComplete}
+                                    onNewTask={() => { setCurrentTask(null); setTaskModalOpen(true); }}
+                                />
+                            )}
+                            {activeTab === 'projects' && (
+                                <ProjectsView
+                                    projects={projects}
+                                    tasks={filteredTasks}
+                                    selectedProjectDetail={selectedProjectDetail}
+                                    setSelectedProjectDetail={setSelectedProjectDetail}
+                                    onEditProject={(p) => { setCurrentProject(p); setProjectModalOpen(true); }}
+                                    onNewProject={() => { setCurrentProject(null); setProjectModalOpen(true); }}
+                                    onNewTaskForProject={(projectId) => { setCurrentTask({ projectId, title: '', quadrant: 'do-first', recurring: 'none' }); setTaskModalOpen(true); }}
+                                    onToggleComplete={handleToggleComplete}
+                                    onTogglePin={handleTogglePin}
+                                    onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
+                                />
+                            )}
+                            {activeTab === 'tasks' && (
+                                <TasksMatrixView
+                                    projects={projects}
+                                    tasks={filteredTasks}
+                                    onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
+                                    onDuplicateTask={handleDuplicateTask}
+                                    onTogglePin={handleTogglePin}
+                                    onToggleComplete={handleToggleComplete}
+                                    onDeleteTask={(id) => {
+                                        const t = tasks.find(x => x.id === id);
+                                        if (t && !window.confirm(`Delete "${t.title}"? This can be undone with Ctrl+Z until you leave the app.`)) return;
+                                        updateTasksWithHistory(tasks.filter(x => x.id !== id), 'Task deleted.');
+                                    }}
+                                    highlightedTaskId={highlightedTaskId}
+                                />
+                            )}
+                            {activeTab === 'calendar' && (
+                                <CalendarView
+                                    tasks={filteredTasks}
+                                    projects={projects}
+                                    onEditTask={(t) => { setCurrentTask(t); setTaskModalOpen(true); }}
+                                    onNewTaskForDate={(dateStr) => { setCurrentTask({ dueDate: dateStr, title: '', quadrant: 'do-first', recurring: 'none' }); setTaskModalOpen(true); }}
+                                    onToggleComplete={handleToggleComplete}
+                                />
+                            )}
+                            {activeTab === 'pomodoro' && (
+                                <PomodoroView
+                                    tasks={filteredTasks.filter(t => t.status !== 'Completed')}
+                                    selectedTaskId={selectedTaskId}
+                                    setSelectedTaskId={setSelectedTaskId}
+                                    pomoCycle={pomoCycle}
+                                    isWorkPhase={isWorkPhase}
+                                    timeLeft={timeLeft}
+                                    isRunning={isRunning}
+                                    toggleTimer={toggleTimer}
+                                    resetTimer={resetTimer}
+                                    customMinutes={customMinutes}
+                                    setCustomMinutes={(val) => {
+                                        setCustomMinutes(val);
+                                        if (!isRunning && isWorkPhase) setTimeLeft(val * 60);
+                                    }}
+                                    formatSeconds={formatSeconds}
+                                    wakeLockEnabled={wakeLockEnabled}
+                                    setWakeLockEnabled={setWakeLockEnabled}
+                                />
+                            )}
 
-                        <footer className="pt-6 pb-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-slate-400 dark:text-slate-600">
-                            <span>Action Plan — a free, local-only productivity app.</span>
-                            <button type="button" onClick={() => { setLegalTab('privacy'); setLegalModalOpen(true); }} className="underline hover:text-sky-500 transition-colors">Privacy Policy</button>
-                            <button type="button" onClick={() => { setLegalTab('terms'); setLegalModalOpen(true); }} className="underline hover:text-sky-500 transition-colors">Terms of Use</button>
-                            <button type="button" onClick={() => { setLegalTab('disclaimer'); setLegalModalOpen(true); }} className="underline hover:text-sky-500 transition-colors">Disclaimer</button>
-                        </footer>
+                            <footer className="pt-8 pb-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400">
+                                <span>Action Plan — a free, local-only productivity app.</span>
+                                <button type="button" onClick={() => { setLegalTab('privacy'); setLegalModalOpen(true); }} className="underline hover:text-sky-600 dark:hover:text-sky-400">Privacy Policy</button>
+                                <button type="button" onClick={() => { setLegalTab('terms'); setLegalModalOpen(true); }} className="underline hover:text-sky-600 dark:hover:text-sky-400">Terms of Use</button>
+                                <button type="button" onClick={() => { setLegalTab('disclaimer'); setLegalModalOpen(true); }} className="underline hover:text-sky-600 dark:hover:text-sky-400">Disclaimer</button>
+                            </footer>
+                        </div>
                     </main>
+
+                    {/* Mobile bottom navigation */}
+                    <nav aria-label="Main" className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white dark:bg-slate-900 border-t border-slate-300 dark:border-slate-750 grid grid-cols-5" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+                        {NAV_TABS.map(tab => (
+                            <button
+                                key={tab.id}
+                                onClick={() => { setActiveTab(tab.id); setIsMobileMenuOpen(false); }}
+                                aria-current={activeTab === tab.id ? 'page' : undefined}
+                                className={`min-h-[56px] flex flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors ${activeTab === tab.id ? 'text-sky-600 dark:text-sky-400 shadow-[inset_0_2px_0_currentColor] font-semibold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'}`}
+                            >
+                                <Icon name={tab.icon} className="w-5 h-5" />
+                                <span>{tab.short}</span>
+                            </button>
+                        ))}
+                    </nav>
 
                     {/* Scroll to Top Button */}
                     <button
@@ -1630,31 +1587,30 @@
                         aria-label="Back to top"
                         tabIndex={showTopBtn ? 0 : -1}
                         aria-hidden={!showTopBtn}
-                        className={`fixed bottom-6 right-6 z-40 p-3 rounded-full bg-sky-500 hover:bg-sky-600 text-white shadow-xl transition-all duration-300 transform btn-press ${showTopBtn ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0 pointer-events-none'}`}
-                        title="Back to Top"
+                        className={`btn icon fixed bottom-20 lg:bottom-6 right-4 lg:right-6 z-30 shadow-xl transition-opacity ${showTopBtn ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                        title="Back to top"
                     >
-                        <Icon name="arrow-up" className="w-5 h-5" />
+                        <Icon name="arrow-up" className="w-4 h-4" />
                     </button>
 
                     {/* Local Data Notice (this app does not use cookies) */}
                     {!cookieAccepted && (
-                        <div role="status" className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-80 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 p-5 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 flex flex-col gap-3 animate-fade-in-up">
-                            <div className="flex items-center gap-2 font-bold text-sm">
-                                <Icon name="cookie" className="w-4 h-4 text-amber-500" /> Your data stays on this device
+                        <div role="status" className="fixed bottom-20 lg:bottom-4 left-3 right-3 md:left-auto md:right-4 md:w-80 panel !shadow-xl z-50 p-4 flex flex-col gap-2.5 animate-fade-in-up border-l-[3px] !border-l-sky-500">
+                            <div className="flex items-center gap-2 font-semibold text-sm text-slate-900 dark:text-slate-100">
+                                <Icon name="shield-check" className="w-4 h-4 text-sky-600 dark:text-sky-400" /> Your data stays on this device
                             </div>
-                            <p className="text-xs text-slate-500 dark:text-slate-400">
+                            <p className="text-xs text-slate-600 dark:text-slate-400">
                                 This app doesn't use cookies or send your tasks anywhere. Everything is saved in this browser's local storage, on this device only.{' '}
-                                <button type="button" onClick={() => { setLegalTab('privacy'); setLegalModalOpen(true); }} className="text-sky-500 hover:underline font-semibold">Learn more</button>
+                                <button type="button" onClick={() => { setLegalTab('privacy'); setLegalModalOpen(true); }} className="link text-xs">Learn more</button>
                             </p>
                             <button
                                 onClick={() => { setCookieAccepted(true); localStorage.setItem('cookie_accepted', 'true'); }}
-                                className="bg-sky-500 hover:bg-sky-600 px-4 py-2 rounded-xl text-white text-xs font-bold transition w-full text-center btn-press"
+                                className="btn primary sm w-full"
                             >
-                                Got it!
+                                Got it
                             </button>
                         </div>
                     )}
-
                     {/* Modals */}
                     {taskModalOpen && (
                         <TaskModal
@@ -1713,23 +1669,23 @@
                     )}
 
                     {shareModalOpen && (
-                        <div className="fixed inset-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setShareModalOpen(false)}>
-                            <div role="dialog" aria-modal="true" aria-labelledby="share-modal-title" onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 animate-fade-in-up">
+                        <div className="fixed inset-0 z-50 bg-slate-950/45 dark:bg-black/60 flex items-center justify-center p-4 animate-fade-in" onClick={() => setShareModalOpen(false)}>
+                            <div role="dialog" aria-modal="true" aria-labelledby="share-modal-title" onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-sm w-full p-5 shadow-2xl space-y-4 animate-fade-in-up">
                                 <div className="flex items-center justify-between">
-                                    <h3 id="share-modal-title" className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                                        <Icon name="share-2" className="w-4 h-4 text-sky-500" />
+                                    <h3 id="share-modal-title" className="text-base font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                                        <Icon name="share-2" className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                                         Export Backup
                                     </h3>
-                                    <button onClick={() => setShareModalOpen(false)} aria-label="Close" className="p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 transition btn-press">
-                                        <Icon name="x" className="w-5 h-5" />
+                                    <button onClick={() => setShareModalOpen(false)} aria-label="Close" className="btn ghost icon sm">
+                                        <Icon name="x" className="w-4 h-4" />
                                     </button>
                                 </div>
-                                <p className="text-xs text-slate-600 dark:text-slate-400">
+                                <p className="text-sm text-slate-600 dark:text-slate-400">
                                     Native share isn’t available here. Download a CSV backup instead.
                                 </p>
                                 <button
                                     onClick={exportCSVBlob}
-                                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold btn-press"
+                                    className="btn primary w-full"
                                 >
                                     <Icon name="download" className="w-4 h-4" />
                                     Download CSV
@@ -1739,21 +1695,21 @@
                     )}
 
                     {clearModalOpen && (
-                        <div className="fixed inset-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => { setClearModalOpen(false); setClearConfirmText(''); }}>
-                            <div role="dialog" aria-modal="true" aria-labelledby="clear-modal-title" onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-5 animate-fade-in-up">
+                        <div className="fixed inset-0 z-50 bg-slate-950/45 dark:bg-black/60 flex items-center justify-center p-4 animate-fade-in" onClick={() => { setClearModalOpen(false); setClearConfirmText(''); }}>
+                            <div role="dialog" aria-modal="true" aria-labelledby="clear-modal-title" onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-t-[3px] border-t-rose-600 dark:border-t-rose-400 rounded-3xl max-w-md w-full p-5 shadow-2xl space-y-4 animate-fade-in-up">
                                 <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-                                    <div className="flex items-center space-x-2 text-rose-500">
+                                    <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400">
                                         <Icon name="alert-triangle" className="w-5 h-5" />
-                                        <h3 id="clear-modal-title" className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">Clear All Saved Data</h3>
+                                        <h3 id="clear-modal-title" className="text-base font-semibold text-slate-900 dark:text-slate-100">Clear all saved data</h3>
                                     </div>
-                                    <button onClick={() => { setClearModalOpen(false); setClearConfirmText(''); }} aria-label="Close" className="p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 transition btn-press">
-                                        <Icon name="x" className="w-5 h-5" />
+                                    <button onClick={() => { setClearModalOpen(false); setClearConfirmText(''); }} aria-label="Close" className="btn ghost icon sm">
+                                        <Icon name="x" className="w-4 h-4" />
                                     </button>
                                 </div>
-                                <p className="text-xs text-slate-700 dark:text-slate-300">Remove all saved projects and tasks? This deletes everything stored in this browser and can't be undone. Export a CSV backup first if you want to keep a copy.</p>
+                                <p className="text-sm text-slate-700 dark:text-slate-300">Remove all saved projects and tasks? This deletes everything stored in this browser and can't be undone. Export a CSV backup first if you want to keep a copy.</p>
                                 <div className="space-y-1.5">
-                                    <label htmlFor="clear-confirm-input" className="block text-slate-600 dark:text-slate-400 text-xs font-semibold">
-                                        Type <span className="text-rose-500 font-bold font-mono">CLEAR</span> to confirm:
+                                    <label htmlFor="clear-confirm-input" className="fld-label">
+                                        Type <span className="text-rose-600 dark:text-rose-400 font-mono">CLEAR</span> to confirm
                                     </label>
                                     <input
                                         id="clear-confirm-input"
@@ -1761,22 +1717,20 @@
                                         value={clearConfirmText}
                                         onChange={(e) => setClearConfirmText(e.target.value)}
                                         placeholder="Type CLEAR"
-                                        className="w-full bg-slate-100 dark:bg-slate-850 border border-slate-300 dark:border-slate-750 rounded-xl px-4 py-2.5 text-xs font-mono uppercase focus:border-rose-500"
+                                        className="w-full px-3 font-mono uppercase"
+                                        autoComplete="off"
+                                        autoFocus
                                     />
                                 </div>
-                                <div className="flex justify-end gap-3">
-                                    <button onClick={() => { setClearModalOpen(false); setClearConfirmText(''); }} className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-850 hover:bg-slate-200 dark:hover:bg-slate-700 btn-press">Cancel</button>
+                                <div className="flex justify-end gap-2 pt-1">
+                                    <button onClick={() => { setClearModalOpen(false); setClearConfirmText(''); }} className="btn">Cancel</button>
                                     <button
                                         disabled={clearConfirmText.trim().toUpperCase() !== 'CLEAR'}
                                         onClick={handleClearAllData}
-                                        className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 btn-press transition ${
-                                            clearConfirmText.trim().toUpperCase() === 'CLEAR'
-                                                ? 'bg-rose-600 hover:bg-rose-500 text-white'
-                                                : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-                                        }`}
+                                        className="btn danger solid"
                                     >
-                                        <Icon name="trash-2" className="w-3.5 h-3.5" />
-                                        Delete All Data
+                                        <Icon name="trash-2" className="w-4 h-4" />
+                                        Delete all data
                                     </button>
                                 </div>
                             </div>
@@ -1792,95 +1746,110 @@
 
         // ---------------- VIEWS ----------------
 
-        function DashboardView({ projects, tasks, setActiveTab, selectedProjectId, setSelectedProjectId, onTaskClick, onTogglePin, onToggleComplete }) {
+        function DashboardView({ projects, tasks, setActiveTab, selectedProjectId, setSelectedProjectId, onTaskClick, onTogglePin, onToggleComplete, onNewTask }) {
             const activeTasks = tasks.filter(t => t.status !== 'Completed');
             const pinnedTasks = tasks.filter(t => t.isPinned);
             const completedTasks = tasks.filter(t => t.status === 'Completed').length;
             const totalFocusMins = tasks.reduce((acc, t) => acc + (t.focusMinutes || 0), 0);
             const completionRate = tasks.length ? Math.round((completedTasks / tasks.length) * 100) : 0;
+            const todayStr = getLocalDateStr();
+            const dueToday = activeTasks.filter(t => t.dueDate === todayStr).length;
+            const overdue = activeTasks.filter(t => t.dueDate && t.dueDate < todayStr).length;
+            const focusLabel = totalFocusMins >= 60 ? `${Math.floor(totalFocusMins / 60)}h ${totalFocusMins % 60}m` : `${totalFocusMins}m`;
 
             return (
-                <div className="space-y-6 animate-fade-in-up">
-                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 card-lift">
-                        <div className="space-y-2 w-full md:w-auto">
-                            <select
-                                value={selectedProjectId}
-                                onChange={(e) => setSelectedProjectId(e.target.value)}
-                                className="bg-slate-100 dark:bg-slate-800 text-sky-600 dark:text-sky-400 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider border border-slate-300 dark:border-slate-700 cursor-pointer outline-none focus:ring-2 focus:ring-sky-500 transition-shadow"
-                            >
+                <div className="space-y-5 animate-fade-in-up">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                        <div>
+                            <h2 className="text-[22px] font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Daily Overview</h2>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">
+                                {activeTasks.length === 0 ? "You're all caught up. Enjoy your day." : `You have ${activeTasks.length} active task${activeTasks.length === 1 ? '' : 's'} remaining.`}
+                            </p>
+                        </div>
+                        <div className="sm:w-64">
+                            <label htmlFor="dash-project-filter" className="fld-label">Showing</label>
+                            <select id="dash-project-filter" value={selectedProjectId} onChange={(e) => setSelectedProjectId(e.target.value)} className="w-full px-3">
                                 <option value="all">All Active Projects</option>
                                 {projects.map(p => <option key={p.id} value={p.id}>Project: {p.name}</option>)}
                             </select>
-                            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight mt-2">Daily Overview</h2>
-                            <p className="text-slate-600 dark:text-slate-400 text-xs max-w-xl">
-                                {activeTasks.length === 0 ? "You're all caught up! Enjoy your day." : `You have ${activeTasks.length} active tasks remaining.`}
-                            </p>
-                        </div>
-                        <div className="flex flex-col items-end gap-3 shrink-0 bg-slate-50 dark:bg-slate-850 p-4 rounded-xl border border-slate-200 dark:border-slate-750 w-full md:w-auto">
-                            <div className="text-right flex items-center space-x-4">
-                                <div>
-                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Completion Rate</div>
-                                    <div className="text-3xl font-extrabold text-slate-900 dark:text-slate-100">{completionRate}%</div>
-                                </div>
-                                <div className="w-12 h-12 rounded-full border-[4px] border-slate-200 dark:border-slate-700 flex items-center justify-center relative">
-                                    <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#38bdf8" strokeWidth="4" strokeDasharray={`${completionRate}, 100`} className="transition-all duration-1000 ease-out" />
-                                    </svg>
-                                    <Icon name="check-circle" className="w-5 h-5 text-sky-500 relative z-10" />
-                                </div>
-                            </div>
-                            <div className="flex gap-4 text-xs font-semibold text-slate-600 dark:text-slate-400">
-                                <div>Completed: <span className="text-emerald-600 dark:text-emerald-400">{completedTasks}</span></div>
-                                <div>Focus Time: <span className="text-sky-600 dark:text-sky-400">{totalFocusMins}m</span></div>
-                            </div>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div className="space-y-4">
-                            <div className="flex items-center justify-between">
-                                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                                    <Icon name="pin" className="w-4 h-4 text-sky-500" />
-                                    Pinned Priority Tasks
-                                </h3>
-                                <button onClick={() => setActiveTab('tasks')} className="text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline hover:text-sky-500 transition-colors">View Matrix →</button>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                        <div className="tile border-l-[3px] !border-l-sky-500">
+                            <div className="lbl">Completion Rate</div>
+                            <div className="val">{completionRate}%</div>
+                            <div className="meter mt-2" role="progressbar" aria-label="Completion rate" aria-valuenow={completionRate} aria-valuemin="0" aria-valuemax="100"><i style={{ width: `${completionRate}%` }}></i></div>
+                        </div>
+                        <div className="tile">
+                            <div className="lbl">Active</div>
+                            <div className="val">{activeTasks.length}</div>
+                            <div className="note">
+                                {dueToday} due today{overdue > 0 && <span className="text-rose-600 dark:text-rose-400 font-semibold"> · {overdue} overdue</span>}
+                            </div>
+                        </div>
+                        <div className="tile">
+                            <div className="lbl">Completed</div>
+                            <div className="val text-emerald-700 dark:text-emerald-400">{completedTasks}</div>
+                            <div className="note">of {tasks.length} total</div>
+                        </div>
+                        <div className="tile">
+                            <div className="lbl">Focus Time</div>
+                            <div className="val">{focusLabel}</div>
+                            <div className="note">logged by the timer</div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+                        <section className="panel">
+                            <div className="panel-h">
+                                <h3><Icon name="pin" className="w-4 h-4 text-sky-600 dark:text-sky-400" /> Pinned Priority Tasks</h3>
+                                <button onClick={() => setActiveTab('tasks')} className="link">View matrix →</button>
                             </div>
                             {pinnedTasks.length === 0 ? (
-                                <div className="bg-white/50 dark:bg-slate-900/50 border border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-8 text-center">
-                                    <Icon name="pin-off" className="w-8 h-8 text-slate-300 dark:text-slate-600 mb-3 mx-auto" />
-                                    <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">No pinned tasks.</p>
+                                <div className="empty">
+                                    <Icon name="pin-off" className="w-6 h-6 text-slate-400 mb-2 mx-auto" />
+                                    <b>No pinned tasks</b>
+                                    Pin the tasks that matter most today so they stay at the top. Use the pin icon on any task, or tick "Pin to Dashboard" when editing one.
                                 </div>
                             ) : (
-                                <div className="space-y-3">
+                                <div className="p-3 space-y-2">
                                     {pinnedTasks.map(task => (
                                         <TaskCard key={task.id} task={task} project={projects.find(p => p.id === task.projectId)} onClick={() => onTaskClick(task.id)} onTogglePin={() => onTogglePin(task.id)} onToggleComplete={() => onToggleComplete(task.id)} />
                                     ))}
                                 </div>
                             )}
-                        </div>
-                        <div className="space-y-4">
-                            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                                <Icon name="zap" className="w-4 h-4 text-amber-500" />
-                                Recent Activity
-                            </h3>
-                            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
-                                {activeTasks.slice(0, 5).map(task => (
-                                    <div key={task.id} className="flex items-center justify-between py-3 border-b border-slate-100 dark:border-slate-800 last:border-0 group">
-                                        <div className="flex-1 min-w-0 pr-4">
-                                            <button type="button" className="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-sky-500 transition-colors block truncate w-full text-left" onClick={() => onTaskClick(task.id)}>{task.title}</button>
-                                            <div className="flex items-center gap-2 mt-1 flex-wrap">
-                                                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center gap-1">
-                                                    <Icon name="timer" className="w-3 h-3" />{task.focusMinutes || 0}m
-                                                </span>
-                                                {task.dueDate && <span className="text-[10px] text-slate-400">{task.dueDate} {task.dueTime}</span>}
-                                            </div>
-                                        </div>
-                                        <button onClick={() => onToggleComplete(task.id)} aria-label={`Mark "${task.title}" as complete`} className="w-6 h-6 rounded-md border-2 border-slate-300 dark:border-slate-600 hover:border-emerald-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex items-center justify-center btn-press shrink-0" />
-                                    </div>
-                                ))}
-                                {activeTasks.length === 0 && <p className="text-xs text-slate-500 text-center py-4">No active tasks.</p>}
+                        </section>
+
+                        <section className="panel">
+                            <div className="panel-h">
+                                <h3><Icon name="zap" className="w-4 h-4 text-amber-500" /> Recent Activity</h3>
+                                <span className="text-xs text-slate-500 dark:text-slate-400 tabular">{Math.min(5, activeTasks.length)} of {activeTasks.length}</span>
                             </div>
-                        </div>
+                            {activeTasks.length === 0 ? (
+                                <div className="empty">
+                                    <Icon name="check-circle-2" className="w-6 h-6 text-emerald-500 mb-2 mx-auto" />
+                                    <b>No active tasks</b>
+                                    Everything here is done. Add a task to plan what's next.
+                                    <div className="mt-3"><button onClick={onNewTask} className="btn primary sm"><Icon name="plus" className="w-4 h-4" /> Add Task</button></div>
+                                </div>
+                            ) : (
+                                <ul className="divide-y divide-slate-100 dark:divide-slate-800">
+                                    {activeTasks.slice(0, 5).map(task => (
+                                        <li key={task.id} className="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-850 transition-colors">
+                                            <button onClick={() => onToggleComplete(task.id)} aria-label={`Mark "${task.title}" as complete`} className="w-5 h-5 rounded border-2 border-slate-300 dark:border-slate-600 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition shrink-0" />
+                                            <div className="flex-1 min-w-0">
+                                                <button type="button" className="text-sm font-semibold text-slate-800 dark:text-slate-100 hover:text-sky-600 dark:hover:text-sky-400 transition-colors block truncate w-full text-left" onClick={() => onTaskClick(task.id)}>{task.title}</button>
+                                                {task.dueDate && <div className="text-xs text-slate-500 dark:text-slate-400 tabular mt-0.5">Due {task.dueDate} {task.dueTime}</div>}
+                                            </div>
+                                            <span className="badge tabular shrink-0" title="Focus time logged">
+                                                <Icon name="timer" className="w-3 h-3" />{task.focusMinutes || 0}m
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </section>
                     </div>
                 </div>
             );
@@ -1890,29 +1859,30 @@
             if (selectedProjectDetail) {
                 const projectTasks = tasks.filter(t => t.projectId === selectedProjectDetail.id);
                 return (
-                    <div className="space-y-6 animate-fade-in-up">
-                        <button onClick={() => setSelectedProjectDetail(null)} className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 flex items-center gap-1.5 transition-colors">
-                            <Icon name="arrow-left" className="w-3.5 h-3.5" /> Back to Projects
+                    <div className="space-y-4 animate-fade-in-up">
+                        <button onClick={() => setSelectedProjectDetail(null)} className="btn ghost sm -ml-2">
+                            <Icon name="arrow-left" className="w-4 h-4" /> Back to Projects
                         </button>
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div className="panel p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-[3px]" style={{ borderLeftColor: selectedProjectDetail.color || '#38bdf8' }}>
                             <div>
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded border" style={{ backgroundColor: `${selectedProjectDetail.color || '#38bdf8'}20`, borderColor: selectedProjectDetail.color || '#38bdf8' }}>{selectedProjectDetail.code}</span>
-                                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border uppercase ${selectedProjectDetail.status === 'Active' ? 'bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-slate-100 text-slate-600 dark:bg-slate-800'}`}>{selectedProjectDetail.status}</span>
+                                <div className="flex items-center gap-2 mb-1.5">
+                                    <span className="badge uppercase"><i className="swatch" style={{ backgroundColor: selectedProjectDetail.color || '#38bdf8' }}></i>{selectedProjectDetail.code}</span>
+                                    <span className={`badge ${selectedProjectDetail.status === 'Active' ? '!bg-emerald-50 !text-emerald-800 !border-emerald-300 dark:!bg-emerald-500/15 dark:!text-emerald-300 dark:!border-emerald-500/40' : ''}`}>{selectedProjectDetail.status}</span>
+                                    <span className="badge tabular">{projectTasks.filter(t => t.status !== 'Completed').length} active · {projectTasks.length} total</span>
                                 </div>
-                                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">{selectedProjectDetail.name}</h2>
-                                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">{selectedProjectDetail.description}</p>
+                                <h2 className="text-[22px] font-extrabold tracking-tight text-slate-900 dark:text-slate-100">{selectedProjectDetail.name}</h2>
+                                {selectedProjectDetail.description && <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">{selectedProjectDetail.description}</p>}
                             </div>
                             <div className="flex items-center gap-2">
-                                <button onClick={() => onEditProject(selectedProjectDetail)} className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-semibold transition btn-press">Edit</button>
-                                <button onClick={() => onNewTaskForProject(selectedProjectDetail.id)} className="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold flex items-center gap-1.5 transition btn-press">
-                                    <Icon name="plus" className="w-3.5 h-3.5" /> Add Task
+                                <button onClick={() => onEditProject(selectedProjectDetail)} className="btn"><Icon name="edit-3" className="w-4 h-4" /> Edit</button>
+                                <button onClick={() => onNewTaskForProject(selectedProjectDetail.id)} className="btn primary">
+                                    <Icon name="plus" className="w-4 h-4" /> Add Task
                                 </button>
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                             {projectTasks.length === 0 ? (
-                                <div className="col-span-full text-center p-8 border border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-slate-500">No tasks in this project yet.</div>
+                                <div className="col-span-full empty border border-dashed border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-900"><b>No tasks in this project yet</b>Tasks you add here are grouped under this project across every view.<div className="mt-3"><button onClick={() => onNewTaskForProject(selectedProjectDetail.id)} className="btn primary sm"><Icon name="plus" className="w-4 h-4" /> Add Task</button></div></div>
                             ) : projectTasks.map(t => (
                                 <TaskCard key={t.id} task={t} project={selectedProjectDetail} onClick={() => onEditTask(t)} onTogglePin={() => onTogglePin(t.id)} onToggleComplete={() => onToggleComplete(t.id)} />
                             ))}
@@ -1922,18 +1892,18 @@
             }
 
             return (
-                <div className="space-y-6 animate-fade-in-up">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                            <Icon name="folder-kanban" className="w-5 h-5 text-sky-500" />
-                            Projects & Areas
-                        </h2>
-                        <button onClick={onNewProject} className="flex items-center space-x-1.5 bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition btn-press">
+                <div className="space-y-4 animate-fade-in-up">
+                    <div className="flex items-end justify-between gap-3">
+                        <div>
+                            <h2 className="text-[22px] font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Projects &amp; Areas</h2>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">{projects.length} project{projects.length === 1 ? '' : 's'}. Open one to see its tasks.</p>
+                        </div>
+                        <button onClick={onNewProject} className="btn primary">
                             <Icon name="plus" className="w-4 h-4" />
                             <span>New Project</span>
                         </button>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         {projects.map(project => {
                             const pTasks = tasks.filter(t => t.projectId === project.id);
                             const activeCount = pTasks.filter(t => t.status !== 'Completed').length;
@@ -1948,23 +1918,23 @@
                                     aria-label={`Open project: ${project.name}`}
                                     onClick={() => setSelectedProjectDetail(project)}
                                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedProjectDetail(project); } }}
-                                    className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 cursor-pointer card-lift shadow-sm hover:border-sky-300 dark:hover:border-slate-600 relative overflow-hidden flex flex-col h-full">
+                                    className="group panel p-4 cursor-pointer card-lift hover:!border-slate-400 dark:hover:!border-slate-600 relative overflow-hidden flex flex-col h-full border-t-[3px]" style={{ borderTopColor: barColor }}>
                                     <div className="flex justify-between items-start mb-3">
-                                        <span className="text-[10px] font-bold px-2 py-0.5 rounded border uppercase" style={{ backgroundColor: `${barColor}20`, borderColor: barColor }}>{project.code}</span>
-                                        <button onClick={(e) => { e.stopPropagation(); onEditProject(project); }} aria-label={`Edit project: ${project.name}`} className="text-slate-400 hover:text-sky-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 p-1 transition btn-press">
+                                        <span className="badge uppercase"><i className="swatch" style={{ backgroundColor: barColor }}></i>{project.code}</span>
+                                        <button onClick={(e) => { e.stopPropagation(); onEditProject(project); }} aria-label={`Edit project: ${project.name}`} className="btn ghost sm icon -mt-1 -mr-1 opacity-60 group-hover:opacity-100 focus-visible:opacity-100">
                                             <Icon name="edit-3" className="w-4 h-4" />
                                         </button>
                                     </div>
-                                    <h3 className="text-base font-extrabold text-slate-900 dark:text-slate-100 mb-1">{project.name}</h3>
-                                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 flex-1">{project.description}</p>
+                                    <h3 className="text-[15px] font-semibold text-slate-900 dark:text-slate-100 mb-1">{project.name}</h3>
+                                    <p className="text-[13px] text-slate-600 dark:text-slate-400 line-clamp-2 mb-4 flex-1">{project.description}</p>
                                     <div className="space-y-2 mt-auto">
-                                        <div className="flex items-center justify-between text-[11px] font-semibold">
+                                        <div className="flex items-center justify-between text-xs tabular">
                                             <span className="text-slate-600 dark:text-slate-300">{activeCount} active · {pTasks.length} total</span>
-                                            <span className="text-slate-500">{prog}%</span>
+                                            <span className="font-semibold text-slate-700 dark:text-slate-200">{prog}%</span>
                                         </div>
-                                        <div className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                        <div className="meter">
                                             <div
-                                                className="h-full rounded-full transition-all duration-1000 ease-out"
+                                                className="h-full rounded-sm transition-all duration-200"
                                                 style={{
                                                     width: prog > 0 ? `${Math.max(prog, 3)}%` : '0%',
                                                     backgroundColor: barColor,
@@ -1977,7 +1947,7 @@
                             );
                         })}
                         {projects.length === 0 && (
-                            <div className="col-span-full text-center p-10 border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl text-slate-500 text-sm">No projects yet. Create one to get started.</div>
+                            <div className="col-span-full empty border border-dashed border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-900"><Icon name="folder-kanban" className="w-6 h-6 text-slate-400 mb-2 mx-auto" /><b>No projects yet</b>Projects group related tasks (work, home, a client) so you can filter and track progress.<div className="mt-3"><button onClick={onNewProject} className="btn primary sm"><Icon name="plus" className="w-4 h-4" /> New Project</button></div></div>
                         )}
                     </div>
                 </div>
@@ -1987,25 +1957,23 @@
         function TasksMatrixView({ projects, tasks, onEditTask, onDuplicateTask, onTogglePin, onToggleComplete, onDeleteTask, highlightedTaskId }) {
             const getTasksByQuad = (quad) => tasks.filter(t => (t.quadrant || 'do-first') === quad && t.status !== 'Completed');
 
-            const renderQuadrant = (id, title, desc, icon, bgClass, borderClass, textClass) => {
+            const renderQuadrant = (id, title, desc, icon, qColor, textClass, emptyHint) => {
                 const quadTasks = getTasksByQuad(id);
                 return (
-                    <div className={`matrix-quad rounded-2xl p-4 border ${borderClass} ${bgClass} shadow-sm`}>
-                        <div className="flex items-center justify-between mb-3 shrink-0">
-                            <div className="flex items-center space-x-2">
-                                <div className={`p-1.5 rounded-lg bg-white/50 dark:bg-slate-900/50 ${textClass}`}>
-                                    <Icon name={icon} className="w-4 h-4" />
-                                </div>
-                                <div>
-                                    <h3 className={`text-sm font-extrabold ${textClass}`}>{title}</h3>
-                                    <p className="text-[10px] text-slate-600 dark:text-slate-400">{desc}</p>
+                    <section className="matrix-quad panel" style={{ '--qc': qColor }} aria-label={`${title}: ${desc}`}>
+                        <div className="panel-h shrink-0">
+                            <div className="flex items-center gap-2.5 min-w-0">
+                                <Icon name={icon} className={`w-4 h-4 ${textClass}`} />
+                                <div className="min-w-0">
+                                    <h3 className={`text-sm font-semibold ${textClass}`}>{title}</h3>
+                                    <p className="text-xs text-slate-500 dark:text-slate-400">{desc}</p>
                                 </div>
                             </div>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/60 dark:bg-slate-900/60 border ${textClass}`}>{quadTasks.length}</span>
+                            <span className="badge tabular" aria-label={`${quadTasks.length} tasks`}>{quadTasks.length}</span>
                         </div>
-                        <div className="matrix-quad-body space-y-3 pr-1">
+                        <div className="matrix-quad-body p-3 space-y-2">
                             {quadTasks.length === 0 ? (
-                                <div className="py-8 flex items-center justify-center text-xs text-slate-400 border-2 border-dashed border-slate-300/50 dark:border-slate-700/50 rounded-xl">Empty</div>
+                                <div className="py-6 px-4 text-center text-xs text-slate-500 dark:text-slate-400 border border-dashed border-slate-300 dark:border-slate-700 rounded-lg">{emptyHint}</div>
                             ) : quadTasks.map(t => (
                                 <TaskCard
                                     key={t.id}
@@ -2020,26 +1988,21 @@
                                 />
                             ))}
                         </div>
-                    </div>
+                    </section>
                 );
             };
 
             return (
-                <div className="animate-fade-in-up flex flex-col gap-3 shrink-0">
-                    <div className="shrink-0 flex items-center justify-between">
-                        <div>
-                            <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                                <Icon name="grid" className="w-5 h-5 text-sky-500" />
-                                Tasks Matrix
-                            </h2>
-                            <p className="text-xs text-slate-500 mt-0.5 hidden sm:block">Eisenhower method — quadrants expand to show their tasks.</p>
-                        </div>
+                <div className="animate-fade-in-up flex flex-col gap-4 shrink-0">
+                    <div className="shrink-0">
+                        <h2 className="text-[22px] font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Tasks Matrix</h2>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">Eisenhower method: sort by urgency and importance. Completed tasks drop off automatically.</p>
                     </div>
                     <div className="matrix-grid">
-                        {renderQuadrant('do-first', 'Do First', 'Urgent & Important', 'alert-circle', 'bg-rose-50/50 dark:bg-rose-950/10', 'border-rose-200 dark:border-rose-900/30', 'text-rose-700 dark:text-rose-400')}
-                        {renderQuadrant('schedule', 'Schedule', 'Important, Not Urgent', 'calendar-clock', 'bg-sky-50/50 dark:bg-sky-950/10', 'border-sky-200 dark:border-sky-900/30', 'text-sky-700 dark:text-sky-400')}
-                        {renderQuadrant('delegate', 'Delegate', 'Urgent, Not Important', 'users', 'bg-amber-50/50 dark:bg-amber-950/10', 'border-amber-200 dark:border-amber-900/30', 'text-amber-700 dark:text-amber-400')}
-                        {renderQuadrant('eliminate', 'Eliminate', 'Neither', 'trash-2', 'bg-slate-100/50 dark:bg-slate-900/30', 'border-slate-200 dark:border-slate-800', 'text-slate-700 dark:text-slate-400')}
+                        {renderQuadrant('do-first', 'Do First', 'Urgent & Important', 'alert-circle', '#dc2626', 'text-rose-700 dark:text-rose-400', 'Nothing urgent and important. Good place to be.')}
+                        {renderQuadrant('schedule', 'Schedule', 'Important, Not Urgent', 'calendar-clock', 'rgb(var(--acc-500))', 'text-sky-700 dark:text-sky-400', 'Plan important work here before it becomes urgent.')}
+                        {renderQuadrant('delegate', 'Delegate', 'Urgent, Not Important', 'users', '#d97706', 'text-amber-700 dark:text-amber-400', 'Nothing to hand off right now.')}
+                        {renderQuadrant('eliminate', 'Eliminate', 'Neither', 'trash-2', 'var(--border-strong)', 'text-slate-700 dark:text-slate-300', 'Nothing to drop. Move low-value tasks here.')}
                     </div>
                 </div>
             );
@@ -2093,41 +2056,43 @@
 
             if (viewMode === 'day') {
                 return (
-                    <div className="space-y-5 animate-fade-in-up">
+                    <div className="space-y-4 animate-fade-in-up">
                         <div className="flex flex-wrap items-center justify-between gap-3">
-                            <div className="flex items-center gap-3 flex-wrap">
-                                <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                                    <Icon name="calendar-days" className="w-5 h-5 text-sky-500" />
+                            <div className="flex items-center gap-2.5 flex-wrap">
+                                <h2 className="text-[22px] font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
                                     {weekdayNames[dayFocus.getDay()]}, {monthNames[dayFocus.getMonth()]} {dayFocus.getDate()}
                                 </h2>
                                 {isToday(dayFocus) && (
-                                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-500 text-white">Today</span>
+                                    <span className="badge !bg-sky-500/10 !text-sky-700 dark:!text-sky-300 !border-sky-500/40">Today</span>
                                 )}
                             </div>
-                            <div className="flex items-center gap-2">
-                                <button onClick={() => shiftDay(-1)} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
-                                    <Icon name="chevron-left" className="w-4 h-4" />
+                            <div className="flex items-center gap-2 flex-wrap">
+                                <div className="inline-flex" role="group" aria-label="Change day">
+                                    <button onClick={() => shiftDay(-1)} aria-label="Previous day" className="btn icon !rounded-r-none">
+                                        <Icon name="chevron-left" className="w-4 h-4" />
+                                    </button>
+                                    <button onClick={goToday} className="btn !rounded-none -ml-px">Today</button>
+                                    <button onClick={() => shiftDay(1)} aria-label="Next day" className="btn icon !rounded-l-none -ml-px">
+                                        <Icon name="chevron-right" className="w-4 h-4" />
+                                    </button>
+                                </div>
+                                <button onClick={() => setViewMode('month')} className="btn">
+                                    <Icon name="calendar" className="w-4 h-4" /> Month
                                 </button>
-                                <button onClick={goToday} className="px-3 py-1 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">Today</button>
-                                <button onClick={() => shiftDay(1)} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
-                                    <Icon name="chevron-right" className="w-4 h-4" />
-                                </button>
-                                <button onClick={() => setViewMode('month')} className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition text-xs font-bold border border-slate-200 dark:border-slate-700 btn-press">
-                                    Month view
-                                </button>
-                                <button onClick={() => onNewTaskForDate(dayStr)} className="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-600 transition text-white text-xs font-bold flex items-center gap-1 btn-press">
-                                    <Icon name="plus" className="w-3.5 h-3.5" /> Add
+                                <button onClick={() => onNewTaskForDate(dayStr)} className="btn primary">
+                                    <Icon name="plus" className="w-4 h-4" /> Add Task
                                 </button>
                             </div>
                         </div>
 
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+                        <div className="panel overflow-hidden">
                             {dayTasks.length === 0 ? (
-                                <div className="p-12 text-center text-slate-500 text-sm">
-                                    <Icon name="calendar-off" className="w-10 h-10 mx-auto mb-3 text-slate-300 dark:text-slate-600" />
-                                    No tasks scheduled for this day.
-                                    <div className="mt-4">
-                                        <button onClick={() => onNewTaskForDate(dayStr)} className="text-sky-500 font-semibold text-xs hover:underline hover:text-sky-600 transition">Create a task for {dayStr}</button>
+                                <div className="empty !py-10">
+                                    <Icon name="calendar-off" className="w-7 h-7 mx-auto mb-2 text-slate-400" />
+                                    <b>Nothing scheduled for this day</b>
+                                    Open tasks due on {dayStr} will appear here in time order.
+                                    <div className="mt-3">
+                                        <button onClick={() => onNewTaskForDate(dayStr)} className="btn primary sm"><Icon name="plus" className="w-4 h-4" /> Add a task for this day</button>
                                     </div>
                                 </div>
                             ) : (
@@ -2143,12 +2108,12 @@
                                                 aria-label={`Open task: ${t.title}`}
                                                 onClick={() => onEditTask(t)}
                                                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onEditTask(t); } }}
-                                                className="flex items-start gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition group"
+                                                className="flex items-start gap-3 sm:gap-4 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-850 cursor-pointer transition group"
                                             >
-                                                <div className="w-16 shrink-0 text-right pt-0.5">
-                                                    <span className="text-xs font-mono font-bold text-slate-500 group-hover:text-sky-500 transition-colors">{t.dueTime || 'All day'}</span>
+                                                <div className="w-14 shrink-0 text-right pt-0.5">
+                                                    <span className="text-xs font-mono text-slate-600 dark:text-slate-400 tabular">{t.dueTime || 'All day'}</span>
                                                 </div>
-                                                <div className="w-1 self-stretch rounded-full shrink-0" style={{ backgroundColor: color }} />
+                                                <div className="w-[3px] self-stretch rounded-sm shrink-0" style={{ backgroundColor: color }} />
 
                                                 {/* In-view Task Completion Toggle */}
                                                 <button
@@ -2161,11 +2126,11 @@
                                                 </button>
 
                                                 <div className="flex-1 min-w-0">
-                                                    <div className="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">{t.title}</div>
+                                                    <div className="text-sm font-semibold text-slate-900 dark:text-slate-100 group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">{t.title}</div>
                                                     {t.description && <p className="text-xs text-slate-500 mt-0.5 line-clamp-2">{t.description}</p>}
                                                     <div className="flex gap-2 mt-1.5">
-                                                        {p && <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded border" style={{ color: color, borderColor: `${color}40`, backgroundColor: `${color}10` }}>{p.code}</span>}
-                                                        {t.recurring && t.recurring !== 'none' && <Icon name="repeat" className="w-3 h-3 text-sky-500" />}
+                                                        {p && <span className="badge uppercase"><i className="swatch" style={{ backgroundColor: color }}></i>{p.code}</span>}
+                                                        {t.recurring && t.recurring !== 'none' && <span className="badge"><Icon name="repeat" className="w-3 h-3" />{t.recurring}</span>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -2179,56 +2144,60 @@
             }
 
             return (
-                <div className="space-y-6 animate-fade-in-up">
+                <div className="space-y-4 animate-fade-in-up">
                     <div className="flex items-center justify-between flex-wrap gap-3">
-                        <div className="flex items-center gap-3">
-                            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                                <Icon name="calendar" className="w-5 h-5 text-sky-500" />
-                                {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-                            </h2>
-                            <button onClick={goToday} className="px-3 py-1 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 transition btn-press">
-                                Today
-                            </button>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <button onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1))} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
+                        <h2 className="text-[22px] font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
+                            {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+                        </h2>
+                        <div className="inline-flex" role="group" aria-label="Change month">
+                            <button onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1))} aria-label="Previous month" className="btn icon !rounded-r-none">
                                 <Icon name="chevron-left" className="w-4 h-4" />
                             </button>
-                            <button onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1))} className="p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition btn-press">
+                            <button onClick={goToday} className="btn !rounded-none -ml-px" title="Jump to today's agenda">Today</button>
+                            <button onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1))} aria-label="Next month" className="btn icon !rounded-l-none -ml-px">
                                 <Icon name="chevron-right" className="w-4 h-4" />
                             </button>
                         </div>
                     </div>
 
-                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-                        <div className="grid grid-cols-7 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+                    <div className="panel overflow-hidden">
+                        <div className="grid grid-cols-7 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850">
                             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                                <div key={day} className="p-3 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">{day}</div>
+                                <div key={day} className="py-2 text-center text-xs font-semibold text-slate-600 dark:text-slate-400">
+                                    <span className="hidden sm:inline">{day}</span><span className="sm:hidden" aria-label={day}>{day[0]}</span>
+                                </div>
                             ))}
                         </div>
-                        <div className="grid grid-cols-7 auto-rows-[minmax(100px,auto)]">
+                        <div className="grid grid-cols-7 auto-rows-[minmax(64px,auto)] sm:auto-rows-[minmax(100px,auto)]">
                             {days.map((date, idx) => {
-                                if (!date) return <div key={`empty-${idx}`} className="p-2 border-r border-b border-slate-100 dark:border-slate-800/50 bg-slate-50/50 dark:bg-slate-950/20" />;
+                                if (!date) return <div key={`empty-${idx}`} className="p-2 border-r border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40" />;
                                 const dateStr = getLocalDateStr(date);
                                 const dayTasks = tasks.filter(t => t.dueDate === dateStr && t.status !== 'Completed');
                                 const isCurrentDay = isToday(date);
                                 return (
                                     <div
                                         key={dateStr}
-                                        className={`p-2 border-r border-b border-slate-100 dark:border-slate-800/50 min-h-[110px] group relative transition-colors ${isCurrentDay ? 'bg-sky-50/30 dark:bg-sky-950/20' : 'hover:bg-slate-50 dark:hover:bg-slate-800/30'}`}
+                                        className={`p-1 sm:p-2 border-r border-b border-slate-100 dark:border-slate-800 min-h-[64px] sm:min-h-[110px] group relative transition-colors ${isCurrentDay ? 'bg-sky-500/[.06] shadow-[inset_0_2px_0_rgb(var(--acc-500))]' : 'hover:bg-slate-50 dark:hover:bg-slate-850'}`}
                                     >
-                                        <div className="flex justify-between items-start mb-2">
+                                        <div className="flex justify-between items-start mb-1 sm:mb-2">
                                             <button
                                                 onClick={() => { setDayFocus(date); setViewMode('day'); }}
-                                                className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full transition-transform btn-press ${isCurrentDay ? 'bg-sky-500 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'}`}
+                                                aria-label={`Open ${monthNames[date.getMonth()]} ${date.getDate()}${dayTasks.length ? `, ${dayTasks.length} task${dayTasks.length === 1 ? '' : 's'}` : ''}${isCurrentDay ? ' (today)' : ''}`}
+                                                className={`text-xs font-semibold tabular min-w-[26px] h-[26px] px-1 flex items-center justify-center rounded transition-colors ${isCurrentDay ? 'bg-sky-600 text-white dark:bg-sky-500 dark:text-slate-950' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-750'}`}
                                             >
                                                 {date.getDate()}
                                             </button>
-                                            <button onClick={() => onNewTaskForDate(dateStr)} className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-sky-500 transition-opacity btn-press" title="Add task">
+                                            <button onClick={() => onNewTaskForDate(dateStr)} aria-label={`Add task on ${dateStr}`} className="hidden sm:flex opacity-0 group-hover:opacity-100 focus-visible:opacity-100 p-1 rounded text-slate-500 hover:text-sky-600 hover:bg-slate-100 dark:hover:bg-slate-750 transition-opacity" title="Add task">
                                                 <Icon name="plus" className="w-3.5 h-3.5" />
                                             </button>
                                         </div>
-                                        <div className="space-y-1.5 max-h-[140px] overflow-y-auto">
+                                        {dayTasks.length > 0 && (
+                                            <button type="button" onClick={() => { setDayFocus(date); setViewMode('day'); }} className="sm:hidden flex flex-wrap gap-0.5 px-0.5" aria-hidden="true" tabIndex={-1}>
+                                                {dayTasks.slice(0, 4).map(t => <i key={t.id} className="swatch" style={{ backgroundColor: taskColor(t) }}></i>)}
+                                                {dayTasks.length > 4 && <span className="text-[10px] leading-none text-slate-500">+{dayTasks.length - 4}</span>}
+                                            </button>
+                                        )}
+                                        <div className="hidden sm:block space-y-1 max-h-[140px] overflow-y-auto">
                                             {dayTasks.map(t => {
                                                 const color = taskColor(t);
                                                 return (
@@ -2239,11 +2208,11 @@
                                                         aria-label={`Open task: ${t.title}`}
                                                         onClick={() => onEditTask(t)}
                                                         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onEditTask(t); } }}
-                                                        className="text-[10px] font-semibold truncate px-2 py-1.5 rounded-lg border cursor-pointer bg-white dark:bg-slate-800 hover:shadow-sm transition-all"
-                                                        style={{ borderColor: color, borderLeftWidth: '3px' }}
+                                                        className="text-[11px] font-medium truncate px-1.5 py-1 rounded-sm border border-slate-200 dark:border-slate-750 cursor-pointer bg-white dark:bg-slate-850 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                                                        style={{ borderLeftColor: color, borderLeftWidth: '3px' }}
                                                     >
                                                         <span className="text-slate-800 dark:text-slate-200">
-                                                            {t.dueTime && <span className="mr-1 text-slate-400">{t.dueTime}</span>}
+                                                            {t.dueTime && <span className="mr-1 text-slate-500 dark:text-slate-400 tabular">{t.dueTime}</span>}
                                                             {t.title}
                                                         </span>
                                                     </div>
@@ -2269,87 +2238,79 @@
             for (let i = 0; i < 4; i++) {
                 const step = i * 2;
                 cycleDots.push(
-                    <div key={i} className={`w-3 h-3 rounded-full border-2 transition-colors ${pomoCycle > step ? 'bg-sky-500 border-sky-500' : pomoCycle === step ? 'border-sky-500 animate-pulse' : 'border-slate-300 dark:border-slate-700'}`} />
+                    <div key={i} aria-hidden="true" className={`w-8 h-1.5 rounded-sm transition-colors ${pomoCycle > step ? 'bg-sky-500' : pomoCycle === step ? 'bg-sky-500/40' : 'bg-slate-200 dark:bg-slate-750'}`} />
                 );
             }
 
             return (
-                <div className="flex items-center justify-center min-h-[calc(100vh-140px)] animate-fade-in-up p-4">
-                    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 p-8 rounded-3xl shadow-2xl max-w-md w-full flex flex-col items-center">
-                        <div className="text-center mb-6">
-                            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center justify-center gap-2">
-                                <Icon name="timer" className="w-5 h-5 text-sky-500" /> Focus Timer
-                            </h2>
-                            <p className="text-xs text-slate-500 mt-1 uppercase tracking-widest font-bold">
-                                {isWorkPhase ? 'Focus Session' : (pomoCycle === 7 ? 'Long Break' : 'Short Break')}
-                            </p>
-                        </div>
-                        
-                        <div className="relative w-56 h-56 flex items-center justify-center mb-8">
-                            <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="3" className="text-slate-200 dark:text-slate-800 transition-colors" />
-                                <circle cx="50" cy="50" r="45" fill="none" stroke={isWorkPhase ? '#38bdf8' : '#34d399'} strokeWidth="5" strokeLinecap="round" strokeDasharray={`${Math.max(0, Math.min(100, progressPercent)) * 2.827}, 282.7`} className="transition-all duration-1000 ease-linear" />
-                            </svg>
-                            <div className="text-5xl font-mono font-extrabold text-slate-900 dark:text-slate-100 relative z-10 tracking-tighter">
-                                {formatSeconds(timeLeft)}
-                            </div>
+                <div className="flex items-start sm:items-center justify-center sm:min-h-[calc(100vh-200px)] animate-fade-in-up">
+                    <div className="panel max-w-md w-full overflow-hidden">
+                        <div className="panel-h">
+                            <h3><Icon name="timer" className="w-4 h-4 text-sky-600 dark:text-sky-400" /> Focus Timer</h3>
+                            <span className={`badge ${isWorkPhase ? '!bg-sky-500/10 !text-sky-700 dark:!text-sky-300 !border-sky-500/40' : '!bg-emerald-500/10 !text-emerald-800 dark:!text-emerald-300 !border-emerald-500/40'}`}>
+                                {isWorkPhase ? 'Focus session' : (pomoCycle === 7 ? 'Long break' : 'Short break')}
+                            </span>
                         </div>
 
-                        <div className="flex justify-center gap-4 mb-8">{cycleDots}</div>
-
-                        <div className="flex flex-col items-center justify-center w-full gap-4">
-                            <div className="flex items-center justify-center gap-4">
-                                <button
-                                    onClick={toggleTimer}
-                                    className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 text-white ${isRunning ? 'bg-amber-500 hover:bg-amber-600' : 'bg-sky-500 hover:bg-sky-600'}`}
-                                >
-                                    <Icon name={isRunning ? 'pause' : 'play'} className="w-6 h-6 ml-0.5" />
-                                </button>
-                                <button
-                                    onClick={resetTimer}
-                                    className="w-12 h-12 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-transform hover:scale-105 active:scale-95 shadow-sm"
-                                    title="Reset Timer"
-                                >
-                                    <Icon name="rotate-ccw" className="w-5 h-5" />
-                                </button>
+                        <div className="p-6 flex flex-col items-center">
+                            <div className="relative w-56 h-56 flex items-center justify-center mb-5" role="timer" aria-live="off" aria-label={`${formatSeconds(timeLeft)} remaining`}>
+                                <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="var(--surface-3)" strokeWidth="4" />
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke={isWorkPhase ? 'var(--accent)' : 'var(--good)'} strokeWidth="4" strokeLinecap="butt" strokeDasharray={`${Math.max(0, Math.min(100, progressPercent)) * 2.827}, 282.7`} style={{ transition: 'stroke-dasharray 1s linear' }} />
+                                </svg>
+                                <div className="text-center relative">
+                                    <div className="text-5xl font-mono font-semibold text-slate-900 dark:text-slate-100 tabular tracking-tight">{formatSeconds(timeLeft)}</div>
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Cycle {Math.floor(pomoCycle / 2) + 1} of 4</div>
+                                </div>
                             </div>
 
-                            <div className="w-full mt-4 space-y-4">
-                                <div className="space-y-1">
-                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Link to Task</label>
-                                    <select
-                                        value={selectedTaskId}
-                                        onChange={(e) => setSelectedTaskId(e.target.value)}
-                                        className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs font-semibold focus:border-sky-500 outline-none transition-colors"
-                                    >
-                                        <option value="">No specific task</option>
-                                        {tasks.map(t => <option key={t.id} value={t.id}>{t.title}</option>)}
-                                    </select>
-                                </div>
+                            <div className="flex justify-center gap-2 mb-6" aria-label={`Session ${Math.floor(pomoCycle / 2) + 1} of 4`}>{cycleDots}</div>
 
-                                <div className="flex items-center justify-between px-2">
-                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5 cursor-pointer group">
-                                        <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${wakeLockEnabled ? 'bg-sky-500 border-sky-500' : 'border-slate-300 dark:border-slate-600 group-hover:border-sky-400'}`}>
-                                            {wakeLockEnabled && <Icon name="check" className="w-2.5 h-2.5 text-white" />}
-                                        </div>
-                                        <input type="checkbox" checked={wakeLockEnabled} onChange={(e) => setWakeLockEnabled(e.target.checked)} className="hidden" />
-                                        Keep Screen On
-                                    </label>
-                                    
-                                    {!isRunning && isWorkPhase && (
-                                        <div className="flex items-center gap-2">
-                                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Mins:</label>
-                                            <input 
-                                                type="number" 
-                                                value={customMinutes} 
-                                                onChange={(e) => setCustomMinutes(Math.max(1, parseInt(e.target.value) || 25))}
-                                                className="w-16 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 text-xs font-bold focus:border-sky-500 outline-none text-center"
-                                                min="1"
-                                                max="120"
-                                            />
-                                        </div>
-                                    )}
-                                </div>
+                            <div className="flex items-center justify-center gap-2 w-full">
+                                <button onClick={toggleTimer} className={`btn flex-1 !min-h-[44px] ${isRunning ? '' : 'primary'}`}>
+                                    <Icon name={isRunning ? 'pause' : 'play'} className="w-4 h-4" />
+                                    {isRunning ? 'Pause' : (timeLeft < (isWorkPhase ? customMinutes : breakMins) * 60 ? 'Resume' : 'Start')}
+                                </button>
+                                <button onClick={resetTimer} className="btn !min-h-[44px]" title="Reset timer">
+                                    <Icon name="rotate-ccw" className="w-4 h-4" /> Reset
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850 p-4 space-y-3">
+                            <div>
+                                <label htmlFor="pomo-task-select" className="fld-label">Log focus time to</label>
+                                <select
+                                    id="pomo-task-select"
+                                    value={selectedTaskId}
+                                    onChange={(e) => setSelectedTaskId(e.target.value)}
+                                    className="w-full px-3"
+                                >
+                                    <option value="">No specific task</option>
+                                    {tasks.map(t => <option key={t.id} value={t.id}>{t.title}</option>)}
+                                </select>
+                            </div>
+
+                            <div className="flex items-center justify-between gap-3 flex-wrap">
+                                <label className="inline-flex items-center gap-2 cursor-pointer text-sm text-slate-700 dark:text-slate-300 min-h-[32px]">
+                                    <input type="checkbox" checked={wakeLockEnabled} onChange={(e) => setWakeLockEnabled(e.target.checked)} />
+                                    Keep screen on
+                                </label>
+
+                                {!isRunning && isWorkPhase && (
+                                    <div className="flex items-center gap-2">
+                                        <label htmlFor="pomo-minutes" className="text-sm text-slate-700 dark:text-slate-300">Focus minutes</label>
+                                        <input
+                                            id="pomo-minutes"
+                                            type="number"
+                                            value={customMinutes}
+                                            onChange={(e) => setCustomMinutes(Math.max(1, parseInt(e.target.value) || 25))}
+                                            className="w-20 px-2 text-center tabular"
+                                            min="1"
+                                            max="120"
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
