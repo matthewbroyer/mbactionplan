@@ -2,7 +2,7 @@
 <html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-lSlqh7ZGd3ngO9vrL5omOIeKtkqOGOylOjO+1asCdSM='; style-src 'unsafe-inline'; img-src data:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-46hRzs60zQMzX1ezlYayB64avUqkH1M3StYmmfU27LU='; style-src 'unsafe-inline'; img-src data:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <!-- Always load light unless dark was chosen last time (runs before first paint). -->
@@ -15,7 +15,7 @@
             document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
         })();
     </script>
-    <title>Action Plan | Simple, Focused Daily Productivity</title>
+    <title>mbactionplan.online | Simple, Focused Daily Productivity</title>
 
     <!--
         Self-contained build: React, React DOM, the icons used, and Tailwind's generated CSS are
@@ -29,7 +29,7 @@
         Content-Security-Policy (same as below, plus frame-ancestors 'self'), X-Content-Type-Options: nosniff,
         Referrer-Policy: no-referrer, Strict-Transport-Security (HTTPS only).
     -->
-    <link id="favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%234f46e5'/><rect x='7' y='7' width='8' height='8' rx='1.5' fill='%23ffffff'/><rect x='17' y='7' width='8' height='8' rx='1.5' fill='%23ffffff' fill-opacity='.55'/><rect x='7' y='17' width='8' height='8' rx='1.5' fill='%23ffffff' fill-opacity='.55'/><rect x='17' y='17' width='8' height='8' rx='1.5' fill='%23ffffff' fill-opacity='.3'/></svg>" />
+    <link id="favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='13' fill='%234A48B8'/><rect x='15' y='17' width='32' height='32' rx='7' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/><path d='M23 33L28.5 38.5L39 27.5' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/><circle cx='48' cy='16' r='6.5' fill='%23F2B640' stroke='%234A48B8' stroke-width='3'/></svg>" />
 
     <script type="text/plain" id="tailwind-config">
         /* "Utility" theme mapped onto Tailwind (v3):
@@ -239,7 +239,7 @@
 
         /* ---- splash (static HTML, shown until React mounts; scoped to #splash) ---- */
         #splash{height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:var(--bg); color:var(--ink)}
-        #splash .sp-logo{width:52px; height:52px; border-radius:8px; background:var(--accent); display:flex; align-items:center; justify-content:center}
+        #splash .sp-logo{width:52px; height:52px; display:flex; align-items:center; justify-content:center}
         #splash .sp-name{font-size:15px; font-weight:650}
         #splash .sp-bar{width:120px; height:3px; border-radius:2px; background:var(--surface-3); overflow:hidden}
         #splash .sp-bar i{display:block; width:40%; height:100%; border-radius:2px; background:var(--accent); animation:spslide 1s ease-in-out infinite}
@@ -376,13 +376,13 @@
 </head>
 <body class="h-full antialiased">
     <div id="root" class="h-full">
-        <div id="splash" role="status" aria-label="Loading Action Plan">
+        <div id="splash" role="status" aria-label="Loading mbactionplan.online">
             <div class="sp-logo" aria-hidden="true">
-                <svg viewBox="0 0 32 32" width="30" height="30"><rect x="7" y="7" width="8" height="8" rx="1.5" fill="#fff"/><rect x="17" y="7" width="8" height="8" rx="1.5" fill="#fff" fill-opacity=".55"/><rect x="7" y="17" width="8" height="8" rx="1.5" fill="#fff" fill-opacity=".55"/><rect x="17" y="17" width="8" height="8" rx="1.5" fill="#fff" fill-opacity=".3"/></svg>
+                <svg viewBox="0 0 64 64" width="52" height="52"><rect width="64" height="64" rx="13" style="fill:var(--accent)"/><rect x="15" y="17" width="32" height="32" rx="7" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 33L28.5 38.5L39 27.5" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="48" cy="16" r="6.5" fill="#F2B640" stroke-width="3" style="stroke:var(--accent)"/></svg>
             </div>
-            <div class="sp-name">Action Plan</div>
+            <div class="sp-name">mbactionplan.online</div>
             <div class="sp-bar" aria-hidden="true"><i></i></div>
-            <noscript>Action Plan needs JavaScript to run.</noscript>
+            <noscript>mbactionplan.online needs JavaScript to run.</noscript>
         </div>
     </div>
 
@@ -1653,13 +1653,13 @@ const BACKUP_NAMES = {
 };
 const BACKUP_TYPES = {
   json: {
-    description: 'Action Plan backup (JSON)',
+    description: 'mbactionplan.online backup (JSON)',
     accept: {
       'application/json': ['.json']
     }
   },
   csv: {
-    description: 'Action Plan backup (CSV)',
+    description: 'mbactionplan.online backup (CSV)',
     accept: {
       'text/csv': ['.csv']
     }
@@ -2374,9 +2374,13 @@ function ProjectModal({
 // no cookies, no analytics, no ads, no network requests after the page loads.
 // If any of that changes, update this text first.
 const LEGAL_UPDATED = 'September 26, 2026';
-const APP_VERSION = '13';
+const APP_VERSION = '14';
 // Newest first. Keep this in step with RELEASE_NOTES.md.
 const RELEASE_NOTES = [{
+  v: '14',
+  date: 'September 28, 2026',
+  items: ['Action Plan is now mbactionplan.online.', 'New app icon: a checked box with a small yellow dot, shown in the browser tab, header, loading screen, and welcome guide. It follows your chosen accent color.', 'Your tasks, projects, settings, and existing backups are unchanged and still import normally.']
+}, {
   v: '13',
   date: 'September 26, 2026',
   items: ['Choose where backups are saved. The first save asks for a folder and file name; after that, "Save backup now" (Ctrl+S) overwrites the same file in one click. Change it anytime with "Change location…" in the Data menu.', 'JSON backups (recommended): "Export All (JSON)" saves everything in one file that restores exactly.', 'CSV backups can also be saved to a chosen location. "Save backup now" updates that CSV too once you have set one up.', 'Import accepts either JSON or CSV backups and opens in your backup folder. It adds what\'s missing and skips anything already here (matched by ID), so importing twice never duplicates and an older backup can\'t overwrite newer edits.', 'The "Backed up …" status next to the Data button now saves a backup when clicked. On phones it becomes a small warning dot on the Data button.', 'Browsers without save-location support (Firefox, Safari, phones) still download the backup, or offer the share sheet on phones, and the Data menu says so.', 'Matched the rest of the app family: solid selected chips, toast style, 44px controls on touch screens and narrow windows, 54px bottom-bar rows.', 'Removed the floating "Your data stays on this device" pop-up. That information is in the welcome screen and the Privacy Policy.']
@@ -2512,7 +2516,7 @@ function LegalModal({
     "aria-labelledby": `legal-tab-${activeTab}`,
     tabIndex: 0,
     className: "flex-1 overflow-y-auto p-6 space-y-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed"
-  }, activeTab === 'privacy' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Privacy Policy"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "In short:"), " Action Plan runs entirely in your web browser. There is no account, no server-side database, no cookies, and no analytics, advertising, or tracking. The developer cannot see what you enter."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What's stored, and where."), " Everything is saved in your browser's storage on this device: your projects and tasks (titles, notes, dates, priority, repeat setting, pin, focus minutes logged, and when a task was completed), plus a few settings: light/dark theme, whether you've seen the welcome guide, and when you last saved a backup. If you choose a save location for backups, the browser also remembers which backup file you picked (its name and your permission to write to it, not the folder path) so \"Save backup now\" can update it. Nothing else is stored."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What leaves your device."), " Your tasks and projects never leave your device unless you export or share a backup yourself. All of the app's code, styles, and icons are built into this single page, so after the page loads it makes no further network requests. As with any website, the service that hosts this page receives your IP address and basic browser information when your browser downloads it, and may keep standard server logs. The app adds nothing to those requests."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Device features."), " \"Keep screen on\" uses your browser's Screen Wake Lock, and the focus timer plays its sound through your browser's audio. Neither sends any data anywhere."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Backups, exporting and sharing."), " The Data menu saves a JSON or CSV backup file. In browsers that support it, you choose the folder and file name and the app writes only to that file; elsewhere the file is downloaded or, on phones and tablets, handed to your device's share sheet. The file goes only where you choose. Importing reads a backup inside your browser; it is never uploaded."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Deleting your data."), " Data \u2192 Clear all data permanently deletes every task, project, and setting this app saved in this browser, including the remembered backup location. Backup files you saved yourself aren't touched; delete those in your file manager. Clearing your browser's site data also removes the app's data. There is no copy anywhere else, so save a backup first if you want one."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Sensitive information."), " Please don't enter passwords, Social Security numbers, credit card or bank numbers, health information, or other highly sensitive data. Local storage is not encrypted, and anyone using this device and browser profile can read it."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Children."), " Action Plan is a general-audience tool and isn't directed at children under 13. It doesn't send any personal information to the developer, from anyone of any age."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Changes."), " If this app ever adds accounts, sync, analytics, or any server-side storage, this policy will be updated first to describe the new behavior, with a new date above.")), activeTab === 'terms' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Terms of Use"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, "By using Action Plan, you agree to the following:"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What this is."), " Action Plan is a free personal productivity tool (task list, priority matrix, calendar, and focus timer) made by an individual developer for ordinary personal or small-business organizing."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Your data, your responsibility."), " What you enter stays in your browser and is yours. You're responsible for its content and for keeping backups with Export. Clearing site data, switching browsers or devices, or a browser problem can erase it, and the developer has no copy to restore."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Acceptable use."), " Don't use the app for anything unlawful, and don't attempt to tamper with the site or use it to harm others."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "No warranty."), " The app is provided \"as is\" and \"as available,\" without warranties of any kind, express or implied, including fitness for a particular purpose. It isn't guaranteed to be error-free or always available, and it isn't a substitute for systems you need to rely on for critical deadlines or records."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Limitation of liability."), " To the extent the law allows, the developer isn't liable for any loss or damage arising from use of the app, including lost data, missed deadlines, or lost time. Some places don't allow these limits, so they may not fully apply to you."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Intellectual property."), " The app's own code, design, and name belong to its developer. You're welcome to use the app for your own personal or business tasks. Open-source components it includes are used under their own licenses (see Credits)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Changes and availability."), " The app may be updated, changed, or taken down at any time without notice. It's free, with no service-level guarantee."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Contact."), " Questions about these terms can be sent to the developer through the site where you found this app.")), activeTab === 'disclaimer' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Disclaimer"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Not professional advice."), " Action Plan is a general organizing tool. It doesn't provide medical, legal, financial, tax, or other professional advice."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "No reminders or alerts."), " Due dates and times are shown in the app only. Action Plan doesn't send notifications, emails, or alarms. The timer sound plays only while the page is open. Don't rely on it as your only reminder for anything important."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Not secure storage."), " \"Local-only\" isn't the same as \"backed up\" or \"encrypted.\" Anyone with access to this device and browser profile can see the same data you can."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "How the numbers work.")), /*#__PURE__*/React.createElement("ul", {
+  }, activeTab === 'privacy' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Privacy Policy"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "In short:"), " mbactionplan.online runs entirely in your web browser. There is no account, no server-side database, no cookies, and no analytics, advertising, or tracking. The developer cannot see what you enter."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What's stored, and where."), " Everything is saved in your browser's storage on this device: your projects and tasks (titles, notes, dates, priority, repeat setting, pin, focus minutes logged, and when a task was completed), plus a few settings: light/dark theme, whether you've seen the welcome guide, and when you last saved a backup. If you choose a save location for backups, the browser also remembers which backup file you picked (its name and your permission to write to it, not the folder path) so \"Save backup now\" can update it. Nothing else is stored."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What leaves your device."), " Your tasks and projects never leave your device unless you export or share a backup yourself. All of the app's code, styles, and icons are built into this single page, so after the page loads it makes no further network requests. As with any website, the service that hosts this page receives your IP address and basic browser information when your browser downloads it, and may keep standard server logs. The app adds nothing to those requests."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Device features."), " \"Keep screen on\" uses your browser's Screen Wake Lock, and the focus timer plays its sound through your browser's audio. Neither sends any data anywhere."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Backups, exporting and sharing."), " The Data menu saves a JSON or CSV backup file. In browsers that support it, you choose the folder and file name and the app writes only to that file; elsewhere the file is downloaded or, on phones and tablets, handed to your device's share sheet. The file goes only where you choose. Importing reads a backup inside your browser; it is never uploaded."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Deleting your data."), " Data \u2192 Clear all data permanently deletes every task, project, and setting this app saved in this browser, including the remembered backup location. Backup files you saved yourself aren't touched; delete those in your file manager. Clearing your browser's site data also removes the app's data. There is no copy anywhere else, so save a backup first if you want one."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Sensitive information."), " Please don't enter passwords, Social Security numbers, credit card or bank numbers, health information, or other highly sensitive data. Local storage is not encrypted, and anyone using this device and browser profile can read it."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Children."), " mbactionplan.online is a general-audience tool and isn't directed at children under 13. It doesn't send any personal information to the developer, from anyone of any age."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Changes."), " If this app ever adds accounts, sync, analytics, or any server-side storage, this policy will be updated first to describe the new behavior, with a new date above.")), activeTab === 'terms' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Terms of Use"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, "By using mbactionplan.online, you agree to the following:"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What this is."), " mbactionplan.online is a free personal productivity tool (task list, priority matrix, calendar, and focus timer) made by an individual developer for ordinary personal or small-business organizing."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Your data, your responsibility."), " What you enter stays in your browser and is yours. You're responsible for its content and for keeping backups with Export. Clearing site data, switching browsers or devices, or a browser problem can erase it, and the developer has no copy to restore."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Acceptable use."), " Don't use the app for anything unlawful, and don't attempt to tamper with the site or use it to harm others."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "No warranty."), " The app is provided \"as is\" and \"as available,\" without warranties of any kind, express or implied, including fitness for a particular purpose. It isn't guaranteed to be error-free or always available, and it isn't a substitute for systems you need to rely on for critical deadlines or records."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Limitation of liability."), " To the extent the law allows, the developer isn't liable for any loss or damage arising from use of the app, including lost data, missed deadlines, or lost time. Some places don't allow these limits, so they may not fully apply to you."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Intellectual property."), " The app's own code, design, and name belong to its developer. You're welcome to use the app for your own personal or business tasks. Open-source components it includes are used under their own licenses (see Credits)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Changes and availability."), " The app may be updated, changed, or taken down at any time without notice. It's free, with no service-level guarantee."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Contact."), " Questions about these terms can be sent to the developer through the site where you found this app.")), activeTab === 'disclaimer' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Disclaimer"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Not professional advice."), " mbactionplan.online is a general organizing tool. It doesn't provide medical, legal, financial, tax, or other professional advice."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "No reminders or alerts."), " Due dates and times are shown in the app only. mbactionplan.online doesn't send notifications, emails, or alarms. The timer sound plays only while the page is open. Don't rely on it as your only reminder for anything important."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Not secure storage."), " \"Local-only\" isn't the same as \"backed up\" or \"encrypted.\" Anyone with access to this device and browser profile can see the same data you can."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "How the numbers work.")), /*#__PURE__*/React.createElement("ul", {
     className: "list-disc pl-5 space-y-1"
   }, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Completion rate"), " = completed tasks \xF7 all tasks shown (for the current project filter and search)."), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Today's progress"), " = tasks you completed today \xF7 (tasks completed today + open tasks due today or overdue)."), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Focus time"), " adds 1 minute to the selected task for every full minute the timer runs during a focus block. Breaks aren't counted. Browsers may slow timers in background tabs, so keep the tab visible for accurate timing."), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Repeating tasks:"), " completing one moves its due date forward from its current due date (or from today if it has none). Monthly, quarterly, 6-month, and yearly repeats keep the same day of the month, using the month's last day when that date doesn't exist (for example, Jan 31 \u2192 Feb 28).")), /*#__PURE__*/React.createElement("p", null, "These are conveniences for personal planning and aren't certified for billing, payroll, compliance, or other official purposes.")), activeTab === 'notes' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Release notes"), RELEASE_NOTES.map(r => /*#__PURE__*/React.createElement("section", {
     key: r.v,
@@ -2525,7 +2529,7 @@ function LegalModal({
     className: "list-disc pl-5 mt-1 space-y-1"
   }, r.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
     key: i
-  }, it)))))), activeTab === 'credits' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Open-source credits"), /*#__PURE__*/React.createElement("p", null, "Action Plan's own code and design are by its developer. It includes these open-source components, used under their licenses. Everything is bundled into this page; nothing is loaded from their servers."), CREDITS.map(c => /*#__PURE__*/React.createElement("details", {
+  }, it)))))), activeTab === 'credits' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Open-source credits"), /*#__PURE__*/React.createElement("p", null, "mbactionplan.online's own code and design are by its developer. It includes these open-source components, used under their licenses. Everything is bundled into this page; nothing is loaded from their servers."), CREDITS.map(c => /*#__PURE__*/React.createElement("details", {
     key: c.name,
     className: "border border-slate-200 dark:border-slate-750 rounded px-3 py-2"
   }, /*#__PURE__*/React.createElement("summary", {
@@ -2622,49 +2626,48 @@ function Onboarding({
   }, step === 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-3 mb-3"
   }, /*#__PURE__*/React.createElement("svg", {
-    viewBox: "0 0 32 32",
+    viewBox: "0 0 64 64",
     className: "w-[52px] h-[52px] shrink-0",
     "aria-hidden": "true"
   }, /*#__PURE__*/React.createElement("rect", {
-    width: "32",
-    height: "32",
-    rx: "6",
+    width: "64",
+    height: "64",
+    rx: "13",
     className: "fill-sky-500"
   }), /*#__PURE__*/React.createElement("rect", {
-    x: "7",
-    y: "7",
-    width: "8",
-    height: "8",
-    rx: "1.5",
-    className: "fill-white dark:fill-slate-950"
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "17",
-    y: "7",
-    width: "8",
-    height: "8",
-    rx: "1.5",
-    className: "fill-white dark:fill-slate-950",
-    fillOpacity: ".55"
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "7",
+    x: "15",
     y: "17",
-    width: "8",
-    height: "8",
-    rx: "1.5",
-    className: "fill-white dark:fill-slate-950",
-    fillOpacity: ".55"
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "17",
-    y: "17",
-    width: "8",
-    height: "8",
-    rx: "1.5",
-    className: "fill-white dark:fill-slate-950",
-    fillOpacity: ".3"
+    width: "32",
+    height: "32",
+    rx: "7",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: "text-white dark:text-slate-950"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M23 33L28.5 38.5L39 27.5",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: "text-white dark:text-slate-950"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "48",
+    cy: "16",
+    r: "8",
+    className: "fill-sky-500"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "48",
+    cy: "16",
+    r: "5",
+    fill: "#F2B640"
   })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     id: titleId,
     className: "text-lg font-bold text-slate-900 dark:text-slate-100"
-  }, "Welcome to Action Plan"), /*#__PURE__*/React.createElement("p", {
+  }, "Welcome to mbactionplan.online"), /*#__PURE__*/React.createElement("p", {
     className: "text-sm text-slate-600 dark:text-slate-400"
   }, "A simple planner for getting the right things done."))), /*#__PURE__*/React.createElement("div", {
     className: "mt-2"
@@ -3357,7 +3360,7 @@ function App() {
       })) {
         try {
           await navigator.share({
-            title: 'Action Plan backup',
+            title: 'mbactionplan.online backup',
             files: [file]
           });
           markBackedUp();
@@ -3436,7 +3439,7 @@ function App() {
       const [h] = await window.showOpenFilePicker({
         startIn: fileHandles.json || fileHandles.csv || 'documents',
         types: [{
-          description: 'Action Plan backup (JSON or CSV)',
+          description: 'mbactionplan.online backup (JSON or CSV)',
           accept: {
             'application/json': ['.json'],
             'text/csv': ['.csv']
@@ -3479,7 +3482,7 @@ function App() {
       return;
     }
     if (!data || typeof data !== 'object' || !Array.isArray(data.tasks) && !Array.isArray(data.projects)) {
-      showToast("That doesn't look like an Action Plan backup (no tasks or projects list). Nothing was changed.", 'error');
+      showToast("That doesn't look like an mbactionplan.online backup (no tasks or projects list). Nothing was changed.", 'error');
       return;
     }
     const rawP = Array.isArray(data.projects) ? data.projects : [];
@@ -3500,12 +3503,12 @@ function App() {
     const isJSON = /\.json$/i.test(file.name) || /json/i.test(file.type || '');
     const isCSV = !isJSON && (/\.csv$/i.test(file.name) || /csv|text\/plain/i.test(file.type || ''));
     if (!isJSON && !isCSV) {
-      showToast('Choose a .json or .csv backup exported from Action Plan.', 'error');
+      showToast('Choose a .json or .csv backup exported from mbactionplan.online.', 'error');
       resetInput();
       return;
     }
     if (file.size > LIMITS.importBytes) {
-      showToast('That file is larger than 5 MB, too big for an Action Plan backup. Nothing was changed.', 'error');
+      showToast('That file is larger than 5 MB, too big for an mbactionplan.online backup. Nothing was changed.', 'error');
       resetInput();
       return;
     }
@@ -3525,12 +3528,12 @@ function App() {
         }
         const lines = text.split(/\r?\n/).filter(l => l.trim());
         if (lines.length < 2) {
-          showToast("That file is empty. Choose a backup exported from Action Plan.", 'error');
+          showToast("That file is empty. Choose a backup exported from mbactionplan.online.", 'error');
           resetInput();
           return;
         }
         if (!/^"?RecordType"?,/i.test(lines[0])) {
-          showToast("That doesn't look like an Action Plan backup (missing the RecordType header). Nothing was changed.", 'error');
+          showToast("That doesn't look like an mbactionplan.online backup (missing the RecordType header). Nothing was changed.", 'error');
           resetInput();
           return;
         }
@@ -3603,7 +3606,7 @@ function App() {
         }
         applyImport(importedProjects, importedTasks);
       } catch (err) {
-        showToast("Couldn't read that file. Nothing was changed. Try a backup exported from Action Plan.", 'error');
+        showToast("Couldn't read that file. Nothing was changed. Try a backup exported from mbactionplan.online.", 'error');
       }
       resetInput();
     };
@@ -3754,50 +3757,49 @@ function App() {
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-2.5 min-w-0"
   }, /*#__PURE__*/React.createElement("svg", {
-    viewBox: "0 0 32 32",
+    viewBox: "0 0 64 64",
     className: "w-7 h-7 shrink-0",
     "aria-hidden": "true"
   }, /*#__PURE__*/React.createElement("rect", {
-    width: "32",
-    height: "32",
-    rx: "6",
+    width: "64",
+    height: "64",
+    rx: "13",
     className: "fill-sky-500"
   }), /*#__PURE__*/React.createElement("rect", {
-    x: "7",
-    y: "7",
-    width: "8",
-    height: "8",
-    rx: "1.5",
-    className: "fill-white dark:fill-slate-950"
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "17",
-    y: "7",
-    width: "8",
-    height: "8",
-    rx: "1.5",
-    className: "fill-white dark:fill-slate-950",
-    fillOpacity: ".55"
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "7",
+    x: "15",
     y: "17",
-    width: "8",
-    height: "8",
-    rx: "1.5",
-    className: "fill-white dark:fill-slate-950",
-    fillOpacity: ".55"
-  }), /*#__PURE__*/React.createElement("rect", {
-    x: "17",
-    y: "17",
-    width: "8",
-    height: "8",
-    rx: "1.5",
-    className: "fill-white dark:fill-slate-950",
-    fillOpacity: ".3"
+    width: "32",
+    height: "32",
+    rx: "7",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: "text-white dark:text-slate-950"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M23 33L28.5 38.5L39 27.5",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: "text-white dark:text-slate-950"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "48",
+    cy: "16",
+    r: "8",
+    className: "fill-sky-500"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "48",
+    cy: "16",
+    r: "5",
+    fill: "#F2B640"
   })), /*#__PURE__*/React.createElement("div", {
     className: "min-w-0 leading-tight"
   }, /*#__PURE__*/React.createElement("h1", {
     className: "text-[15px] font-bold text-slate-900 dark:text-slate-100 truncate"
-  }, "Action Plan"), /*#__PURE__*/React.createElement("p", {
+  }, "mbactionplan.online"), /*#__PURE__*/React.createElement("p", {
     className: "hidden xl:block whitespace-nowrap text-[11px] text-slate-500 dark:text-slate-400"
   }, "Simple, focused daily productivity"))), /*#__PURE__*/React.createElement("div", {
     className: "flex-1"
@@ -4161,7 +4163,7 @@ function App() {
     setWakeLockEnabled: setWakeLockEnabled
   }), /*#__PURE__*/React.createElement("footer", {
     className: "pt-8 pb-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400"
-  }, /*#__PURE__*/React.createElement("span", null, "Action Plan v", APP_VERSION, " \u2014 a free, local-only productivity app."), /*#__PURE__*/React.createElement("button", {
+  }, /*#__PURE__*/React.createElement("span", null, "mbactionplan.online v", APP_VERSION, " \u2014 a free, local-only productivity app."), /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: () => {
       setLegalTab('notes');
