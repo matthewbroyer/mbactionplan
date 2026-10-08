@@ -1,6 +1,6 @@
 # Attributions: Action Plan
 
-Action Plan's own code, design, name, and logo are by its developer. The app bundles the open-source components below directly into `mbactionplan13.html`. Nothing is loaded from their servers at runtime, and none of them receive any user data.
+Action Plan's own code, design, name, and logo are by its developer. The app bundles the open-source components below directly into `index.html`. Nothing is loaded from their servers at runtime, and none of them receive any user data.
 
 The same credits and full licence texts are shown in the app under **About & Legal → Credits**.
 
