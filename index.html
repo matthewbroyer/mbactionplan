@@ -2,7 +2,7 @@
 <html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-2z7CUqIrUayGAE7Q0wVzqZpwiRzjdqlPyu4jk29v+/A='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-fNlVzcUQ+Ai02+DwLGx4JN8UoLdfyyjPb/PX22LfbBo='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#4F46A5">
@@ -518,6 +518,8 @@
   --ctl:38px; --ctl-sm:32px;
   --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
   --ease:120ms ease;
+  /* page width: every app's header and content share one container (mbmoney.online's) */
+  --page-max:1280px; --gutter:16px;
   /* neutrals */
   --bg:#f3f4f6; --surface:#ffffff; --surface-2:#f6f7f9; --surface-3:#eceef2;
   --ink:#1b1f24; --ink-2:#48505c; --muted:#5f6773;
@@ -564,6 +566,7 @@ input[type=checkbox],input[type=radio],input[type=range],progress{accent-color:v
 .tabular,.num,time{font-variant-numeric:tabular-nums}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important;scroll-behavior:auto!important}}
 @media(pointer:coarse),(max-width:700px){:root{--ctl:44px;--ctl-sm:44px}}
+.tld{font-style:normal;color:var(--accent)}
 
 /* ---- MB SUITE v1 · mbactionplan.online adapter ---- */
 /* Tailwind's remapped "sky" scale keeps following --accent (see --acc-* in the theme block). */
@@ -574,6 +577,15 @@ input[type=checkbox],input[type=radio],input[type=range],progress{accent-color:v
 .tld{color:var(--accent)}
 #splash .sp-logo svg{width:52px;height:52px;border-radius:var(--r-lg)}
 #splash .sp-name .tld{color:var(--accent)}
+/* app bar: same title + tab style as mbmoney.online */
+.app-bar h1{font-size:14.5px!important;font-weight:650!important;letter-spacing:-.005em;line-height:1.15;color:var(--ink)!important}
+#root .hdr-tagline{font-size:11px;font-weight:400;color:var(--muted)!important;letter-spacing:.01em}
+.app-logo{width:28px;height:28px}
+.tabs button{font-size:14px;gap:7px;padding:0 12px;min-height:40px}
+.tabs button svg{width:16px;height:16px;opacity:.75}
+.tabs button[aria-current="page"] svg{opacity:1}
+/* page width: same container as mbmoney.online (1280px, 16px gutters on every screen size) */
+#root .max-w-7xl{max-width:var(--page-max);padding-left:max(var(--gutter),env(safe-area-inset-left));padding-right:max(var(--gutter),env(safe-area-inset-right))}
 
 </style>
 </head>
@@ -2496,7 +2508,7 @@ function LegalModal({
     className: "text-base font-semibold text-slate-900 dark:text-slate-100"
   }, "About & Legal ", /*#__PURE__*/React.createElement("span", {
     className: "text-xs font-normal text-slate-500 dark:text-slate-400"
-  }, "\xB7 Version ", APP_VERSION)), /*#__PURE__*/React.createElement("button", {
+  }, "\xB7 Official Web App \xB7 v1.0")), /*#__PURE__*/React.createElement("button", {
     onClick: onClose,
     "aria-label": "Close",
     className: "btn ghost icon sm"
@@ -5616,7 +5628,7 @@ function App() {
     className: "tld"
   }, ".online")), /*#__PURE__*/React.createElement("p", {
     className: "hdr-tagline text-[11px] text-slate-500 dark:text-slate-400"
-  }, "Simple, focused daily productivity."))), /*#__PURE__*/React.createElement("div", {
+  }, "Official Web App \xB7 v1.0"))), /*#__PURE__*/React.createElement("div", {
     className: "flex-1"
   }), /*#__PURE__*/React.createElement("div", {
     className: "relative hidden md:block"
