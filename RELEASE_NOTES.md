@@ -2,6 +2,16 @@
 
 Newest first. The same notes appear in the app under **About & Legal → Release notes** (footer link).
 
+## Version 17 · October 9, 2026
+
+**Focus timer**
+- **Mark complete.** When a task is selected under "Log focus time to", a **Mark complete** button now sits right under Start and Reset. It counts the time so far toward the task, finishes it, and clears the selection. Undo is in the message that appears.
+
+**Look**
+- **Centered icon.** The app icon is now centered, including the home-screen icon on iPhone and the icon on Android (they were drawn slightly off-center before). It also has a soft gradient instead of flat color. The preview image for shared links matches.
+- The tagline **Simple, focused daily productivity.** is back under the name at the top, on every screen size.
+- The footer now reads "mbactionplan.online - a free, local-only productivity app." The version number is still in About & Legal.
+
 ## Version 16 · October 8, 2026
 
 **Install as an app**
