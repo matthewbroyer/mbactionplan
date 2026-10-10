@@ -6,7 +6,7 @@
  * How it updates: it always asks the network first and only uses the saved copy when that fails (or is very
  * slow). So uploading new files to the host is enough. There is no version number to bump here.
  */
-const CACHE = 'actionplan-app-v18';
+const CACHE = 'actionplan-app-v18.1';
 const SHELL = ['./', 'index.html', 'manifest.json', 'favicon.svg', 'icon-192.png', 'icon-512.png',
   'icon-maskable-512.png', 'apple-touch-icon.png'];
 const SLOW_MS = 4000; // with a saved copy on hand, stop waiting on a bad connection after this long

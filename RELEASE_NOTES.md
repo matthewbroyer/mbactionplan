@@ -2,6 +2,12 @@
 
 Newest first. The same notes appear in the app under **About & Legal → Release notes** (footer link).
 
+## Version 18.1 · October 9, 2026
+
+- Lighter, fresher look (Paper Cutouts): a soft indigo tint across the top of each page, a gradient accent line and tab underline, gradient buttons and progress bars, and a leaf-art banner on the Today screen. Layout, features and shortcuts are unchanged.
+- New logo and icons: the same checked box on a softer gradient badge, with a matching link-preview image.
+- Your tasks, projects, settings and backups are unchanged.
+
 ## Version 18 · October 9, 2026
 
 - New look that matches the other mb apps: a flat indigo app icon (a checked box), a thin accent line across the top bar, and the same buttons, panels and spacing used across the family.

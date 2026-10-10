@@ -2,7 +2,7 @@
 <html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-fNlVzcUQ+Ai02+DwLGx4JN8UoLdfyyjPb/PX22LfbBo='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-aNu6J17+fXm5Iml5PIzDbSz5pbkoiX5w7dEpDDU58F4='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#4F46A5">
@@ -13,15 +13,15 @@
     <meta name="apple-mobile-web-app-title" content="Action Plan">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="manifest" href="manifest.json">
-<link rel="icon" href="favicon.ico" sizes="48x48">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="favicon.ico?v=2" sizes="48x48">
+<link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="mbactionplan.online">
     <meta property="og:title" content="Action Plan | Simple, Focused Daily Productivity">
     <meta property="og:description" content="Action Plan is a free, private to-do list and focus timer. Plan your day with Today, a priority matrix, projects, a calendar and a Pomodoro timer. No account, and your tasks stay on your device.">
     <meta property="og:url" content="https://mbactionplan.online/">
-    <meta property="og:image" content="https://mbactionplan.online/og-image.png">
+    <meta property="og:image" content="https://mbactionplan.online/og-image.png?v=2">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Action Plan | Simple, Focused Daily Productivity">
     <meta name="twitter:description" content="Action Plan is a free, private to-do list and focus timer. Plan your day with Today, a priority matrix, projects, a calendar and a Pomodoro timer. No account, and your tasks stay on your device.">
-    <meta name="twitter:image" content="https://mbactionplan.online/og-image.png">
+    <meta name="twitter:image" content="https://mbactionplan.online/og-image.png?v=2">
     <!-- Always load light unless dark was chosen last time (runs before first paint). -->
     <script>
         (function () {
@@ -588,13 +588,141 @@ input[type=checkbox],input[type=radio],input[type=range],progress{accent-color:v
 #root .max-w-7xl{max-width:var(--page-max);padding-left:max(var(--gutter),env(safe-area-inset-left));padding-right:max(var(--gutter),env(safe-area-inset-right))}
 
 </style>
+<style id="mb-suite-cutouts">
+/* =====================================================================
+   MB SUITE v2 · PAPER CUTOUTS surface layer
+   Additive and accent-driven. Load LAST in <head>: after mb-suite-core.css,
+   mb-suite-appbar.css and the app's adapter. Never edit core to get this look.
+   Changes SURFACE only: gradients, page wash, cutout art. Geometry (6/4/8px),
+   layout, density, type, components, motion and behavior stay MB Suite v1.
+   Per-app tweaks go in adapters/<app>-cutouts.css, not here.
+   ===================================================================== */
+
+/* ---- art + gradient tokens (all derived from --accent; no per-app hex) ---- */
+:root{
+  --cut-deep:var(--accent);
+  --cut-mid:color-mix(in srgb,var(--accent) 52%,#fff);
+  --cut-soft:color-mix(in srgb,var(--accent) 24%,#fff);
+  --cut-near:color-mix(in srgb,var(--accent) 62%,#0aa6b8);      /* neighbor hue; upgraded below where supported */
+  --cut-butter:#FFD98A;
+  --cut-blush:#F7B8A8;
+  --wash-top:color-mix(in srgb,var(--accent) 7%,#fff);
+  --wash-mid:color-mix(in srgb,var(--accent) 4%,var(--bg));
+  --g-line:linear-gradient(90deg,var(--accent),var(--cut-mid) 55%,var(--cut-butter));
+  --g-underline:linear-gradient(90deg,var(--accent),var(--cut-mid));
+  --g-pri:linear-gradient(135deg,var(--accent),var(--accent-hover));
+  --g-bar:linear-gradient(90deg,var(--accent),var(--cut-mid));
+  --g-tile:linear-gradient(135deg,color-mix(in srgb,var(--accent) 11%,var(--surface)),var(--surface) 65%);
+}
+@supports (color:oklch(from red l c h)){
+  :root{--cut-near:oklch(from var(--accent) calc(l + .04) c calc(h + 34))}
+}
+:root[data-theme="dark"],:root.dark{
+  --cut-mid:color-mix(in srgb,var(--accent) 60%,var(--surface));
+  --cut-soft:color-mix(in srgb,var(--accent) 30%,var(--surface));
+  --cut-near:color-mix(in srgb,var(--accent) 62%,#0aa6b8);
+  --cut-butter:#D9B363;
+  --cut-blush:#C98C80;
+  --wash-top:color-mix(in srgb,var(--accent) 16%,var(--bg));
+  --wash-mid:color-mix(in srgb,var(--accent) 7%,var(--bg));
+}
+@supports (color:oklch(from red l c h)){
+  :root[data-theme="dark"],:root.dark{--cut-near:oklch(from var(--accent) calc(l - .06) c calc(h + 34))}
+}
+
+/* ---- page wash: accent-derived, fades into the neutral page by ~680px ---- */
+html{background:linear-gradient(180deg,var(--wash-top) 0,var(--wash-mid) 420px,var(--bg) 680px) no-repeat,var(--bg)}
+body{background:none}
+
+/* ---- app bar: gradient accent line + gradient underline on the current tab ---- */
+.top,.app-bar{box-shadow:var(--shadow)!important}
+.top::before,.app-bar::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--g-line);pointer-events:none;z-index:1}
+.tabs button[aria-current="page"],nav.tabs button[aria-current="page"],
+:root[data-theme="dark"] nav.tabs button[aria-current="page"]{box-shadow:none!important;background:var(--g-underline) bottom/100% 2px no-repeat!important}
+.bnav button[aria-current="page"]{box-shadow:none!important;background:var(--g-underline) top/100% 2px no-repeat!important}
+
+/* ---- gradient is allowed ONLY here (everything else stays flat v1) ----
+   primary buttons, progress/bar fills, the hero stat tile, the banner, the page wash, the accent line.
+   Map the app's own selectors in adapters/<app>-cutouts.css; these are the common ones. */
+:is(.btn.primary,.btn.pri,.btn-primary,button.primary,.primary-btn){background:var(--g-pri)!important;border-color:transparent!important;color:var(--accent-ink)!important}
+.cu-hero{background:var(--g-tile)}
+.cu-bar{background:var(--g-bar)!important}                 /* use on the fill element of a progress/bar */
+
+/* ---- banner ---- */
+.cu-banner{position:relative;overflow:hidden;min-height:128px;margin:0 0 var(--sp-4);padding:22px 24px;border-radius:var(--r-lg);
+  border:1px solid color-mix(in srgb,var(--accent) 16%,transparent);box-shadow:var(--shadow);
+  background:linear-gradient(105deg,color-mix(in srgb,var(--accent) 3%,var(--surface)) 0%,color-mix(in srgb,var(--accent) 9%,var(--surface)) 60%,
+    color-mix(in srgb,var(--cut-butter) 22%,color-mix(in srgb,var(--accent) 5%,var(--surface))) 100%)}
+.cu-banner.slim{min-height:72px;padding:16px 24px}
+.cu-banner .cu-txt{position:relative;z-index:1}
+.cu-banner.slim .cu-art:not(.at-bottom):not(.at-top){max-width:58%}
+.cu-banner .cu-t{margin:0;font-size:var(--fs-h2);font-weight:650;letter-spacing:-.015em;color:var(--ink)}
+.cu-banner .cu-s{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+
+/* ---- art: roles (never hardcode hexes; recolor by role class or palette class) ---- */
+.cu-art{position:absolute;right:0;top:0;height:100%;width:auto;max-width:75%;pointer-events:none}
+.cu-art .d{fill:var(--cu-d,var(--cut-deep))}
+.cu-art .m{fill:var(--cu-m,var(--cut-mid))}
+.cu-art .s{fill:var(--cu-s,var(--cut-soft))}
+.cu-art .n{fill:var(--cu-n,var(--cut-near))}
+.cu-art .b{fill:var(--cu-b,var(--cut-butter))}
+.cu-art .r{fill:var(--cu-r,var(--cut-blush))}
+.cu-art .sd{fill:none;stroke:var(--cu-d,var(--cut-deep));stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.cu-art .sm{fill:none;stroke:var(--cu-m,var(--cut-mid));stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---- palettes: put on the svg or any ancestor ---- */
+.cu-p-mono{--cu-n:color-mix(in srgb,var(--accent) 78%,#000);--cu-b:color-mix(in srgb,var(--accent) 14%,var(--surface));--cu-r:color-mix(in srgb,var(--accent) 38%,var(--surface))}
+.cu-p-soft{--cu-d:var(--cut-mid);--cu-m:var(--cut-soft);--cu-s:color-mix(in srgb,var(--accent) 12%,var(--surface));
+  --cu-n:color-mix(in srgb,var(--cut-near) 45%,var(--surface));--cu-b:color-mix(in srgb,var(--cut-butter) 70%,var(--surface));--cu-r:color-mix(in srgb,var(--cut-blush) 70%,var(--surface))}
+.cu-p-bold{--cu-d:var(--accent-hover);--cu-m:var(--accent);--cu-s:var(--cut-mid)}
+
+/* ---- placement / size / modifiers (all optional; size with --cu-w or height) ---- */
+.cu-art.at-right{right:0;left:auto;top:0}
+.cu-art.at-left{left:0;right:auto;top:0}
+.cu-art.at-top{left:0;right:0;top:0;width:100%;height:auto;max-width:none}
+.cu-art.at-bottom{left:0;right:0;top:auto;bottom:0;width:100%;height:auto;max-width:none}
+.cu-art.at-corner{top:0;right:0;height:auto;width:var(--cu-w,220px);max-width:none}
+.cu-art.at-corner-bl{top:auto;right:auto;bottom:0;left:0;height:auto;width:var(--cu-w,220px);max-width:none}
+.cu-art.inline{position:relative;display:block;right:auto;top:auto;margin:0 auto;width:var(--cu-w,100%);max-width:100%;height:auto}
+.cu-art.mirror{transform:scaleX(-1)}
+.cu-art.flip{transform:scaleY(-1)}
+.cu-art.fade{opacity:.35}
+.cu-art.xs{--cu-w:64px}.cu-art.sm{--cu-w:120px}.cu-art.md{--cu-w:220px}.cu-art.lg{--cu-w:340px}
+:root[data-theme="dark"] .cu-art,:root.dark .cu-art{opacity:.85}
+:root[data-theme="dark"] .cu-art.fade,:root.dark .cu-art.fade{opacity:.3}
+
+/* ---- phones + print ---- */
+@media(max-width:600px){
+  .cu-banner{padding:18px 16px;min-height:104px}
+  .cu-banner .cu-art:not(.at-bottom):not(.at-top){max-width:46%}
+}
+@media print{html{background:#fff}.cu-banner,.cu-art{display:none}}
+
+/* =====================================================================
+   MB SUITE v2 · mbactionplan.online adapter (loads after mb-suite-cutouts.css)
+   Maps Action Plan's own selectors onto the v2 tokens. Surface only.
+   ===================================================================== */
+/* primary buttons: gradient (generic rule), with hover feedback and a flat disabled state */
+.btn.primary:hover:not(:disabled){filter:brightness(.94)}
+.btn.primary:disabled{background:var(--surface-3)!important;border-color:var(--border)!important;color:var(--muted)!important;filter:none}
+/* progress: Today meter and the segmented goal bar */
+.meter>i,.segs>i.on{background:var(--g-bar)}
+#splash .sp-bar i{background:var(--g-bar)}
+/* phone bottom bar: the active item uses the gradient marker instead of the Tailwind inset shadow */
+nav[aria-label="Main"] button[aria-current="page"]{box-shadow:none!important;background:var(--g-underline) top/100% 2px no-repeat!important}
+/* Today: the banner sits inside a space-y-4 stack, so it needs no bottom margin of its own */
+.space-y-4>.cu-banner{margin-bottom:0}
+/* splash: wreath around the 52px badge, static */
+#splash .sp-wreath{position:relative;width:min(280px,70vw);margin:0 auto}
+#splash .sp-wreath .sp-logo{position:absolute;inset:0;margin:auto}
+/* phones: keep banner text in its own column so it never meets the art */
+@media(max-width:600px){.cu-banner .cu-txt{max-width:54%}}
+</style>
 </head>
 <body class="h-full antialiased">
     <div id="root" class="h-full">
         <div id="splash" role="status" aria-label="Loading mbactionplan.online">
-            <div class="sp-logo" aria-hidden="true">
-                <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" width="52" height="52"><rect width="64" height="64" rx="14" fill="#4F46A5"/><rect x="15.5" y="15.5" width="33" height="33" rx="5" stroke="#fff" stroke-opacity=".55" stroke-width="4.5" fill="none"/><path d="M23.5 32.5L30 39L41.5 26" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-            </div>
+            <div class="sp-wreath"><svg class="cu-art inline cu-p-soft" viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><path class="b" transform="translate(289.4 194.7) rotate(95) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="r" transform="translate(254.8 254.8) rotate(125) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="s" transform="translate(194.7 289.4) rotate(155) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="b" transform="translate(125.3 289.4) rotate(185) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="r" transform="translate(65.2 254.8) rotate(215) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="s" transform="translate(30.6 194.7) rotate(245) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="b" transform="translate(30.6 125.3) rotate(275) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="r" transform="translate(65.2 65.2) rotate(305) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="s" transform="translate(125.3 30.6) rotate(335) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="b" transform="translate(194.7 30.6) rotate(365) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="r" transform="translate(254.8 65.2) rotate(395) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="s" transform="translate(289.4 125.3) rotate(425) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="d" transform="translate(260 160) rotate(78) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="m" transform="translate(246.6 210) rotate(108) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(210 246.6) rotate(138) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="n" transform="translate(160 260) rotate(168) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="m" transform="translate(110 246.6) rotate(198) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(73.4 210) rotate(228) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="d" transform="translate(60 160) rotate(258) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="m" transform="translate(73.4 110) rotate(288) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(110 73.4) rotate(318) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="n" transform="translate(160 60) rotate(348) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="m" transform="translate(210 73.4) rotate(378) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(246.6 110) rotate(408) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><circle class="b" cx="160" cy="160" r="6"/></svg><div class="sp-logo" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 64 64" width="52" height="52"><defs><linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#6860b2"/><stop offset=".55" stop-color="#4F46A5"/><stop offset="1" stop-color="#3f3884"/></linearGradient><clipPath id="c1"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#c1)"><rect width="64" height="64" fill="url(#g1)"/><ellipse cx="14" cy="6" rx="40" ry="26" fill="#fff" opacity="0.14"/><rect x="15.5" y="15.5" width="33" height="33" rx="5" stroke="#fff" stroke-opacity=".55" stroke-width="4.5" fill="none"/><path d="M23.5 32.5L30 39L41.5 26" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g><rect x=".5" y=".5" width="63" height="63" rx="17.5" fill="none" stroke="#fff" stroke-opacity="0.24"/></svg></div></div>
             <div class="sp-name">mbactionplan<span class="tld">.online</span></div>
             <div class="sp-bar" aria-hidden="true"><i></i></div>
             <noscript>mbactionplan.online needs JavaScript to run.</noscript>
@@ -2380,9 +2508,13 @@ function ProjectModal({
 // no cookies, no analytics, no ads, no network requests after the page loads.
 // If any of that changes, update this text first.
 const LEGAL_UPDATED = 'October 8, 2026';
-const APP_VERSION = '18';
+const APP_VERSION = '18.1';
 // Newest first. Keep this in step with RELEASE_NOTES.md.
 const RELEASE_NOTES = [{
+  v: '18.1',
+  date: 'October 9, 2026',
+  items: ["Lighter, fresher look (Paper Cutouts): a soft indigo tint across the top of each page, a gradient accent line and tab underline, gradient buttons and progress bars, and a leaf-art banner on the Today screen. Layout, features and shortcuts are unchanged.", "New logo and icons: the same checked box on a softer gradient badge, with a matching link-preview image.", "Your tasks, projects, settings and backups are unchanged."]
+}, {
   v: '18',
   date: 'October 9, 2026',
   items: ['New look that matches the other mb apps: a flat indigo app icon (a checked box), a thin accent line across the top bar, and the same buttons, panels and spacing used across the family.', 'Your tasks, projects, settings and backups are unchanged.']
@@ -2508,7 +2640,7 @@ function LegalModal({
     className: "text-base font-semibold text-slate-900 dark:text-slate-100"
   }, "About & Legal ", /*#__PURE__*/React.createElement("span", {
     className: "text-xs font-normal text-slate-500 dark:text-slate-400"
-  }, "\xB7 Official Web App \xB7 v1.0")), /*#__PURE__*/React.createElement("button", {
+  }, "\xB7 Official Web App \xB7 v1.1")), /*#__PURE__*/React.createElement("button", {
     onClick: onClose,
     "aria-label": "Close",
     className: "btn ghost icon sm"
@@ -2647,7 +2779,7 @@ function Onboarding({
     className: "flex-1 overflow-y-auto px-5 py-5"
   }, step === 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-3 mb-3"
-  }, /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 64", className: "app-logo-lg shrink-0", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: {__html: "<rect width=\"64\" height=\"64\" rx=\"14\" fill=\"#4F46A5\"/><rect x=\"15.5\" y=\"15.5\" width=\"33\" height=\"33\" rx=\"5\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"4.5\" fill=\"none\"/><path d=\"M23.5 32.5L30 39L41.5 26\" stroke=\"#fff\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>"}}), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 64", className: "app-logo-lg shrink-0", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: {__html: "<defs><linearGradient id=\"g2\" gradientUnits=\"userSpaceOnUse\" x1=\"10\" y1=\"0\" x2=\"54\" y2=\"64\"><stop offset=\"0\" stop-color=\"#6860b2\"/><stop offset=\".55\" stop-color=\"#4F46A5\"/><stop offset=\"1\" stop-color=\"#3f3884\"/></linearGradient><clipPath id=\"c2\"><rect width=\"64\" height=\"64\" rx=\"18\"/></clipPath></defs><g clip-path=\"url(#c2)\"><rect width=\"64\" height=\"64\" fill=\"url(#g2)\"/><ellipse cx=\"14\" cy=\"6\" rx=\"40\" ry=\"26\" fill=\"#fff\" opacity=\"0.14\"/><rect x=\"15.5\" y=\"15.5\" width=\"33\" height=\"33\" rx=\"5\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"4.5\" fill=\"none\"/><path d=\"M23.5 32.5L30 39L41.5 26\" stroke=\"#fff\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/></g><rect x=\".5\" y=\".5\" width=\"63\" height=\"63\" rx=\"17.5\" fill=\"none\" stroke=\"#fff\" stroke-opacity=\"0.24\"/>"}}), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     id: titleId,
     className: "text-lg font-bold text-slate-900 dark:text-slate-100"
   }, "Welcome to mbactionplan.online"), /*#__PURE__*/React.createElement("p", {
@@ -3898,7 +4030,7 @@ function TodayView({
   }];
   const laterCount = model.upcoming.length + model.inbox.length + model.later.length;
   const hasAnyActive = tasks.some((t) => t.status !== "Completed");
-  return /* @__PURE__ */ React.createElement("div", { className: "space-y-4 animate-fade-in-up" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-col sm:flex-row sm:items-end justify-between gap-3" }, /* @__PURE__ */ React.createElement("div", { className: "min-w-0" }, /* @__PURE__ */ React.createElement("div", { className: "sect-t flex items-center gap-1.5" }, /* @__PURE__ */ React.createElement(Icon, { name: "sunrise", className: "w-3.5 h-3.5" }), " ", dateLabel), /* @__PURE__ */ React.createElement("h2", { className: "text-xl sm:text-[22px] font-extrabold tracking-tight text-slate-900 dark:text-slate-100 mt-0.5" }, headline), model.plannedMins > 0 && /* @__PURE__ */ React.createElement("p", { className: "hint mt-0.5 tabular" }, "About ", fmtMins(model.plannedMins), " planned", model.unestimated ? `, ${model.unestimated} without an estimate` : "")), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 flex-wrap" }, projects.length > 1 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { htmlFor: "today-project-filter", className: "sr-only" }, "Project"), /* @__PURE__ */ React.createElement("select", { id: "today-project-filter", value: selectedProjectId, onChange: (e) => setSelectedProjectId(e.target.value), className: "px-3 td-select" }, /* @__PURE__ */ React.createElement("option", { value: "all" }, "All projects"), projects.map((p) => /* @__PURE__ */ React.createElement("option", { key: p.id, value: p.id }, p.name)))), /* @__PURE__ */ React.createElement("button", { type: "button", className: `btn sm ${hour >= 16 && left > 0 ? "primary" : ""}`, onClick: onReview }, /* @__PURE__ */ React.createElement(Icon, { name: "calendar-check", className: "w-4 h-4" }), " Wrap up", /* @__PURE__ */ React.createElement("span", { className: "hidden sm:inline" }, " day")), /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm", onClick: onExplain }, /* @__PURE__ */ React.createElement(Icon, { name: "info", className: "w-4 h-4" }), " Explain", /* @__PURE__ */ React.createElement("span", { className: "hidden sm:inline" }, " my tasks")))), total > 0 && /* @__PURE__ */ React.createElement("div", null, total <= 14 ? /* @__PURE__ */ React.createElement("div", { className: "segs", role: "progressbar", "aria-label": "Today's progress", "aria-valuenow": doneToday, "aria-valuemin": "0", "aria-valuemax": total }, Array.from({
+  return /* @__PURE__ */ React.createElement("div", { className: "space-y-4 animate-fade-in-up" }, /* @__PURE__ */ React.createElement("section", { className: "cu-banner" }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 300 200", preserveAspectRatio: "xMaxYMax slice", className: "cu-art", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: { __html: "<path class=\"sd\" d=\"M280 192 L274 190.3 L267.8 188.3 L261.6 186.2 L255.3 183.8 L248.9 181.1 L242.4 178.2 L235.8 175.1 L229.2 171.8 L222.4 168.2 L215.6 164.4 L208.6 160.4 L201.6 156.2 L194.5 151.7 L187.3 147 L180 142 L172.6 136.8 L165.2 131.4 L157.6 125.8 L150 119.9 L142.2 113.8 L134.4 107.4 L126.5 100.9 L118.5 94.1 L110.4 87 L102.2 79.8 L94 72.3 L85.6 64.6 L77.2 56.6 L68.6 48.4 L60 40\"/><path class=\"d\" transform=\"translate(257.8 184.7) rotate(-209) scale(1)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"m\" transform=\"translate(228.5 171.5) rotate(-102.7) scale(0.9)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"n\" transform=\"translate(197.3 153.5) rotate(-197.6) scale(0.8)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"s\" transform=\"translate(164.4 130.9) rotate(-93.6) scale(0.7)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"d\" transform=\"translate(129.7 103.5) rotate(-190.2) scale(0.6)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"m\" transform=\"translate(60 40) rotate(-135.4) scale(0.65)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><circle class=\"b\" cx=\"250\" cy=\"60\" r=\"9\"/><circle class=\"r\" cx=\"210\" cy=\"24\" r=\"5\"/>" } }), /* @__PURE__ */ React.createElement("div", { className: "cu-txt" }, /* @__PURE__ */ React.createElement("h2", { className: "cu-t" }, headline), /* @__PURE__ */ React.createElement("p", { className: "cu-s tabular" }, dateLabel, model.plannedMins > 0 ? " \u00B7 About " + fmtMins(model.plannedMins) + " planned" + (model.unestimated ? ", " + model.unestimated + " without an estimate" : "") : ""))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 flex-wrap sm:justify-end" }, projects.length > 1 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { htmlFor: "today-project-filter", className: "sr-only" }, "Project"), /* @__PURE__ */ React.createElement("select", { id: "today-project-filter", value: selectedProjectId, onChange: (e) => setSelectedProjectId(e.target.value), className: "px-3 td-select" }, /* @__PURE__ */ React.createElement("option", { value: "all" }, "All projects"), projects.map((p) => /* @__PURE__ */ React.createElement("option", { key: p.id, value: p.id }, p.name)))), /* @__PURE__ */ React.createElement("button", { type: "button", className: `btn sm ${hour >= 16 && left > 0 ? "primary" : ""}`, onClick: onReview }, /* @__PURE__ */ React.createElement(Icon, { name: "calendar-check", className: "w-4 h-4" }), " Wrap up", /* @__PURE__ */ React.createElement("span", { className: "hidden sm:inline" }, " day")), /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm", onClick: onExplain }, /* @__PURE__ */ React.createElement(Icon, { name: "info", className: "w-4 h-4" }), " Explain", /* @__PURE__ */ React.createElement("span", { className: "hidden sm:inline" }, " my tasks"))), total > 0 && /* @__PURE__ */ React.createElement("div", null, total <= 14 ? /* @__PURE__ */ React.createElement("div", { className: "segs", role: "progressbar", "aria-label": "Today's progress", "aria-valuenow": doneToday, "aria-valuemin": "0", "aria-valuemax": total }, Array.from({
     length: total
   }).map((_, i) => /* @__PURE__ */ React.createElement("i", { key: i, className: i < doneToday ? "on" : "" }))) : /* @__PURE__ */ React.createElement("div", { className: "meter", role: "progressbar", "aria-label": "Today's progress", "aria-valuenow": pct, "aria-valuemin": "0", "aria-valuemax": "100" }, /* @__PURE__ */ React.createElement("i", { style: {
     width: `${pct}%`
@@ -5620,7 +5752,7 @@ function App() {
     className: "w-4 h-4"
   })), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-2.5 min-w-0"
-  }, /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 64", className: "app-logo shrink-0", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: {__html: "<rect width=\"64\" height=\"64\" rx=\"14\" fill=\"#4F46A5\"/><rect x=\"15.5\" y=\"15.5\" width=\"33\" height=\"33\" rx=\"5\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"4.5\" fill=\"none\"/><path d=\"M23.5 32.5L30 39L41.5 26\" stroke=\"#fff\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>"}}), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 64", className: "app-logo shrink-0", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: {__html: "<defs><linearGradient id=\"g3\" gradientUnits=\"userSpaceOnUse\" x1=\"10\" y1=\"0\" x2=\"54\" y2=\"64\"><stop offset=\"0\" stop-color=\"#6860b2\"/><stop offset=\".55\" stop-color=\"#4F46A5\"/><stop offset=\"1\" stop-color=\"#3f3884\"/></linearGradient><clipPath id=\"c3\"><rect width=\"64\" height=\"64\" rx=\"18\"/></clipPath></defs><g clip-path=\"url(#c3)\"><rect width=\"64\" height=\"64\" fill=\"url(#g3)\"/><rect x=\"15.5\" y=\"15.5\" width=\"33\" height=\"33\" rx=\"5\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"4.5\" fill=\"none\"/><path d=\"M23.5 32.5L30 39L41.5 26\" stroke=\"#fff\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/></g>"}}), /*#__PURE__*/React.createElement("div", {
     className: "min-w-0 leading-tight"
   }, /*#__PURE__*/React.createElement("h1", {
     className: "text-[15px] font-bold text-slate-900 dark:text-slate-100 truncate"
@@ -5628,7 +5760,7 @@ function App() {
     className: "tld"
   }, ".online")), /*#__PURE__*/React.createElement("p", {
     className: "hdr-tagline text-[11px] text-slate-500 dark:text-slate-400"
-  }, "Official Web App \xB7 v1.0"))), /*#__PURE__*/React.createElement("div", {
+  }, "Official Web App \xB7 v1.1"))), /*#__PURE__*/React.createElement("div", {
     className: "flex-1"
   }), /*#__PURE__*/React.createElement("div", {
     className: "relative hidden md:block"
