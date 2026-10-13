@@ -2,6 +2,24 @@
 
 Newest first. The same notes appear in the app under **About & Legal → Release notes** (footer link).
 
+## Version 18.2 · October 13, 2026
+
+**Navigation**
+- When you install it, the app is now named **Action Plan** on your computer and phone.
+- The sections moved to a **sidebar on the left**. On tablets it is a narrow icon rail; on phones the bottom bar stays as it was.
+- The logo and name always take you back to **Today**, from any screen.
+
+**New More page**
+- **More** (bottom of the sidebar, or the tools menu on a phone) holds the **Install** card, the dark theme switch, a backup shortcut, the welcome guide, release notes and the legal pages.
+- The Install button is no longer in the header. Where your browser can install the app, the card has an **Install** button; on iPhone and iPad it shows how to add it to your Home Screen; inside the installed app it says it is installed.
+
+**Share your progress**
+- In **Your numbers** on Today (and when you clear your day) a **Share** button makes a square image of your finished count and streak. It is drawn on your device and only goes where you send it. Task names stay off the image unless you tick **Show task names**.
+
+**Look**
+- New stone-cairn art on Today and the loading screen, a refreshed checkmark in the app icon, and a new link-preview image.
+- Your tasks, projects, settings and backups are unchanged.
+
 ## Version 18.1 · October 9, 2026
 
 - Lighter, fresher look (Paper Cutouts): a soft indigo tint across the top of each page, a gradient accent line and tab underline, gradient buttons and progress bars, and a leaf-art banner on the Today screen. Layout, features and shortcuts are unchanged.

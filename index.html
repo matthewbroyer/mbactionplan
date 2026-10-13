@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full" data-app-short="Action Plan" data-app-domain="mbactionplan.online">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-aNu6J17+fXm5Iml5PIzDbSz5pbkoiX5w7dEpDDU58F4='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-hT3TT5y0/5LlCEOsFX5X0h2fdS+uae6m/4urXZQjzFw=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-u2cWdPZx0s1jDg3+SMS+ZeCe2F7DzWnW1JprbBgIo6U='; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#4F46A5">
@@ -13,23 +13,26 @@
     <meta name="apple-mobile-web-app-title" content="Action Plan">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="manifest" href="manifest.json">
-<link rel="icon" href="favicon.ico?v=2" sizes="48x48">
-<link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="icon" href="favicon.ico?v=3" sizes="48x48">
+<link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+    <link rel="canonical" href="https://mbactionplan.online/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="mbactionplan.online">
     <meta property="og:title" content="Action Plan | Simple, Focused Daily Productivity">
     <meta property="og:description" content="Action Plan is a free, private to-do list and focus timer. Plan your day with Today, a priority matrix, projects, a calendar and a Pomodoro timer. No account, and your tasks stay on your device.">
     <meta property="og:url" content="https://mbactionplan.online/">
-    <meta property="og:image" content="https://mbactionplan.online/og-image.png?v=2">
+    <meta property="og:image" content="https://mbactionplan.online/og-image.png?v=3">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Action Plan: simple, focused daily productivity. A Today list with Must do tasks, at mbactionplan.online.">
+    <meta property="og:image:alt" content="mbactionplan.online: simple, focused daily productivity. A private to-do list and focus timer, shown with a Today list.">
+    <meta name="twitter:image:alt" content="mbactionplan.online: simple, focused daily productivity. A private to-do list and focus timer, shown with a Today list.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Action Plan | Simple, Focused Daily Productivity">
     <meta name="twitter:description" content="Action Plan is a free, private to-do list and focus timer. Plan your day with Today, a priority matrix, projects, a calendar and a Pomodoro timer. No account, and your tasks stay on your device.">
-    <meta name="twitter:image" content="https://mbactionplan.online/og-image.png?v=2">
+    <meta name="twitter:image" content="https://mbactionplan.online/og-image.png?v=3">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Action Plan","alternateName":"mbactionplan.online","url":"https://mbactionplan.online/","description":"A free, private to-do list and focus timer. Plan your day with Today, a priority matrix, projects, a calendar and a Pomodoro timer. No account, and your tasks stay on your device.","applicationCategory":"ProductivityApplication","operatingSystem":"Any (runs in a web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"image":"https://mbactionplan.online/og-image.png","inLanguage":"en"}</script>
     <!-- Always load light unless dark was chosen last time (runs before first paint). -->
     <script>
         (function () {
@@ -496,9 +499,7 @@
         .td-pad{padding-left:14px; padding-right:14px}
         .td-warn-ic{color:var(--warn-ink)}
         #root input.td-w24{width:96px}
-        /* Header tagline: one line where it fits, otherwise it wraps to two balanced lines (header is 56px tall, so both fit). */
-        #root .hdr-tagline{text-wrap:balance; line-height:1.15}
-        @media (max-width:430px){ #root .hdr-tagline{font-size:10.5px; letter-spacing:-.01em} #root .hdr-chev{display:none} }
+        @media (max-width:430px){ #root .hdr-chev{display:none} }
     </style>
     <style id="tailwind-css">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Segoe UI Variable Text,Segoe UI,system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Arial,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.pointer-events-none{pointer-events:none}.visible{visibility:visible}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.inset-x-0{left:0;right:0}.bottom-0{bottom:0}.bottom-20{bottom:5rem}.bottom-\[136px\]{bottom:136px}.bottom-\[140px\]{bottom:140px}.left-0{left:0}.left-2{left:.5rem}.left-2\.5{left:.625rem}.left-3{left:.75rem}.right-1{right:.25rem}.right-1\.5{right:.375rem}.right-3{right:.75rem}.right-5{right:1.25rem}.top-0{top:0}.top-1{top:.25rem}.top-1\.5{top:.375rem}.top-1\/2{top:50%}.z-10{z-index:10}.z-30{z-index:30}.z-40{z-index:40}.z-50{z-index:50}.col-span-full{grid-column:1/-1}.-my-1{margin-top:-.25rem;margin-bottom:-.25rem}.mx-auto{margin-left:auto;margin-right:auto}.\!mb-0{margin-bottom:0!important}.-mb-px{margin-bottom:-1px}.-ml-1{margin-left:-.25rem}.-ml-2{margin-left:-.5rem}.-ml-px{margin-left:-1px}.-mr-1{margin-right:-.25rem}.-mr-1\.5{margin-right:-.375rem}.-mr-2{margin-right:-.5rem}.-mt-1{margin-top:-.25rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}.mr-1{margin-right:.25rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-2\.5{margin-top:.625rem}.mt-3{margin-top:.75rem}.mt-5{margin-top:1.25rem}.mt-auto{margin-top:auto}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.inline{display:inline}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.grid{display:grid}.hidden{display:none}.h-0{height:0}.h-0\.5{height:.125rem}.h-1{height:.25rem}.h-1\.5{height:.375rem}.h-10{height:2.5rem}.h-14{height:3.5rem}.h-3{height:.75rem}.h-3\.5{height:.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-56{height:14rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-\[32px\]{height:32px}.h-\[52px\]{height:52px}.h-full{height:100%}.max-h-\[140px\]{max-height:140px}.\!min-h-\[44px\]{min-height:44px!important}.min-h-\[28px\]{min-height:28px}.min-h-\[32px\]{min-height:32px}.min-h-\[36px\]{min-height:36px}.min-h-\[52px\]{min-height:52px}.min-h-\[54px\]{min-height:54px}.min-h-\[64px\]{min-height:64px}.w-10{width:2.5rem}.w-14{width:3.5rem}.w-20{width:5rem}.w-3{width:.75rem}.w-3\.5{width:.875rem}.w-4{width:1rem}.w-44{width:11rem}.w-5{width:1.25rem}.w-56{width:14rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-\[3px\]{width:3px}.w-\[52px\]{width:52px}.w-full{width:100%}.w-px{width:1px}.min-w-0{min-width:0}.min-w-\[120px\]{min-width:120px}.min-w-\[200px\]{min-width:200px}.min-w-\[32px\]{min-width:32px}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-y-1{--tw-translate-y:-0.25rem}.-translate-y-1,.-translate-y-1\/2{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-1\/2{--tw-translate-y:-50%}.-rotate-90{--tw-rotate:-90deg}.-rotate-90,.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes fade-in{0%{opacity:0}to{opacity:1}}.animate-fade-in{animation:fade-in .12s ease-out}@keyframes fade-in-up{0%{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}.animate-fade-in-up{animation:fade-in-up .14s ease-out}@keyframes highlight-pulse{0%,to{box-shadow:0 0 0 2px rgb(var(--acc-500))}50%{box-shadow:0 0 0 4px rgb(var(--acc-500)/.45)}}.animate-highlight-pulse{animation:highlight-pulse 1s ease-in-out 3}@keyframes toast-in{0%{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}.animate-toast-in{animation:toast-in .14s ease-out}.cursor-pointer{cursor:pointer}.resize-none{resize:none}.resize{resize:both}.list-disc{list-style-type:disc}.auto-rows-\[minmax\(64px\2c auto\)\]{grid-auto-rows:minmax(64px,auto)}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.grid-cols-7{grid-template-columns:repeat(7,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-0{gap:0}.gap-0\.5{gap:.125rem}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-x-2{-moz-column-gap:.5rem;column-gap:.5rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-y-0{row-gap:0}.gap-y-0\.5{row-gap:.125rem}.gap-y-1{row-gap:.25rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.divide-y>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px*(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px*var(--tw-divide-y-reverse))}.divide-slate-100>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgb(236 238 242/var(--tw-divide-opacity,1))}.self-stretch{align-self:stretch}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis}.truncate,.whitespace-nowrap{white-space:nowrap}.whitespace-pre-line{white-space:pre-line}.\!rounded-none{border-radius:0!important}.rounded{border-radius:4px}.rounded-lg{border-radius:6px}.rounded-sm{border-radius:3px}.\!rounded-l-none{border-top-left-radius:0!important;border-bottom-left-radius:0!important}.\!rounded-r-none{border-top-right-radius:0!important;border-bottom-right-radius:0!important}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-l-\[3px\]{border-left-width:3px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-t-\[3px\]{border-top-width:3px}.border-dashed{border-style:dashed}.\!border-emerald-300{--tw-border-opacity:1!important;border-color:rgb(110 231 183/var(--tw-border-opacity,1))!important}.\!border-emerald-500{--tw-border-opacity:1!important;border-color:rgb(16 185 129/var(--tw-border-opacity,1))!important}.\!border-emerald-500\/40{border-color:rgba(16,185,129,.4)!important}.\!border-rose-300{--tw-border-opacity:1!important;border-color:rgb(253 164 175/var(--tw-border-opacity,1))!important}.\!border-rose-500{--tw-border-opacity:1!important;border-color:rgb(244 63 94/var(--tw-border-opacity,1))!important}.\!border-sky-500{--tw-border-opacity:1!important;border-color:rgb(var(--acc-500)/var(--tw-border-opacity,1))!important}.\!border-sky-500\/40{border-color:rgb(var(--acc-500)/.4)!important}.border-amber-400{--tw-border-opacity:1;border-color:rgb(251 191 36/var(--tw-border-opacity,1))}.border-amber-400\/60{border-color:rgba(251,191,36,.6)}.border-sky-500{--tw-border-opacity:1;border-color:rgb(var(--acc-500)/var(--tw-border-opacity,1))}.border-sky-500\/40{border-color:rgb(var(--acc-500)/.4)}.border-slate-100{--tw-border-opacity:1;border-color:rgb(236 238 242/var(--tw-border-opacity,1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(223 226 231/var(--tw-border-opacity,1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(198 203 211/var(--tw-border-opacity,1))}.border-slate-900{--tw-border-opacity:1;border-color:rgb(30 33 38/var(--tw-border-opacity,1))}.border-transparent{border-color:transparent}.\!border-l-emerald-600{--tw-border-opacity:1!important;border-left-color:rgb(5 150 105/var(--tw-border-opacity,1))!important}.\!border-l-rose-600{--tw-border-opacity:1!important;border-left-color:rgb(225 29 72/var(--tw-border-opacity,1))!important}.\!border-l-sky-500{--tw-border-opacity:1!important;border-left-color:rgb(var(--acc-500)/var(--tw-border-opacity,1))!important}.\!border-t-rose-600{--tw-border-opacity:1!important;border-top-color:rgb(225 29 72/var(--tw-border-opacity,1))!important}.\!bg-emerald-50{--tw-bg-opacity:1!important;background-color:rgb(236 253 245/var(--tw-bg-opacity,1))!important}.\!bg-emerald-500{--tw-bg-opacity:1!important;background-color:rgb(16 185 129/var(--tw-bg-opacity,1))!important}.\!bg-emerald-500\/10{background-color:rgba(16,185,129,.1)!important}.\!bg-sky-500{--tw-bg-opacity:1!important;background-color:rgb(var(--acc-500)/var(--tw-bg-opacity,1))!important}.\!bg-sky-500\/10{background-color:rgb(var(--acc-500)/.1)!important}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11/var(--tw-bg-opacity,1))}.bg-amber-500\/10{background-color:rgba(245,158,11,.1)}.bg-rose-950{--tw-bg-opacity:1;background-color:rgb(76 5 25/var(--tw-bg-opacity,1))}.bg-sky-500{--tw-bg-opacity:1;background-color:rgb(var(--acc-500)/var(--tw-bg-opacity,1))}.bg-sky-500\/10{background-color:rgb(var(--acc-500)/.1)}.bg-sky-500\/40{background-color:rgb(var(--acc-500)/.4)}.bg-sky-500\/\[\.06\]{background-color:rgb(var(--acc-500)/.06)}.bg-sky-600{--tw-bg-opacity:1;background-color:rgb(var(--acc-600)/var(--tw-bg-opacity,1))}.bg-slate-200{--tw-bg-opacity:1;background-color:rgb(223 226 231/var(--tw-bg-opacity,1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(246 247 249/var(--tw-bg-opacity,1))}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(22 24 28/var(--tw-bg-opacity,1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.fill-sky-500{fill:rgb(var(--acc-500)/1)}.fill-white{fill:#fff}.p-0{padding:0}.p-0\.5{padding:.125rem}.p-1{padding:.25rem}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.\!py-10{padding-top:2.5rem!important;padding-bottom:2.5rem!important}.px-0{padding-left:0;padding-right:0}.px-0\.5{padding-left:.125rem;padding-right:.125rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-3{padding-bottom:.75rem}.pb-36{padding-bottom:9rem}.pl-3{padding-left:.75rem}.pl-5{padding-left:1.25rem}.pl-8{padding-left:2rem}.pr-2{padding-right:.5rem}.pr-3{padding-right:.75rem}.pt-0{padding-top:0}.pt-0\.5{padding-top:.125rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-3{padding-top:.75rem}.pt-3\.5{padding-top:.875rem}.pt-4{padding-top:1rem}.pt-8{padding-top:2rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace,Cascadia Mono,Consolas,SF Mono,Menlo,monospace}.\!text-\[15px\]{font-size:15px!important}.text-5xl{font-size:3rem;line-height:1}.text-\[10\.5px\]{font-size:10.5px}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[13px\]{font-size:13px}.text-\[15px\]{font-size:15px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:600}.font-extrabold{font-weight:650}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.\!text-amber-700{--tw-text-opacity:1!important;color:rgb(180 83 9/var(--tw-text-opacity,1))!important}.\!text-emerald-800{--tw-text-opacity:1!important;color:rgb(6 95 70/var(--tw-text-opacity,1))!important}.\!text-rose-700{--tw-text-opacity:1!important;color:rgb(190 18 60/var(--tw-text-opacity,1))!important}.\!text-sky-700{--tw-text-opacity:1!important;color:rgb(var(--acc-700)/var(--tw-text-opacity,1))!important}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11/var(--tw-text-opacity,1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9/var(--tw-text-opacity,1))}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129/var(--tw-text-opacity,1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105/var(--tw-text-opacity,1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87/var(--tw-text-opacity,1))}.text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72/var(--tw-text-opacity,1))}.text-rose-700{--tw-text-opacity:1;color:rgb(190 18 60/var(--tw-text-opacity,1))}.text-sky-600{--tw-text-opacity:1;color:rgb(var(--acc-600)/var(--tw-text-opacity,1))}.text-sky-700{--tw-text-opacity:1;color:rgb(var(--acc-700)/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(142 151 163/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(95 103 115/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(72 80 92/var(--tw-text-opacity,1))}.text-slate-700{--tw-text-opacity:1;color:rgb(58 64 73/var(--tw-text-opacity,1))}.text-slate-800{--tw-text-opacity:1;color:rgb(42 46 52/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(30 33 38/var(--tw-text-opacity,1))}.text-slate-950{--tw-text-opacity:1;color:rgb(22 24 28/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.underline{text-decoration-line:underline}.line-through{text-decoration-line:line-through}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.opacity-100{opacity:1}.opacity-60{opacity:.6}.opacity-70{opacity:.7}.shadow-\[inset_0_2px_0_currentColor\]{--tw-shadow:inset 0 2px 0 currentColor;--tw-shadow-colored:inset 0 2px 0 var(--tw-shadow-color)}.shadow-\[inset_0_2px_0_currentColor\],.shadow-\[inset_0_2px_0_rgb\(var\(--acc-500\)\)\]{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[inset_0_2px_0_rgb\(var\(--acc-500\)\)\]{--tw-shadow:inset 0 2px 0 rgb(var(--acc-500));--tw-shadow-colored:inset 0 2px 0 var(--tw-shadow-color)}.shadow-md{--tw-shadow:0 1px 3px rgba(20,24,31,.1);--tw-shadow-colored:0 1px 3px var(--tw-shadow-color)}.shadow-md,.shadow-sm{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px rgba(20,24,31,.06);--tw-shadow-colored:0 1px 2px var(--tw-shadow-color)}.shadow-xl{--tw-shadow:0 8px 24px -6px rgba(20,24,31,.22),0 1px 3px rgba(20,24,31,.08);--tw-shadow-colored:0 8px 24px -6px var(--tw-shadow-color),0 1px 3px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.ring{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.blur{--tw-blur:blur(8px)}.blur,.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-200{transition-duration:.2s}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}.first-of-type\:border-t-0:first-of-type{border-top-width:0}.first-of-type\:pt-0:first-of-type{padding-top:0}.empty\:hidden:empty{display:none}.hover\:\!border-slate-400:hover{--tw-border-opacity:1!important;border-color:rgb(142 151 163/var(--tw-border-opacity,1))!important}.hover\:border-sky-500:hover{--tw-border-opacity:1;border-color:rgb(var(--acc-500)/var(--tw-border-opacity,1))}.hover\:bg-rose-50:hover{--tw-bg-opacity:1;background-color:rgb(255 241 242/var(--tw-bg-opacity,1))}.hover\:bg-slate-100:hover{--tw-bg-opacity:1;background-color:rgb(236 238 242/var(--tw-bg-opacity,1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(223 226 231/var(--tw-bg-opacity,1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(246 247 249/var(--tw-bg-opacity,1))}.hover\:text-rose-600:hover{--tw-text-opacity:1;color:rgb(225 29 72/var(--tw-text-opacity,1))}.hover\:text-sky-600:hover{--tw-text-opacity:1;color:rgb(var(--acc-600)/var(--tw-text-opacity,1))}.hover\:text-sky-700:hover{--tw-text-opacity:1;color:rgb(var(--acc-700)/var(--tw-text-opacity,1))}.hover\:text-slate-700:hover{--tw-text-opacity:1;color:rgb(58 64 73/var(--tw-text-opacity,1))}.hover\:text-slate-800:hover{--tw-text-opacity:1;color:rgb(42 46 52/var(--tw-text-opacity,1))}.hover\:text-slate-900:hover{--tw-text-opacity:1;color:rgb(30 33 38/var(--tw-text-opacity,1))}.focus\:not-sr-only:focus{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal}.focus\:fixed:focus{position:fixed}.focus\:left-2:focus{left:.5rem}.focus\:top-2:focus{top:.5rem}.focus\:z-\[70\]:focus{z-index:70}.focus-visible\:opacity-100:focus-visible{opacity:1}.group:focus-within .group-focus-within\:opacity-100{opacity:1}.group:hover .group-hover\:text-sky-700{--tw-text-opacity:1;color:rgb(var(--acc-700)/var(--tw-text-opacity,1))}.group:hover .group-hover\:opacity-100{opacity:1}.dark\:divide-slate-800:is(.dark *)>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgb(42 46 52/var(--tw-divide-opacity,1))}.dark\:\!border-emerald-500\/40:is(.dark *){border-color:rgba(16,185,129,.4)!important}.dark\:\!border-rose-500\/40:is(.dark *){border-color:rgba(244,63,94,.4)!important}.dark\:border-slate-700:is(.dark *){--tw-border-opacity:1;border-color:rgb(58 64 73/var(--tw-border-opacity,1))}.dark\:border-slate-750:is(.dark *){--tw-border-opacity:1;border-color:rgb(48 53 60/var(--tw-border-opacity,1))}.dark\:border-slate-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(42 46 52/var(--tw-border-opacity,1))}.dark\:border-white:is(.dark *){--tw-border-opacity:1;border-color:rgb(255 255 255/var(--tw-border-opacity,1))}.dark\:\!border-l-emerald-400:is(.dark *){--tw-border-opacity:1!important;border-left-color:rgb(52 211 153/var(--tw-border-opacity,1))!important}.dark\:\!border-l-rose-400:is(.dark *){--tw-border-opacity:1!important;border-left-color:rgb(251 113 133/var(--tw-border-opacity,1))!important}.dark\:\!border-t-rose-400:is(.dark *){--tw-border-opacity:1!important;border-top-color:rgb(251 113 133/var(--tw-border-opacity,1))!important}.dark\:\!bg-emerald-500\/15:is(.dark *){background-color:rgba(16,185,129,.15)!important}.dark\:bg-sky-500:is(.dark *){--tw-bg-opacity:1;background-color:rgb(var(--acc-500)/var(--tw-bg-opacity,1))}.dark\:bg-slate-750:is(.dark *){--tw-bg-opacity:1;background-color:rgb(48 53 60/var(--tw-bg-opacity,1))}.dark\:bg-slate-850:is(.dark *){--tw-bg-opacity:1;background-color:rgb(37 41 47/var(--tw-bg-opacity,1))}.dark\:bg-slate-900:is(.dark *){--tw-bg-opacity:1;background-color:rgb(30 33 38/var(--tw-bg-opacity,1))}.dark\:bg-slate-950\/40:is(.dark *){background-color:rgba(22,24,28,.4)}.dark\:fill-slate-950:is(.dark *){fill:#16181c}.dark\:\!text-amber-300:is(.dark *){--tw-text-opacity:1!important;color:rgb(252 211 77/var(--tw-text-opacity,1))!important}.dark\:\!text-emerald-300:is(.dark *){--tw-text-opacity:1!important;color:rgb(110 231 183/var(--tw-text-opacity,1))!important}.dark\:\!text-rose-400:is(.dark *){--tw-text-opacity:1!important;color:rgb(251 113 133/var(--tw-text-opacity,1))!important}.dark\:\!text-sky-300:is(.dark *){--tw-text-opacity:1!important;color:rgb(var(--acc-300)/var(--tw-text-opacity,1))!important}.dark\:text-amber-300:is(.dark *){--tw-text-opacity:1;color:rgb(252 211 77/var(--tw-text-opacity,1))}.dark\:text-amber-400:is(.dark *){--tw-text-opacity:1;color:rgb(251 191 36/var(--tw-text-opacity,1))}.dark\:text-emerald-400:is(.dark *){--tw-text-opacity:1;color:rgb(52 211 153/var(--tw-text-opacity,1))}.dark\:text-rose-400:is(.dark *){--tw-text-opacity:1;color:rgb(251 113 133/var(--tw-text-opacity,1))}.dark\:text-sky-400:is(.dark *){--tw-text-opacity:1;color:rgb(var(--acc-400)/var(--tw-text-opacity,1))}.dark\:text-slate-100:is(.dark *){--tw-text-opacity:1;color:rgb(236 238 242/var(--tw-text-opacity,1))}.dark\:text-slate-200:is(.dark *){--tw-text-opacity:1;color:rgb(223 226 231/var(--tw-text-opacity,1))}.dark\:text-slate-300:is(.dark *){--tw-text-opacity:1;color:rgb(198 203 211/var(--tw-text-opacity,1))}.dark\:text-slate-400:is(.dark *){--tw-text-opacity:1;color:rgb(142 151 163/var(--tw-text-opacity,1))}.dark\:text-slate-950:is(.dark *){--tw-text-opacity:1;color:rgb(22 24 28/var(--tw-text-opacity,1))}.dark\:hover\:\!border-slate-600:hover:is(.dark *){--tw-border-opacity:1!important;border-color:rgb(72 80 92/var(--tw-border-opacity,1))!important}.dark\:hover\:bg-rose-950\/40:hover:is(.dark *){background-color:rgba(76,5,25,.4)}.dark\:hover\:bg-slate-750:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(48 53 60/var(--tw-bg-opacity,1))}.dark\:hover\:bg-slate-800:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(42 46 52/var(--tw-bg-opacity,1))}.dark\:hover\:bg-slate-850:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(37 41 47/var(--tw-bg-opacity,1))}.dark\:hover\:text-rose-400:hover:is(.dark *){--tw-text-opacity:1;color:rgb(251 113 133/var(--tw-text-opacity,1))}.dark\:hover\:text-sky-400:hover:is(.dark *){--tw-text-opacity:1;color:rgb(var(--acc-400)/var(--tw-text-opacity,1))}.dark\:hover\:text-slate-100:hover:is(.dark *){--tw-text-opacity:1;color:rgb(236 238 242/var(--tw-text-opacity,1))}.dark\:hover\:text-slate-200:hover:is(.dark *){--tw-text-opacity:1;color:rgb(223 226 231/var(--tw-text-opacity,1))}.group:hover .dark\:group-hover\:text-sky-400:is(.dark *){--tw-text-opacity:1;color:rgb(var(--acc-400)/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:bottom-20{bottom:5rem}.sm\:left-auto{left:auto}.sm\:right-4{right:1rem}.sm\:mb-2{margin-bottom:.5rem}.sm\:block{display:block}.sm\:inline{display:inline}.sm\:flex{display:flex}.sm\:inline-flex{display:inline-flex}.sm\:hidden{display:none}.sm\:min-h-\[110px\]{min-height:110px}.sm\:min-h-\[calc\(100vh-200px\)\]{min-height:calc(100vh - 200px)}.sm\:w-64{width:16rem}.sm\:max-w-2xl{max-width:42rem}.sm\:max-w-lg{max-width:32rem}.sm\:max-w-md{max-width:28rem}.sm\:max-w-sm{max-width:24rem}.sm\:max-w-xl{max-width:36rem}.sm\:auto-rows-\[minmax\(100px\2c auto\)\]{grid-auto-rows:minmax(100px,auto)}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-end{align-items:flex-end}.sm\:items-center{align-items:center}.sm\:gap-3{gap:.75rem}.sm\:gap-4{gap:1rem}.sm\:rounded-b-3xl{border-bottom-right-radius:8px;border-bottom-left-radius:8px}.sm\:p-2{padding:.5rem}.sm\:p-6{padding:1.5rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pb-20{padding-bottom:5rem}.sm\:text-\[22px\]{font-size:22px}}@media (min-width:768px){.md\:block{display:block}.md\:hidden{display:none}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}}@media (min-width:1024px){.lg\:bottom-6{bottom:1.5rem}.lg\:left-6{left:1.5rem}.lg\:right-6{right:1.5rem}.lg\:right-auto{right:auto}.lg\:col-span-2{grid-column:span 2/span 2}.lg\:col-span-3{grid-column:span 3/span 3}.lg\:block{display:block}.lg\:inline{display:inline}.lg\:flex{display:flex}.lg\:inline-flex{display:inline-flex}.lg\:hidden{display:none}.lg\:w-56{width:14rem}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.lg\:pb-0{padding-bottom:0}}@media (min-width:1280px){.xl\:block{display:block}}</style>
 <style id="mb-suite">
@@ -569,21 +570,13 @@ input[type=checkbox],input[type=radio],input[type=range],progress{accent-color:v
 .tld{font-style:normal;color:var(--accent)}
 
 /* ---- MB SUITE v1 · mbactionplan.online adapter ---- */
-/* Tailwind's remapped "sky" scale keeps following --accent (see --acc-* in the theme block). */
-.app-bar{box-shadow:inset 0 3px 0 var(--accent),var(--shadow)!important}
-.app-bar>div{padding-top:3px}
-.app-logo{width:28px;height:28px;flex:none;border-radius:var(--r);overflow:hidden;display:block}
+/* Tailwind's remapped "sky" scale keeps following --accent (see --acc-* in the theme block).
+   v3: the old .app-bar header and its tab row are gone; the sidebar, page bar and bottom bar
+   are styled by the mb-suite-sidebar block below. */
 .app-logo-lg{width:52px;height:52px;flex:none;border-radius:var(--r-lg);overflow:hidden;display:block}
 .tld{color:var(--accent)}
 #splash .sp-logo svg{width:52px;height:52px;border-radius:var(--r-lg)}
 #splash .sp-name .tld{color:var(--accent)}
-/* app bar: same title + tab style as mbmoney.online */
-.app-bar h1{font-size:14.5px!important;font-weight:650!important;letter-spacing:-.005em;line-height:1.15;color:var(--ink)!important}
-#root .hdr-tagline{font-size:11px;font-weight:400;color:var(--muted)!important;letter-spacing:.01em}
-.app-logo{width:28px;height:28px}
-.tabs button{font-size:14px;gap:7px;padding:0 12px;min-height:40px}
-.tabs button svg{width:16px;height:16px;opacity:.75}
-.tabs button[aria-current="page"] svg{opacity:1}
 /* page width: same container as mbmoney.online (1280px, 16px gutters on every screen size) */
 #root .max-w-7xl{max-width:var(--page-max);padding-left:max(var(--gutter),env(safe-area-inset-left));padding-right:max(var(--gutter),env(safe-area-inset-right))}
 
@@ -631,7 +624,7 @@ input[type=checkbox],input[type=radio],input[type=range],progress{accent-color:v
 }
 
 /* ---- page wash: accent-derived, fades into the neutral page by ~680px ---- */
-html{background:linear-gradient(180deg,var(--wash-top) 0,var(--wash-mid) 420px,var(--bg) 680px) no-repeat,var(--bg)}
+html{min-height:100%;background:linear-gradient(180deg,var(--wash-top) 0,var(--wash-mid) 420px,var(--bg) 680px) 0 0/100% 680px no-repeat,var(--bg)}  /* v3 fix: fixed 680px size + min-height so short pages don't show a seam */
 body{background:none}
 
 /* ---- app bar: gradient accent line + gradient underline on the current tab ---- */
@@ -708,8 +701,6 @@ body{background:none}
 /* progress: Today meter and the segmented goal bar */
 .meter>i,.segs>i.on{background:var(--g-bar)}
 #splash .sp-bar i{background:var(--g-bar)}
-/* phone bottom bar: the active item uses the gradient marker instead of the Tailwind inset shadow */
-nav[aria-label="Main"] button[aria-current="page"]{box-shadow:none!important;background:var(--g-underline) top/100% 2px no-repeat!important}
 /* Today: the banner sits inside a space-y-4 stack, so it needs no bottom margin of its own */
 .space-y-4>.cu-banner{margin-bottom:0}
 /* splash: wreath around the 52px badge, static */
@@ -718,16 +709,391 @@ nav[aria-label="Main"] button[aria-current="page"]{box-shadow:none!important;bac
 /* phones: keep banner text in its own column so it never meets the art */
 @media(max-width:600px){.cu-banner .cu-txt{max-width:54%}}
 </style>
+<style id="mb-suite-sidebar">
+/* =====================================================================
+   MB SUITE v3 · LEFT SIDEBAR NAVIGATION  (replaces mb-suite-appbar.css)
+   Load order: mb-suite-core.css → app adapter → mb-suite-cutouts.css (v2) → this file → <app>-v3.css
+   Needs v1 tokens (--surface, --border, --accent, --r-sm, --page-max, --gutter …) and, if present,
+   v2's --g-line / --cut-mid for the gradient accents (falls back to flat accent without v2).
+
+   Markup (see v3-updates/demo/index.html for a working page):
+   <body class="mb-shell">
+     <aside class="mb-side" aria-label="App">
+       <a class="brand" href="./" aria-label="mbname.online: go to Home"> .logo + .bt(b + span) </a>
+       <nav class="side-nav" aria-label="Sections"> <button aria-current="page"><svg class="uic"/><span>Home</span></button> … </nav>
+       <nav class="side-nav side-end" aria-label="More"> Settings / Help items (optional) </nav>
+     </aside>
+     <div class="mb-main">
+       <header class="page-bar">
+         <a class="brand phone-brand" href="./" …>  (same brand block; shown on phones only)
+         <h1 class="page-title">Home</h1>
+         <div class="actions"> search · status chip · Data · theme switch · primary action </div>
+       </header>
+       <main class="wrap"> … </main>
+     </div>
+     <nav class="bnav" aria-label="Sections"> phone bottom bar (max 5 items, rest in a More sheet) </nav>
+   </body>
+
+   Breakpoints (identical in every app):
+     ≥1024px  sidebar 240px with labels
+     768–1023 rail 76px: icon over a short label, logo only
+     <768     no sidebar; page-bar becomes the top bar with the brand; docked bottom bar
+   ===================================================================== */
+:root{
+  --side-w:240px; --rail-w:76px; --bar-h:56px;
+  --g-rail:linear-gradient(180deg,var(--accent),var(--cut-mid,var(--accent)));
+}
+
+/* family accent line across the whole window (sidebar included) */
+.mb-shell::before{content:"";position:fixed;left:0;right:0;top:0;height:3px;background:var(--g-line,var(--accent));z-index:60;pointer-events:none}
+
+/* ---- sidebar ---- */
+.mb-side{position:fixed;top:0;bottom:0;left:0;width:var(--side-w);z-index:40;display:flex;flex-direction:column;gap:2px;
+  padding:15px 0 12px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.mb-side .brand{margin:0 8px 12px;padding:6px 8px}
+.side-nav{display:flex;flex-direction:column;gap:2px;padding:0 8px}
+.side-nav.side-end{margin-top:auto;padding-top:8px;border-top:1px solid var(--border)}
+.side-label{margin:14px 20px 4px;font-size:var(--fs-xs,11.5px);font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.side-nav button,.side-nav a{position:relative;display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:0 12px;border:0;border-radius:var(--r-sm);
+  background:none;font:500 14px var(--font);color:var(--ink-2);text-align:left;text-decoration:none;cursor:pointer;
+  transition:background-color var(--ease),color var(--ease)}
+.side-nav .uic,.side-nav svg{flex:none;width:18px;height:18px;opacity:.75}
+.side-nav button:hover,.side-nav a:hover{background:var(--surface-2);color:var(--ink)}
+.side-nav [aria-current="page"],.side-nav [aria-current="page"]:hover{color:var(--accent);font-weight:600;
+  background:var(--g-rail) left center/3px 60% no-repeat,var(--accent-soft)}
+.side-nav [aria-current="page"] svg{opacity:1}
+.side-nav button:focus-visible,.side-nav a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.side-nav .count{margin-left:auto;font-size:12px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.side-nav .dot{position:absolute;left:24px;top:8px;width:8px;height:8px;border-radius:2px;background:var(--warn)}
+
+/* ---- the brand block: ALWAYS a link to the home / start view ---- */
+a.brand{display:flex;align-items:center;gap:9px;min-width:0;border-radius:var(--r-sm);color:inherit;text-decoration:none;transition:background-color var(--ease)}
+a.brand:hover{background:var(--surface-2)}
+a.brand:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.brand .logo,.brand .logo svg{display:block;flex:none;width:28px;height:28px;border-radius:var(--r)}
+.brand .bt{display:flex;flex-direction:column;min-width:0;line-height:1.15}
+.brand b{font-size:14.5px;font-weight:650;letter-spacing:-.005em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand .bt span{font-size:11px;color:var(--muted);letter-spacing:.01em;white-space:nowrap}
+
+/* ---- main column + page bar ---- */
+.mb-main{margin-left:var(--side-w);min-width:0}
+.page-bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;min-height:var(--bar-h);
+  padding:3px max(var(--gutter),calc((100% - var(--page-max)) / 2 + var(--gutter))) 0;
+  background:color-mix(in srgb,var(--surface) 96%,transparent);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.page-bar .phone-brand{display:none}
+.page-title{margin:0;font-size:18px;font-weight:650;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.page-bar .actions{margin-left:auto;display:flex;align-items:center;gap:6px}
+.page-bar .actions>*{min-height:var(--ctl-sm)}
+.mb-main>.wrap{max-width:var(--page-max);margin:0 auto;padding:20px max(var(--gutter),env(safe-area-inset-right)) 48px max(var(--gutter),env(safe-area-inset-left))}
+
+/* ---- phone bottom bar (hidden until <768px) ---- */
+.bnav{display:none}
+
+/* ---- tablet: compact rail ---- */
+@media (max-width:1023px){
+  .mb-side{width:var(--rail-w);padding-top:12px}
+  .mb-side .brand{justify-content:center;margin:0 10px 10px;padding:8px 0}
+  .mb-side .brand .bt,.side-label,.side-nav .count{display:none}
+  .side-nav{padding:0 6px}
+  .side-nav button,.side-nav a{flex-direction:column;justify-content:center;gap:3px;min-height:56px;padding:6px 2px;font-size:10.5px;text-align:center;line-height:1.15}
+  .side-nav [aria-current="page"],.side-nav [aria-current="page"]:hover{background:var(--g-rail) left center/3px 50% no-repeat,var(--accent-soft)}
+  .side-nav .dot{left:auto;right:12px}
+  .mb-main{margin-left:var(--rail-w)}
+}
+/* ---- phones: top bar with the brand + docked bottom bar ---- */
+@media (max-width:767px){
+  .mb-side{display:none}
+  .mb-main{margin-left:0}
+  .page-bar{padding:3px max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left));gap:8px}
+  .page-bar .phone-brand{display:flex;margin-left:-3px;padding:3px 6px 3px 3px}
+  .page-bar .page-title{display:none}               /* the view's own h2 / banner names the page on phones */
+  .page-bar .actions .hide-phone{display:none}
+  .bnav{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;position:fixed;left:0;right:0;bottom:0;z-index:40;
+    padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:var(--surface);border-top:1px solid var(--border-strong)}
+  .bnav button,.bnav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:56px;border:0;border-radius:0;background:none;
+    font:500 11px var(--font);color:var(--ink-2);text-decoration:none}
+  .bnav svg{width:20px;height:20px}
+  .bnav [aria-current="page"]{color:var(--accent);font-weight:600;background:var(--g-underline,linear-gradient(var(--accent),var(--accent))) top/100% 2px no-repeat}
+  body.mb-shell{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
+}
+@media (max-width:420px){.page-bar .phone-brand .bt span{display:none}}
+@media print{.mb-side,.bnav,.page-bar .actions,.mb-shell::before{display:none!important}.mb-main{margin-left:0}}
+</style>
+<style id="mb-suite-v3">
+/* =====================================================================
+   MB SUITE v3 · components: install card (Settings/More) and the share dialog.
+   Load after mb-suite-sidebar.css. Uses v1 tokens only; v2 gradients are picked up where present.
+   ===================================================================== */
+/* ---- install card ---- */
+.mb-install{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:var(--r);background:var(--surface)}
+.mb-install>.uic{flex:none;width:22px;height:22px;color:var(--accent)}
+.mb-install>div{flex:1;min-width:0}
+.mb-install b{display:block;font-size:14px;font-weight:600;color:var(--ink)}
+.mb-install p{margin:2px 0 0;font-size:12.5px;color:var(--ink-2)}
+.mb-install p b{display:inline;font-size:inherit}
+.mb-install .btn{flex:none}
+.mb-install.is-done{border-left-color:var(--good)}
+.mb-install.is-done>.uic{color:var(--good-ink)}
+@media (max-width:520px){.mb-install{flex-wrap:wrap}.mb-install .btn{width:100%}}
+
+/* ---- share button (put it where the milestone is shown) ---- */
+.mb-share-btn .uic{width:16px;height:16px}
+
+/* ---- share dialog ---- */
+dialog.mb-share{width:min(460px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:1px solid var(--border);border-radius:var(--r-lg);
+  background:var(--surface);color:var(--ink);box-shadow:var(--shadow-pop);overflow:auto}
+dialog.mb-share::backdrop{background:var(--scrim)}
+.mb-share .ms-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.mb-share h3{margin:0;font-size:16px;font-weight:650}
+.mb-share .ms-prev{position:relative;margin:16px 16px 0;aspect-ratio:1;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--surface-2)}
+.mb-share .ms-prev img{display:block;width:100%;height:100%}
+.mb-share .ms-wait{position:absolute;inset:0;display:grid;place-items:center;margin:0;color:var(--muted);font-size:13px}
+.mb-share .ms-opts{display:flex;flex-wrap:wrap;gap:4px 16px;padding:12px 16px 0}
+.mb-share .ms-opts:empty{display:none}
+.mb-share .ms-opt{display:inline-flex;align-items:center;gap:8px;min-height:36px;font-size:13.5px}
+.mb-share .ms-note{margin:10px 16px 0;font-size:12px;color:var(--muted)}
+.mb-share .ms-btns{display:flex;justify-content:flex-end;gap:8px;padding:14px 16px 16px;margin-top:12px;border-top:1px solid var(--border)}
+@media (max-width:520px){.mb-share .ms-btns .btn{flex:1}}
+.mb-share [hidden],[data-mb-install][hidden]{display:none!important}
+/* v2 banner on phones: keep the text column clear of the art */
+@media (max-width:600px){:where(.cu-banner) .cu-txt{max-width:54%}}   /* same as the v2 adapters; low specificity so an adapter can override */
+</style>
+<style id="actionplan-v3">
+/* =====================================================================
+   MB SUITE v3 · mbactionplan.online adapter (loads after mb-suite-sidebar + mb-suite-v3)
+   The app scrolls inside <main> (scroll progress and Back to top read it), so the main column is a
+   full-height flex column: page bar on top, <main> fills the rest. Everything else is the kit's.
+   ===================================================================== */
+#root .mb-main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+#root .mb-main>main{flex:1 1 auto;min-height:0}
+#root .page-bar{position:relative;flex:none;padding-top:3px}
+.ap-scrollprog{top:3px!important}
+/* sidebar: full labels in the sidebar, short ones in the tablet rail */
+.side-nav .lbl-short{display:none}
+@media (max-width:1023px){.side-nav .lbl-full{display:none}.side-nav .lbl-short{display:inline}}
+.side-nav .lucide{width:18px;height:18px}
+.bnav .lucide{width:20px;height:20px}
+.ap-tools{flex:none;padding:12px max(var(--gutter),env(safe-area-inset-right)) 12px max(var(--gutter),env(safe-area-inset-left));background:var(--surface);border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:12px}
+/* toasts sit beside the sidebar instead of over it */
+@media (min-width:1024px){#root .toast{left:calc(var(--side-w) + 24px)!important}}
+/* More view */
+.more-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+@media (min-width:900px){.more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.more-body{padding:14px;display:flex;flex-direction:column;gap:12px}
+.more-row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
+.more-row>div{min-width:0}
+.more-row b{display:block;font-size:14px;font-weight:600;color:var(--ink)}
+.more-row p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.more-links{display:flex;flex-direction:column}
+.more-links button{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:0 4px;border-top:1px solid var(--border);font-size:14px;color:var(--ink);text-align:left;transition:color var(--ease)}
+.more-links button:first-child{border-top:0}
+.more-links button:hover{color:var(--accent)}
+.more-links button .lucide{color:var(--ink-2)}
+.more-links button>span:last-child{margin-left:auto;color:var(--muted)}
+.more-ver{font-size:12px;color:var(--muted)}
+/* install card: the app's Icon component wraps its svg in a span */
+.mb-install>span .lucide{width:22px;height:22px;color:var(--accent)}
+.mb-install.is-done>span .lucide{color:var(--good-ink)}
+/* splash fallback text when JavaScript is off */
+#splash .sp-ns-h{margin:0;font-size:17px;font-weight:650;text-align:center}
+#splash .sp-ns{max-width:420px;margin:6px auto 0;padding:0 16px;text-align:center;color:var(--ink-2)}
+/* share button next to a milestone */
+.ap-share-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 12px 12px}
+.cu-banner .ap-share{margin-top:10px}
+</style>
 </head>
 <body class="h-full antialiased">
     <div id="root" class="h-full">
         <div id="splash" role="status" aria-label="Loading mbactionplan.online">
-            <div class="sp-wreath"><svg class="cu-art inline cu-p-soft" viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><path class="b" transform="translate(289.4 194.7) rotate(95) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="r" transform="translate(254.8 254.8) rotate(125) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="s" transform="translate(194.7 289.4) rotate(155) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="b" transform="translate(125.3 289.4) rotate(185) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="r" transform="translate(65.2 254.8) rotate(215) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="s" transform="translate(30.6 194.7) rotate(245) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="b" transform="translate(30.6 125.3) rotate(275) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="r" transform="translate(65.2 65.2) rotate(305) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="s" transform="translate(125.3 30.6) rotate(335) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="b" transform="translate(194.7 30.6) rotate(365) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="r" transform="translate(254.8 65.2) rotate(395) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="s" transform="translate(289.4 125.3) rotate(425) scale(0.5)" d="M0 0 C 24 -15 70 -17 104 0 C 70 17 24 15 0 0Z"/><path class="d" transform="translate(260 160) rotate(78) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="m" transform="translate(246.6 210) rotate(108) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(210 246.6) rotate(138) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="n" transform="translate(160 260) rotate(168) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="m" transform="translate(110 246.6) rotate(198) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(73.4 210) rotate(228) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="d" transform="translate(60 160) rotate(258) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="m" transform="translate(73.4 110) rotate(288) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(110 73.4) rotate(318) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="n" transform="translate(160 60) rotate(348) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="m" transform="translate(210 73.4) rotate(378) scale(0.82)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(246.6 110) rotate(408) scale(1)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><circle class="b" cx="160" cy="160" r="6"/></svg><div class="sp-logo" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 64 64" width="52" height="52"><defs><linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#6860b2"/><stop offset=".55" stop-color="#4F46A5"/><stop offset="1" stop-color="#3f3884"/></linearGradient><clipPath id="c1"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#c1)"><rect width="64" height="64" fill="url(#g1)"/><ellipse cx="14" cy="6" rx="40" ry="26" fill="#fff" opacity="0.14"/><rect x="15.5" y="15.5" width="33" height="33" rx="5" stroke="#fff" stroke-opacity=".55" stroke-width="4.5" fill="none"/><path d="M23.5 32.5L30 39L41.5 26" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g><rect x=".5" y=".5" width="63" height="63" rx="17.5" fill="none" stroke="#fff" stroke-opacity="0.24"/></svg></div></div>
+            <div class="sp-wreath"><svg class="cu-art inline cu-p-soft" viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><path class="d" transform="translate(272 160) rotate(90)" d="M-28 2.4 C-28 -16.8 15.4 -17.6 28 -1.6 C28.6 15.2 -15.4 17.6 -28 2.4Z"/><path class="m" transform="translate(239.2 239.2) rotate(135)" d="M-24 2.1 C-24 -14.7 13.2 -15.4 24 -1.4 C24.5 13.3 -13.2 15.4 -24 2.1Z"/><path class="m" transform="translate(203.8 263.1) rotate(155) scale(0.4)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(160 272) rotate(180)" d="M-20 1.8 C-20 -12.6 11 -13.2 20 -1.2 C20.4 11.4 -11 13.2 -20 1.8Z"/><path class="n" transform="translate(80.8 239.2) rotate(225)" d="M-28 2.4 C-28 -16.8 15.4 -17.6 28 -1.6 C28.6 15.2 -15.4 17.6 -28 2.4Z"/><path class="m" transform="translate(56.9 203.8) rotate(245) scale(0.4)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="d" transform="translate(48 160) rotate(270)" d="M-24 2.1 C-24 -14.7 13.2 -15.4 24 -1.4 C24.5 13.3 -13.2 15.4 -24 2.1Z"/><path class="m" transform="translate(80.8 80.8) rotate(315)" d="M-20 1.8 C-20 -12.6 11 -13.2 20 -1.2 C20.4 11.4 -11 13.2 -20 1.8Z"/><path class="m" transform="translate(116.2 56.9) rotate(335) scale(0.4)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(160 48) rotate(360)" d="M-28 2.4 C-28 -16.8 15.4 -17.6 28 -1.6 C28.6 15.2 -15.4 17.6 -28 2.4Z"/><path class="n" transform="translate(239.2 80.8) rotate(405)" d="M-24 2.1 C-24 -14.7 13.2 -15.4 24 -1.4 C24.5 13.3 -13.2 15.4 -24 2.1Z"/><path class="m" transform="translate(263.1 116.2) rotate(425) scale(0.4)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><circle class="b" cx="160" cy="34" r="9"/></svg><div class="sp-logo" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 64 64" width="52" height="52"><defs><linearGradient id="ap-splash-g" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#6860b2"/><stop offset=".55" stop-color="#4F46A5"/><stop offset="1" stop-color="#3f3884"/></linearGradient><clipPath id="ap-splash-c"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#ap-splash-c)"><rect width="64" height="64" fill="url(#ap-splash-g)"/><rect x="15.5" y="15.5" width="33" height="33" rx="5" stroke="#fff" stroke-opacity=".55" stroke-width="4.5" fill="none"/><path d="m 23,32.000052 6.5,6.5 11.5,-13" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg></div></div>
             <div class="sp-name">mbactionplan<span class="tld">.online</span></div>
             <div class="sp-bar" aria-hidden="true"><i></i></div>
-            <noscript>mbactionplan.online needs JavaScript to run.</noscript>
+            <noscript><h1 class="sp-ns-h">Action Plan: a free, private to-do list and focus timer</h1><p class="sp-ns">Plan your day with Today, a priority matrix, projects, a calendar and a focus timer. No account, and your tasks stay on your device. mbactionplan.online needs JavaScript to run.</p></noscript>
         </div>
     </div>
+    <!-- Art for the share image (MB Suite v3 NA-02 Cairn); kept in a template so it is never rendered on the page. -->
+    <template id="ap-share-art"><svg class="cu-art" viewBox="0 0 640 136" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false"><circle class="b" cx="588" cy="50" r="30"/><path class="s" d="M260 140 C365 100 575 100 680 140Z"/><path class="d" transform="translate(540 107.4)" d="M-39 2.2 C-39 -15.8 21.5 -16.5 39 -1.5 C39.8 14.2 -21.5 16.5 -39 2.2Z"/><path class="m" transform="translate(540 83.1)" d="M-30 1.9 C-30 -13.7 16.5 -14.3 30 -1.3 C30.6 12.3 -16.5 14.3 -30 1.9Z"/><path class="n" transform="translate(540 62.4)" d="M-23 1.6 C-23 -11.6 12.7 -12.1 23 -1.1 C23.5 10.4 -12.7 12.1 -23 1.6Z"/><path class="d" transform="translate(540 47.1)" d="M-15 1.2 C-15 -8.4 8.2 -8.8 15 -0.8 C15.3 7.6 -8.2 8.8 -15 1.2Z"/><path class="m" transform="translate(452 114)" d="M-25 1.6 C-25 -11.6 13.8 -12.1 25 -1.1 C25.5 10.4 -13.8 12.1 -25 1.6Z"/><path class="d" transform="translate(452 97)" d="M-18 1.3 C-18 -9.5 9.9 -9.9 18 -0.9 C18.4 8.5 -9.9 9.9 -18 1.3Z"/><path class="s" transform="translate(452 84.5)" d="M-11 1 C-11 -6.8 6.1 -7.2 11 -0.7 C11.2 6.2 -6.1 7.2 -11 1Z"/><path class="m" transform="translate(590 132) rotate(-62) scale(0.6)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="d" transform="translate(602 132) rotate(-118) scale(0.5)" d="M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z"/><path class="s" transform="translate(380 126)" d="M-13 0.9 C-13 -6.3 7.2 -6.6 13 -0.6 C13.3 5.7 -7.2 6.6 -13 0.9Z"/><circle class="r" cx="400" cy="44" r="6"/><circle class="b" cx="372" cy="70" r="4"/></svg></template>
+    <!-- MB Suite v3 share cards (kit v3-updates/mb-share.js, unchanged). Draws the image on this device; nothing is uploaded. -->
+    <script>/* =====================================================================
+   MB Suite v3 · share cards for progress, updates and milestones. No dependencies.
+   Draws a 1080×1080 PNG on the device (canvas) in the app's own colors, shows a preview, then
+   opens the phone/computer share sheet (Web Share API with files) or saves the image.
+   Nothing is uploaded anywhere; the card holds only what the preview shows.
+
+   Usage:
+     MBShare.open({
+       kicker: 'Milestone',                         // small accent label (optional)
+       headline: 'Net worth up 12% this year',      // the one thing worth sharing
+       sub: 'January to October 2026',              // one supporting line (optional)
+       stats: [{ label: 'Months tracked', value: '10' }, { label: 'Savings rate', value: '22%' }],   // 0-3 (optional)
+       art: document.querySelector('#share-art svg'),   // an NA-/CU- template <svg> already in the page (optional)
+       fileName: 'mbmoney-milestone.png',
+       options: [ { id: 'amounts', label: 'Show dollar amounts', value: false } ],   // optional privacy toggles
+       build: function (opts) { return { headline: …, stats: … } }                  // re-builds the text when a toggle changes
+     });
+   Requires on <html>: data-app-short="Money" and data-app-domain="mbmoney.online".
+   The badge is read from the first ".brand .logo svg" in the page.
+   CSP: needs img-src data: blob: (the art is drawn from a data: URL, the preview is a blob: URL). Inline it and recompute hashes if the app uses script hashes.
+   ===================================================================== */
+(function () {
+  var W = 1080, FONT = '"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif';
+
+  function resolve(v, fallback) {          // turn a CSS custom property into a concrete color the canvas understands
+    var el = document.createElement('i'); el.style.color = 'var(' + v + ',' + (fallback || '#888') + ')';
+    el.style.display = 'none'; document.body.appendChild(el);
+    var c = getComputedStyle(el).color; el.remove(); return c;
+  }
+  function svgImage(svgEl, roleColors) {
+    return new Promise(function (ok) {
+      if (!svgEl) return ok(null);
+      var clone = svgEl.cloneNode(true);
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      clone.removeAttribute('style'); clone.removeAttribute('class');
+      var vb = (clone.getAttribute('viewBox') || '0 0 300 150').split(/[\s,]+/);
+      clone.setAttribute('width', vb[2]); clone.setAttribute('height', vb[3]);
+      var css = Object.keys(roleColors).map(function (k) { return '.' + k + '{fill:' + roleColors[k] + '}'; }).join('') +
+        '.sd{fill:none;stroke:' + roleColors.d + ';stroke-width:3;stroke-linecap:round}.sm{fill:none;stroke:' + roleColors.m + ';stroke-width:3;stroke-linecap:round}';
+      var st = document.createElementNS('http://www.w3.org/2000/svg', 'style'); st.textContent = css; clone.insertBefore(st, clone.firstChild);
+      var img = new Image();
+      img.onload = function () { ok(img); }; img.onerror = function () { ok(null); };
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(clone));
+    });
+  }
+  function wrap(g, text, maxW, maxLines) {
+    var words = String(text || '').split(/\s+/), lines = [], line = '';
+    words.forEach(function (w) {
+      var t = line ? line + ' ' + w : w;
+      if (g.measureText(t).width > maxW && line) { lines.push(line); line = w; } else line = t;
+    });
+    if (line) lines.push(line);
+    if (lines.length > maxLines) { lines = lines.slice(0, maxLines); lines[maxLines - 1] = lines[maxLines - 1].replace(/\s*\S*$/, '') + '…'; }
+    return lines;
+  }
+  function rr(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+
+  // Share cards are always drawn in the LIGHT palette (they leave the app, so they shouldn't depend on dark mode).
+  // Every color derives from the app's brand color (--brand), the same way mb-suite-cutouts.css derives the art roles.
+  function rgb(str) { var m = String(str).match(/[\d.]+/g) || [0, 0, 0]; return [+m[0], +m[1], +m[2]]; }
+  function hex(c) { return '#' + c.map(function (v) { return ('0' + Math.round(Math.max(0, Math.min(255, v))).toString(16)).slice(-2); }).join(''); }
+  function mix(a, b, t) { return a.map(function (v, i) { return v + (b[i] - v) * t; }); }   // t = share of b
+  function hueShift(c, deg) {                       // approximate the v2 "neighbor hue" (+34°) in HSL
+    var r = c[0] / 255, g = c[1] / 255, b = c[2] / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), h = 0, l = (mx + mn) / 2, s = 0, dd = mx - mn;
+    if (dd) { s = l > .5 ? dd / (2 - mx - mn) : dd / (mx + mn); h = mx === r ? (g - b) / dd + (g < b ? 6 : 0) : mx === g ? (b - r) / dd + 2 : (r - g) / dd + 4; h *= 60; }
+    h = (h + deg + 360) % 360; var C = (1 - Math.abs(2 * l - 1)) * s, X = C * (1 - Math.abs((h / 60) % 2 - 1)), m = l - C / 2, q;
+    q = h < 60 ? [C, X, 0] : h < 120 ? [X, C, 0] : h < 180 ? [0, C, X] : h < 240 ? [0, X, C] : h < 300 ? [X, 0, C] : [C, 0, X];
+    return q.map(function (v) { return (v + m) * 255; });
+  }
+  function palette() {
+    var brand = rgb(resolve('--brand', resolve('--accent', '#087F5B'))), W8 = [255, 255, 255];
+    var P = { accent: hex(brand), ink: '#1b1f24', ink2: '#48505c', muted: '#5f6773', border: '#dfe2e7',
+      wash: hex(mix(brand, W8, .92)), mid: hex(mix(brand, W8, .48)), butter: '#ffd98a' };
+    var roles = { d: hex(brand), m: P.mid, s: hex(mix(brand, W8, .76)), n: hex(hueShift(brand, 34)), b: '#ffd98a', r: '#f7b8a8' };
+    return { C: P, roles: roles };
+  }
+
+  function draw(d) {
+    var root = document.documentElement, pal = palette(), C = pal.C, roles = pal.roles;
+    var app = root.getAttribute('data-app-short') || 'App', domain = root.getAttribute('data-app-domain') || location.hostname;
+    var badge = document.querySelector('.brand .logo svg');
+    return Promise.all([svgImage(badge, roles), svgImage(d.art, roles)]).then(function (imgs) {
+      var c = document.createElement('canvas'); c.width = W; c.height = W; var g = c.getContext('2d');
+      // text and tiles are drawn first; the art and the paper go *behind* them (destination-over) once we know where the text ends
+      // brand row
+      var x = 72, y = 92;
+      if (imgs[0]) g.drawImage(imgs[0], x, y - 4, 72, 72);
+      g.fillStyle = C.ink; g.font = '650 34px ' + FONT; g.textBaseline = 'middle';
+      var nm = domain.replace(/\.online$/, ''); g.fillText(nm, x + 92, y + 32);
+      if (/\.online$/.test(domain)) { var nw = g.measureText(nm).width; g.fillStyle = C.accent; g.fillText('.online', x + 92 + nw, y + 32); }
+      // kicker + headline + sub
+      g.textBaseline = 'alphabetic'; y = 300;
+      if (d.kicker) { g.fillStyle = C.accent; g.font = '700 30px ' + FONT; g.fillText(String(d.kicker).toUpperCase(), x, y); y += 26; }
+      g.fillStyle = C.ink; g.font = '750 76px ' + FONT;
+      wrap(g, d.headline, W - 2 * x, 3).forEach(function (l) { y += 86; g.fillText(l, x, y); });
+      if (d.sub) { g.fillStyle = C.ink2; g.font = '400 36px ' + FONT; y += 18; wrap(g, d.sub, W - 2 * x, 2).forEach(function (l) { y += 48; g.fillText(l, x, y); }); }
+      // stat tiles (white paper cards)
+      var st = (d.stats || []).slice(0, 3);
+      if (st.length) {
+        y += 56; var gap = 20, tw = (W - 2 * x - gap * (st.length - 1)) / st.length;
+        st.forEach(function (s, i) {
+          var tx = x + i * (tw + gap);
+          g.fillStyle = 'rgba(20,24,31,.06)'; rr(g, tx, y + 3, tw, 150, 12); g.fill();
+          g.fillStyle = '#ffffff'; rr(g, tx, y, tw, 150, 12); g.fill(); g.strokeStyle = C.border; g.lineWidth = 2; g.stroke();
+          g.fillStyle = C.accent; g.fillRect(tx, y + 18, 5, 114);
+          g.fillStyle = C.muted; g.font = '650 24px ' + FONT; g.fillText(String(s.label).toUpperCase(), tx + 28, y + 52);
+          g.fillStyle = C.ink; g.font = '700 54px ' + FONT; g.fillText(wrap(g, s.value, tw - 48, 1)[0], tx + 28, y + 118);
+        });
+      }
+      // art bleeding off the bottom-right corner, sized to fit between the content and the footer
+      var contentBottom = st.length ? y + 150 : y + 12;
+      if (imgs[1]) {
+        var ar = imgs[1].naturalWidth && imgs[1].naturalHeight ? imgs[1].naturalWidth / imgs[1].naturalHeight : 2;
+        var aw = ar >= 1.6 ? W * .92 : W * .56, ah = aw / ar, artBottom = W - 118, avail = artBottom - contentBottom - 20;
+        if (ah > avail && avail >= 140) { ah = avail; aw = ah * ar; }
+        g.globalCompositeOperation = 'destination-over';
+        g.drawImage(imgs[1], W - aw + 30, artBottom - ah, aw, ah);
+        g.globalCompositeOperation = 'source-over';
+      }
+      // paper background (behind everything): white sheet with an accent wash from the top-left, then the family accent line on top
+      g.globalCompositeOperation = 'destination-over';
+      var bg = g.createLinearGradient(0, 0, W * .7, W); bg.addColorStop(0, C.wash); bg.addColorStop(.6, '#ffffff'); g.fillStyle = bg; g.fillRect(0, 0, W, W);
+      g.fillStyle = '#ffffff'; g.fillRect(0, 0, W, W);
+      g.globalCompositeOperation = 'source-over';
+      var ln = g.createLinearGradient(0, 0, W, 0); ln.addColorStop(0, C.accent); ln.addColorStop(.55, C.mid); ln.addColorStop(1, C.butter); g.fillStyle = ln; g.fillRect(0, 0, W, 14);
+      // footer: where it came from (this is what helps the app grow)
+      g.fillStyle = C.ink2; g.font = '600 28px ' + FONT;
+      g.fillText((d.date ? d.date + '  ·  ' : '') + 'Made with ' + domain, x, W - 64);
+      g.fillStyle = C.muted; g.font = '400 24px ' + FONT; g.fillText('Free · No account · Your data stays on your device', x, W - 30);
+      return c;
+    });
+  }
+
+  function toBlob(c) { return new Promise(function (ok, bad) { try { c.toBlob(function (b) { b ? ok(b) : bad(new Error('blob')); }, 'image/png'); } catch (e) { bad(e); } }); }
+  function save(blob, name) { var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500); }
+
+  var dlg;
+  function open(cfg) {
+    var opts = {}; (cfg.options || []).forEach(function (o) { opts[o.id] = !!o.value; });
+    function data() { var extra = cfg.build ? cfg.build(opts) || {} : {}; var d = {}; Object.keys(cfg).forEach(function (k) { d[k] = cfg[k]; }); Object.keys(extra).forEach(function (k) { d[k] = extra[k]; }); return d; }
+    if (!dlg) {
+      dlg = document.createElement('dialog'); dlg.className = 'mb-share'; dlg.setAttribute('aria-labelledby', 'mbShareTitle');
+      dlg.innerHTML = '<div class="ms-head"><h3 id="mbShareTitle">Share</h3><button type="button" class="btn ghost sm" data-ms="close" aria-label="Close">Close</button></div>' +
+        '<div class="ms-prev"><img alt="" data-ms="img"><p class="ms-wait" data-ms="wait">Making your card…</p></div>' +
+        '<div class="ms-opts" data-ms="opts"></div>' +
+        '<p class="ms-note">The image is made on this device. It shows only what you see above: no location, notes or account details.</p>' +
+        '<div class="ms-btns"><button type="button" class="btn" data-ms="save">Save image</button><button type="button" class="btn primary" data-ms="share">Share…</button></div>';
+      document.body.appendChild(dlg);
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    }
+    var img = dlg.querySelector('[data-ms=img]'), wait = dlg.querySelector('[data-ms=wait]'), box = dlg.querySelector('[data-ms=opts]');
+    dlg.querySelector('#mbShareTitle').textContent = cfg.title || 'Share your progress';
+    box.innerHTML = (cfg.options || []).map(function (o) { return '<label class="ms-opt"><input type="checkbox" data-opt="' + o.id + '"' + (opts[o.id] ? ' checked' : '') + '> ' + o.label + '</label>'; }).join('');
+    var current = null, url = null;
+    function refresh() {
+      wait.hidden = false; img.hidden = true;
+      return draw(data()).then(toBlob).then(function (b) {
+        current = b; if (url) URL.revokeObjectURL(url); url = URL.createObjectURL(b); img.src = url; img.hidden = false; wait.hidden = true;
+        img.alt = 'Preview of the image you are about to share: ' + (data().headline || '');
+      }).catch(function () { wait.textContent = 'This browser could not make the image.'; });
+    }
+    box.onchange = function (e) { var id = e.target.getAttribute('data-opt'); if (id) { opts[id] = e.target.checked; refresh(); } };
+    var file = function () { return new File([current], cfg.fileName || 'share.png', { type: 'image/png' }); };
+    var shareBtn = dlg.querySelector('[data-ms=share]');
+    var canShareFiles = !!(navigator.canShare && navigator.share);
+    shareBtn.hidden = !canShareFiles;                                      // no share sheet here: Save image is the only action
+    dlg.querySelector('[data-ms=save]').classList.toggle('primary', !canShareFiles);
+    shareBtn.onclick = function () {
+      if (!current) return; var f = file();
+      if (navigator.canShare({ files: [f] })) navigator.share({ files: [f], title: cfg.headline || '' }).then(function () { dlg.close(); }, function () {});
+      else save(current, f.name);
+    };
+    dlg.querySelector('[data-ms=save]').onclick = function () { if (current) save(current, cfg.fileName || 'share.png'); };
+    dlg.querySelector('[data-ms=close]').onclick = function () { dlg.close(); };
+    if (!dlg.open) dlg.showModal();
+    return refresh();
+  }
+  window.MBShare = { open: open, draw: draw };
+})();</script>
 
     <script>/**
  * @license React
@@ -1226,7 +1592,7 @@ const RECURRING_OPTIONS = [{
 }];
 
 // Fixed list of icon names used in this app; only these are embedded at build time.
-const KNOWN_ICON_NAMES = new Set(['check', 'timer', 'pin', 'pin-off', 'copy', 'trash-2', 'x', 'calendar', 'repeat', 'plus', 'layout-dashboard', 'folder-kanban', 'grid', 'search', 'upload', 'undo-2', 'redo-2', 'download', 'sun', 'moon', 'menu', 'alert-circle', 'alert-triangle', 'info', 'check-circle-2', 'check-circle', 'zap', 'arrow-left', 'arrow-up', 'edit-3', 'calendar-clock', 'users', 'calendar-days', 'chevron-left', 'chevron-right', 'calendar-off', 'rotate-ccw', 'play', 'pause', 'share-2', 'cookie', 'shield-check', 'file-text', 'scale', 'chevron-down', 'arrow-right', 'database', 'calendar-check', 'sunrise', 'party-popper', 'circle']);
+const KNOWN_ICON_NAMES = new Set(['check', 'timer', 'pin', 'pin-off', 'copy', 'trash-2', 'x', 'calendar', 'repeat', 'plus', 'layout-dashboard', 'folder-kanban', 'grid', 'search', 'upload', 'undo-2', 'redo-2', 'download', 'sun', 'moon', 'menu', 'alert-circle', 'alert-triangle', 'info', 'check-circle-2', 'check-circle', 'zap', 'arrow-left', 'arrow-up', 'edit-3', 'calendar-clock', 'users', 'calendar-days', 'chevron-left', 'chevron-right', 'calendar-off', 'rotate-ccw', 'play', 'pause', 'share-2', 'cookie', 'shield-check', 'file-text', 'scale', 'chevron-down', 'arrow-right', 'database', 'calendar-check', 'sunrise', 'party-popper', 'circle', 'ellipsis']);
 
 // Eisenhower quadrants — single source for the matrix, task form and badges.
 const QUADRANTS = [{
@@ -1752,6 +2118,19 @@ const ICON_NODES = {
     "d": "m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"
   }], ["path", {
     "d": "M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"
+  }]],
+  "ellipsis": [["circle", {
+    "cx": "12",
+    "cy": "12",
+    "r": "1"
+  }], ["circle", {
+    "cx": "19",
+    "cy": "12",
+    "r": "1"
+  }], ["circle", {
+    "cx": "5",
+    "cy": "12",
+    "r": "1"
   }]],
   "circle": [["circle", {
     "cx": "12",
@@ -2507,10 +2886,16 @@ function ProjectModal({
 // Written to describe exactly what this build of the app does: no server, no accounts,
 // no cookies, no analytics, no ads, no network requests after the page loads.
 // If any of that changes, update this text first.
-const LEGAL_UPDATED = 'October 8, 2026';
-const APP_VERSION = '18.1';
+const LEGAL_UPDATED = 'October 13, 2026';
+const APP_VERSION = '18.2';
+// Shown under the name in the brand block and in About & Legal ("Official Web App · v1.2").
+const BRAND_VERSION = '1.2';
 // Newest first. Keep this in step with RELEASE_NOTES.md.
 const RELEASE_NOTES = [{
+  v: '18.2',
+  date: 'October 13, 2026',
+  items: ['When you install it, the app is now named Action Plan on your computer and phone.', 'Navigation moved to a sidebar on the left (an icon rail on tablets, the same bottom bar on phones). The logo and name always take you back to Today.', 'New More page with the Install card, the dark theme switch, a backup shortcut, the welcome guide, release notes and the legal pages. The Install button is no longer in the header.', 'Share your progress: in Your numbers on Today (and when you clear your day) you can make an image of your finished count and streak, drawn on your device. Task names stay off the image unless you turn them on.', 'New stone-cairn art on Today and the loading screen, a refreshed checkmark in the app icon, and a new link-preview image.', 'Your tasks, projects, settings and backups are unchanged.']
+}, {
   v: '18.1',
   date: 'October 9, 2026',
   items: ["Lighter, fresher look (Paper Cutouts): a soft indigo tint across the top of each page, a gradient accent line and tab underline, gradient buttons and progress bars, and a leaf-art banner on the Today screen. Layout, features and shortcuts are unchanged.", "New logo and icons: the same checked box on a softer gradient badge, with a matching link-preview image.", "Your tasks, projects, settings and backups are unchanged."]
@@ -2640,7 +3025,7 @@ function LegalModal({
     className: "text-base font-semibold text-slate-900 dark:text-slate-100"
   }, "About & Legal ", /*#__PURE__*/React.createElement("span", {
     className: "text-xs font-normal text-slate-500 dark:text-slate-400"
-  }, "\xB7 Official Web App \xB7 v1.1")), /*#__PURE__*/React.createElement("button", {
+  }, "\xB7 Official Web App \xB7 v", BRAND_VERSION)), /*#__PURE__*/React.createElement("button", {
     onClick: onClose,
     "aria-label": "Close",
     className: "btn ghost icon sm"
@@ -2670,7 +3055,7 @@ function LegalModal({
     "aria-labelledby": `legal-tab-${activeTab}`,
     tabIndex: 0,
     className: "flex-1 overflow-y-auto p-6 space-y-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed"
-  }, activeTab === 'privacy' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Privacy Policy"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "In short:"), " mbactionplan.online runs entirely in your web browser. There is no account, no server-side database, no cookies, and no analytics, advertising, or tracking. The developer cannot see what you enter."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What's stored, and where."), " Everything is saved in your browser's storage on this device: your projects and tasks (titles, notes, dates, priority, repeat setting, pin, time estimate, steps, where and energy labels, how many times a task was moved to a later day, focus minutes logged, and when a task was created and completed), plus a count of how many tasks you finished each day (for your streak), plus a few settings: light/dark theme, whether you've seen the welcome guide, and when you last saved a backup, plus the focus timer's state (which task, how much time is left, and when the current block ends) so it stays accurate if your screen locks or the page reloads. If you choose a save location for backups, the browser also remembers which backup file you picked (its name and your permission to write to it, not the folder path) so \"Save backup now\" can update it. Nothing else is stored."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What leaves your device."), " Your tasks and projects never leave your device unless you export or share a backup yourself. All of the app's code, styles, and icons are built into this single page, so after the page loads it makes no further network requests. As with any website, the service that hosts this page receives your IP address and basic browser information when your browser downloads it, and may keep standard server logs. The app adds nothing to those requests."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Device features."), " \"Keep screen on\" uses your browser's Screen Wake Lock, and the focus timer plays its sound through your browser's audio. Neither sends any data anywhere."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Installing and offline use."), " In browsers that support it, the app keeps a copy of its own files (this page, its icons and its install details) in your browser's cache so it can open without a connection and be installed on your home screen or desktop. That copy contains none of your tasks or settings. When you are online, your browser checks this site for a newer version each time you open the app. Clearing your browser's site data removes the copy."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Backups, exporting and sharing."), " The Data menu saves a JSON or CSV backup file. In browsers that support it, you choose the folder and file name and the app writes only to that file; elsewhere the file is downloaded or, on phones and tablets, handed to your device's share sheet. The file goes only where you choose. Importing reads a backup inside your browser; it is never uploaded."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Deleting your data."), " Data \u2192 Clear all data permanently deletes every task, project, and setting this app saved in this browser, including the remembered backup location. Backup files you saved yourself aren't touched; delete those in your file manager. Clearing your browser's site data also removes the app's data. There is no copy anywhere else, so save a backup first if you want one."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Sensitive information."), " Please don't enter passwords, Social Security numbers, credit card or bank numbers, health information, or other highly sensitive data. Local storage is not encrypted, and anyone using this device and browser profile can read it."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Children."), " mbactionplan.online is a general-audience tool and isn't directed at children under 13. It doesn't send any personal information to the developer, from anyone of any age."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Changes."), " If this app ever adds accounts, sync, analytics, or any server-side storage, this policy will be updated first to describe the new behavior, with a new date above.")), activeTab === 'terms' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Terms of Use"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, "By using mbactionplan.online, you agree to the following:"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What this is."), " mbactionplan.online is a free personal productivity tool (task list, priority matrix, calendar, and focus timer) made by an individual developer for ordinary personal or small-business organizing."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Your data, your responsibility."), " What you enter stays in your browser and is yours. You're responsible for its content and for keeping backups with Export. Clearing site data, switching browsers or devices, or a browser problem can erase it, and the developer has no copy to restore."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Acceptable use."), " Don't use the app for anything unlawful, and don't attempt to tamper with the site or use it to harm others."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "No warranty."), " The app is provided \"as is\" and \"as available,\" without warranties of any kind, express or implied, including fitness for a particular purpose. It isn't guaranteed to be error-free or always available, and it isn't a substitute for systems you need to rely on for critical deadlines or records."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Limitation of liability."), " To the extent the law allows, the developer isn't liable for any loss or damage arising from use of the app, including lost data, missed deadlines, or lost time. Some places don't allow these limits, so they may not fully apply to you."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Intellectual property."), " The app's own code, design, and name belong to its developer. You're welcome to use the app for your own personal or business tasks. Open-source components it includes are used under their own licenses (see Credits)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Changes and availability."), " The app may be updated, changed, or taken down at any time without notice. It's free, with no service-level guarantee."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Contact."), " Questions about these terms can be sent to the developer through the site where you found this app.")), activeTab === 'disclaimer' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Disclaimer"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Not professional advice."), " mbactionplan.online is a general organizing tool. It doesn't provide medical, legal, financial, tax, or other professional advice."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "No reminders or alerts."), " Due dates and times are shown in the app only. mbactionplan.online doesn't send notifications, emails, or alarms. The timer sound plays only while the page is open. Don't rely on it as your only reminder for anything important."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Not secure storage."), " \"Local-only\" isn't the same as \"backed up\" or \"encrypted.\" Anyone with access to this device and browser profile can see the same data you can."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "How the numbers work.")), /*#__PURE__*/React.createElement("ul", {
+  }, activeTab === 'privacy' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Privacy Policy"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "In short:"), " mbactionplan.online runs entirely in your web browser. There is no account, no server-side database, no cookies, and no analytics, advertising, or tracking. The developer cannot see what you enter."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What's stored, and where."), " Everything is saved in your browser's storage on this device: your projects and tasks (titles, notes, dates, priority, repeat setting, pin, time estimate, steps, where and energy labels, how many times a task was moved to a later day, focus minutes logged, and when a task was created and completed), plus a count of how many tasks you finished each day (for your streak), plus a few settings: light/dark theme, whether you've seen the welcome guide, and when you last saved a backup, plus the focus timer's state (which task, how much time is left, and when the current block ends) so it stays accurate if your screen locks or the page reloads. If you choose a save location for backups, the browser also remembers which backup file you picked (its name and your permission to write to it, not the folder path) so \"Save backup now\" can update it. Nothing else is stored."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What leaves your device."), " Your tasks and projects never leave your device unless you export or share a backup yourself. All of the app's code, styles, and icons are built into this single page, so after the page loads it makes no further network requests. As with any website, the service that hosts this page receives your IP address and basic browser information when your browser downloads it, and may keep standard server logs. The app adds nothing to those requests."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Device features."), " \"Keep screen on\" uses your browser's Screen Wake Lock, and the focus timer plays its sound through your browser's audio. Neither sends any data anywhere."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Installing and offline use."), " In browsers that support it, the app keeps a copy of its own files (this page, its icons and its install details) in your browser's cache so it can open without a connection and be installed on your home screen or desktop. That copy contains none of your tasks or settings. When you are online, your browser checks this site for a newer version each time you open the app. Clearing your browser's site data removes the copy."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Backups, exporting and sharing."), " The Data menu saves a JSON or CSV backup file. In browsers that support it, you choose the folder and file name and the app writes only to that file; elsewhere the file is downloaded or, on phones and tablets, handed to your device's share sheet. The file goes only where you choose. Importing reads a backup inside your browser; it is never uploaded. Share (on Today) draws a progress image on your device from your finished count and streak, plus task names only if you tick Show task names. It is saved or handed to your device's share sheet only when you choose, and the app never sees where it goes."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Deleting your data."), " Data \u2192 Clear all data permanently deletes every task, project, and setting this app saved in this browser, including the remembered backup location. Backup files you saved yourself aren't touched; delete those in your file manager. Clearing your browser's site data also removes the app's data. There is no copy anywhere else, so save a backup first if you want one."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Sensitive information."), " Please don't enter passwords, Social Security numbers, credit card or bank numbers, health information, or other highly sensitive data. Local storage is not encrypted, and anyone using this device and browser profile can read it."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Children."), " mbactionplan.online is a general-audience tool and isn't directed at children under 13. It doesn't send any personal information to the developer, from anyone of any age."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Changes."), " If this app ever adds accounts, sync, analytics, or any server-side storage, this policy will be updated first to describe the new behavior, with a new date above.")), activeTab === 'terms' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Terms of Use"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, "By using mbactionplan.online, you agree to the following:"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "What this is."), " mbactionplan.online is a free personal productivity tool (task list, priority matrix, calendar, and focus timer) made by an individual developer for ordinary personal or small-business organizing."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Your data, your responsibility."), " What you enter stays in your browser and is yours. You're responsible for its content and for keeping backups with Export. Clearing site data, switching browsers or devices, or a browser problem can erase it, and the developer has no copy to restore."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Acceptable use."), " Don't use the app for anything unlawful, and don't attempt to tamper with the site or use it to harm others."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "No warranty."), " The app is provided \"as is\" and \"as available,\" without warranties of any kind, express or implied, including fitness for a particular purpose. It isn't guaranteed to be error-free or always available, and it isn't a substitute for systems you need to rely on for critical deadlines or records."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Limitation of liability."), " To the extent the law allows, the developer isn't liable for any loss or damage arising from use of the app, including lost data, missed deadlines, or lost time. Some places don't allow these limits, so they may not fully apply to you."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Intellectual property."), " The app's own code, design, and name belong to its developer. You're welcome to use the app for your own personal or business tasks. Open-source components it includes are used under their own licenses (see Credits)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Changes and availability."), " The app may be updated, changed, or taken down at any time without notice. It's free, with no service-level guarantee."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Contact."), " Questions about these terms can be sent to the developer through the site where you found this app.")), activeTab === 'disclaimer' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Disclaimer"), /*#__PURE__*/React.createElement(Updated, null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Not professional advice."), " mbactionplan.online is a general organizing tool. It doesn't provide medical, legal, financial, tax, or other professional advice."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "No reminders or alerts."), " Due dates and times are shown in the app only. mbactionplan.online doesn't send notifications, emails, or alarms. The timer sound plays only while the page is open. Don't rely on it as your only reminder for anything important."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Not secure storage."), " \"Local-only\" isn't the same as \"backed up\" or \"encrypted.\" Anyone with access to this device and browser profile can see the same data you can."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "How the numbers work.")), /*#__PURE__*/React.createElement("ul", {
     className: "list-disc pl-5 space-y-1"
   }, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Completion rate"), " = completed tasks \xF7 all tasks shown (for the current project filter and search)."), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Today's progress"), " = tasks you completed today \xF7 (tasks completed today + open tasks due today or overdue)."), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Focus time"), " adds 1 minute to the selected task for every full minute the timer runs during a focus block. Breaks aren't counted. Browsers may slow timers in background tabs, so keep the tab visible for accurate timing."), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Repeating tasks:"), " completing one moves its due date forward from its current due date (or from today if it has none, or if you chose \"Count from when I finish\"). Monthly, quarterly, 6-month, and yearly repeats keep the same day of the month, using the month's last day when that date doesn't exist (for example, Jan 31 \u2192 Feb 28)."), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Suggestions:"), " \"What should I do now?\" and \"Explain my tasks\" use simple rules on your device (due dates, priority, estimates, and the filters you pick). No AI service is involved and nothing is sent anywhere.")), /*#__PURE__*/React.createElement("p", null, "These are conveniences for personal planning and aren't certified for billing, payroll, compliance, or other official purposes.")), activeTab === 'notes' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(H, null, "Release notes"), RELEASE_NOTES.map(r => /*#__PURE__*/React.createElement("section", {
     key: r.v,
@@ -2779,7 +3164,7 @@ function Onboarding({
     className: "flex-1 overflow-y-auto px-5 py-5"
   }, step === 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-3 mb-3"
-  }, /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 64", className: "app-logo-lg shrink-0", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: {__html: "<defs><linearGradient id=\"g2\" gradientUnits=\"userSpaceOnUse\" x1=\"10\" y1=\"0\" x2=\"54\" y2=\"64\"><stop offset=\"0\" stop-color=\"#6860b2\"/><stop offset=\".55\" stop-color=\"#4F46A5\"/><stop offset=\"1\" stop-color=\"#3f3884\"/></linearGradient><clipPath id=\"c2\"><rect width=\"64\" height=\"64\" rx=\"18\"/></clipPath></defs><g clip-path=\"url(#c2)\"><rect width=\"64\" height=\"64\" fill=\"url(#g2)\"/><ellipse cx=\"14\" cy=\"6\" rx=\"40\" ry=\"26\" fill=\"#fff\" opacity=\"0.14\"/><rect x=\"15.5\" y=\"15.5\" width=\"33\" height=\"33\" rx=\"5\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"4.5\" fill=\"none\"/><path d=\"M23.5 32.5L30 39L41.5 26\" stroke=\"#fff\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/></g><rect x=\".5\" y=\".5\" width=\"63\" height=\"63\" rx=\"17.5\" fill=\"none\" stroke=\"#fff\" stroke-opacity=\"0.24\"/>"}}), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 64", className: "app-logo-lg shrink-0", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: {__html: "<defs><linearGradient id=\"ap-onb-g\" gradientUnits=\"userSpaceOnUse\" x1=\"10\" y1=\"0\" x2=\"54\" y2=\"64\"><stop offset=\"0\" stop-color=\"#6860b2\"/><stop offset=\".55\" stop-color=\"#4F46A5\"/><stop offset=\"1\" stop-color=\"#3f3884\"/></linearGradient><clipPath id=\"ap-onb-c\"><rect width=\"64\" height=\"64\" rx=\"18\"/></clipPath></defs><g clip-path=\"url(#ap-onb-c)\"><rect width=\"64\" height=\"64\" fill=\"url(#ap-onb-g)\"/><rect x=\"15.5\" y=\"15.5\" width=\"33\" height=\"33\" rx=\"5\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"4.5\" fill=\"none\"/><path d=\"m 23,32.000052 6.5,6.5 11.5,-13\" stroke=\"#ffffff\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/></g>"}}), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
     id: titleId,
     className: "text-lg font-bold text-slate-900 dark:text-slate-100"
   }, "Welcome to mbactionplan.online"), /*#__PURE__*/React.createElement("p", {
@@ -4030,13 +4415,34 @@ function TodayView({
   }];
   const laterCount = model.upcoming.length + model.inbox.length + model.later.length;
   const hasAnyActive = tasks.some((t) => t.status !== "Completed");
-  return /* @__PURE__ */ React.createElement("div", { className: "space-y-4 animate-fade-in-up" }, /* @__PURE__ */ React.createElement("section", { className: "cu-banner" }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 300 200", preserveAspectRatio: "xMaxYMax slice", className: "cu-art", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: { __html: "<path class=\"sd\" d=\"M280 192 L274 190.3 L267.8 188.3 L261.6 186.2 L255.3 183.8 L248.9 181.1 L242.4 178.2 L235.8 175.1 L229.2 171.8 L222.4 168.2 L215.6 164.4 L208.6 160.4 L201.6 156.2 L194.5 151.7 L187.3 147 L180 142 L172.6 136.8 L165.2 131.4 L157.6 125.8 L150 119.9 L142.2 113.8 L134.4 107.4 L126.5 100.9 L118.5 94.1 L110.4 87 L102.2 79.8 L94 72.3 L85.6 64.6 L77.2 56.6 L68.6 48.4 L60 40\"/><path class=\"d\" transform=\"translate(257.8 184.7) rotate(-209) scale(1)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"m\" transform=\"translate(228.5 171.5) rotate(-102.7) scale(0.9)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"n\" transform=\"translate(197.3 153.5) rotate(-197.6) scale(0.8)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"s\" transform=\"translate(164.4 130.9) rotate(-93.6) scale(0.7)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"d\" transform=\"translate(129.7 103.5) rotate(-190.2) scale(0.6)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"m\" transform=\"translate(60 40) rotate(-135.4) scale(0.65)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><circle class=\"b\" cx=\"250\" cy=\"60\" r=\"9\"/><circle class=\"r\" cx=\"210\" cy=\"24\" r=\"5\"/>" } }), /* @__PURE__ */ React.createElement("div", { className: "cu-txt" }, /* @__PURE__ */ React.createElement("h2", { className: "cu-t" }, headline), /* @__PURE__ */ React.createElement("p", { className: "cu-s tabular" }, dateLabel, model.plannedMins > 0 ? " \u00B7 About " + fmtMins(model.plannedMins) + " planned" + (model.unestimated ? ", " + model.unestimated + " without an estimate" : "") : ""))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 flex-wrap sm:justify-end" }, projects.length > 1 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { htmlFor: "today-project-filter", className: "sr-only" }, "Project"), /* @__PURE__ */ React.createElement("select", { id: "today-project-filter", value: selectedProjectId, onChange: (e) => setSelectedProjectId(e.target.value), className: "px-3 td-select" }, /* @__PURE__ */ React.createElement("option", { value: "all" }, "All projects"), projects.map((p) => /* @__PURE__ */ React.createElement("option", { key: p.id, value: p.id }, p.name)))), /* @__PURE__ */ React.createElement("button", { type: "button", className: `btn sm ${hour >= 16 && left > 0 ? "primary" : ""}`, onClick: onReview }, /* @__PURE__ */ React.createElement(Icon, { name: "calendar-check", className: "w-4 h-4" }), " Wrap up", /* @__PURE__ */ React.createElement("span", { className: "hidden sm:inline" }, " day")), /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm", onClick: onExplain }, /* @__PURE__ */ React.createElement(Icon, { name: "info", className: "w-4 h-4" }), " Explain", /* @__PURE__ */ React.createElement("span", { className: "hidden sm:inline" }, " my tasks"))), total > 0 && /* @__PURE__ */ React.createElement("div", null, total <= 14 ? /* @__PURE__ */ React.createElement("div", { className: "segs", role: "progressbar", "aria-label": "Today's progress", "aria-valuenow": doneToday, "aria-valuemin": "0", "aria-valuemax": total }, Array.from({
+  // Share (MB Suite v3 §6): a square image drawn on this device from real counts only. Task names are off
+  // unless the person turns them on; notes, projects and dates of tasks never go on the card.
+  const dayDone = total > 0 && left === 0 && doneToday > 0;
+  const canShare = typeof window !== "undefined" && !!window.MBShare && (doneToday > 0 || week > 0 || streak > 0);
+  const shareProgress = () => {
+    if (!window.MBShare) return;
+    const names = doneTodayList.map((t) => t.title).filter(Boolean);
+    const artTpl = document.getElementById("ap-share-art");
+    window.MBShare.open({
+      title: "Share your progress",
+      kicker: dayDone ? "Day done" : "Progress",
+      headline: dayDone ? `Day done: ${doneToday} of ${total}` : streak > 1 ? `${streak}-day streak` : `${week} task${week === 1 ? "" : "s"} finished in the last 7 days`,
+      sub: dateLabel,
+      stats: [{ label: "Done today", value: String(doneToday) }, { label: "Streak", value: `${streak} day${streak === 1 ? "" : "s"}` }, { label: "Last 7 days", value: String(week) }],
+      art: artTpl && artTpl.content ? artTpl.content.firstElementChild : null,
+      fileName: "mbactionplan-progress.png",
+      date: (/* @__PURE__ */ new Date()).toLocaleDateString(void 0, { month: "short", year: "numeric" }),
+      options: names.length ? [{ id: "names", label: "Show task names", value: false }] : [],
+      build: (o) => o.names && names.length ? { sub: "Done: " + names.slice(0, 3).join(", ") + (names.length > 3 ? ` and ${names.length - 3} more` : "") } : { sub: dateLabel }
+    });
+  };
+  return /* @__PURE__ */ React.createElement("div", { className: "space-y-4 animate-fade-in-up" }, /* @__PURE__ */ React.createElement("section", { className: "cu-banner" }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 640 136", preserveAspectRatio: "xMaxYMid slice", className: "cu-art", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: { __html: "<circle class=\"b\" cx=\"588\" cy=\"50\" r=\"30\"/><path class=\"s\" d=\"M260 140 C365 100 575 100 680 140Z\"/><path class=\"d\" transform=\"translate(540 107.4)\" d=\"M-39 2.2 C-39 -15.8 21.5 -16.5 39 -1.5 C39.8 14.2 -21.5 16.5 -39 2.2Z\"/><path class=\"m\" transform=\"translate(540 83.1)\" d=\"M-30 1.9 C-30 -13.7 16.5 -14.3 30 -1.3 C30.6 12.3 -16.5 14.3 -30 1.9Z\"/><path class=\"n\" transform=\"translate(540 62.4)\" d=\"M-23 1.6 C-23 -11.6 12.7 -12.1 23 -1.1 C23.5 10.4 -12.7 12.1 -23 1.6Z\"/><path class=\"d\" transform=\"translate(540 47.1)\" d=\"M-15 1.2 C-15 -8.4 8.2 -8.8 15 -0.8 C15.3 7.6 -8.2 8.8 -15 1.2Z\"/><path class=\"m\" transform=\"translate(452 114)\" d=\"M-25 1.6 C-25 -11.6 13.8 -12.1 25 -1.1 C25.5 10.4 -13.8 12.1 -25 1.6Z\"/><path class=\"d\" transform=\"translate(452 97)\" d=\"M-18 1.3 C-18 -9.5 9.9 -9.9 18 -0.9 C18.4 8.5 -9.9 9.9 -18 1.3Z\"/><path class=\"s\" transform=\"translate(452 84.5)\" d=\"M-11 1 C-11 -6.8 6.1 -7.2 11 -0.7 C11.2 6.2 -6.1 7.2 -11 1Z\"/><path class=\"m\" transform=\"translate(590 132) rotate(-62) scale(0.6)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"d\" transform=\"translate(602 132) rotate(-118) scale(0.5)\" d=\"M0 0 C 20 -34 66 -40 96 -6 C 70 28 22 34 0 0Z\"/><path class=\"s\" transform=\"translate(380 126)\" d=\"M-13 0.9 C-13 -6.3 7.2 -6.6 13 -0.6 C13.3 5.7 -7.2 6.6 -13 0.9Z\"/><circle class=\"r\" cx=\"400\" cy=\"44\" r=\"6\"/><circle class=\"b\" cx=\"372\" cy=\"70\" r=\"4\"/>" } }), /* @__PURE__ */ React.createElement("div", { className: "cu-txt" }, /* @__PURE__ */ React.createElement("h2", { className: "cu-t" }, headline), /* @__PURE__ */ React.createElement("p", { className: "cu-s tabular" }, dateLabel, model.plannedMins > 0 ? " \u00B7 About " + fmtMins(model.plannedMins) + " planned" + (model.unestimated ? ", " + model.unestimated + " without an estimate" : "") : ""), dayDone && canShare && /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm mb-share-btn ap-share", onClick: shareProgress }, /* @__PURE__ */ React.createElement(Icon, { name: "share-2", className: "w-4 h-4" }), "Share"))), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2 flex-wrap sm:justify-end" }, projects.length > 1 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("label", { htmlFor: "today-project-filter", className: "sr-only" }, "Project"), /* @__PURE__ */ React.createElement("select", { id: "today-project-filter", value: selectedProjectId, onChange: (e) => setSelectedProjectId(e.target.value), className: "px-3 td-select" }, /* @__PURE__ */ React.createElement("option", { value: "all" }, "All projects"), projects.map((p) => /* @__PURE__ */ React.createElement("option", { key: p.id, value: p.id }, p.name)))), /* @__PURE__ */ React.createElement("button", { type: "button", className: `btn sm ${hour >= 16 && left > 0 ? "primary" : ""}`, onClick: onReview }, /* @__PURE__ */ React.createElement(Icon, { name: "calendar-check", className: "w-4 h-4" }), " Wrap up", /* @__PURE__ */ React.createElement("span", { className: "hidden sm:inline" }, " day")), /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm", onClick: onExplain }, /* @__PURE__ */ React.createElement(Icon, { name: "info", className: "w-4 h-4" }), " Explain", /* @__PURE__ */ React.createElement("span", { className: "hidden sm:inline" }, " my tasks"))), total > 0 && /* @__PURE__ */ React.createElement("div", null, total <= 14 ? /* @__PURE__ */ React.createElement("div", { className: "segs", role: "progressbar", "aria-label": "Today's progress", "aria-valuenow": doneToday, "aria-valuemin": "0", "aria-valuemax": total }, Array.from({
     length: total
   }).map((_, i) => /* @__PURE__ */ React.createElement("i", { key: i, className: i < doneToday ? "on" : "" }))) : /* @__PURE__ */ React.createElement("div", { className: "meter", role: "progressbar", "aria-label": "Today's progress", "aria-valuenow": pct, "aria-valuemin": "0", "aria-valuemax": "100" }, /* @__PURE__ */ React.createElement("i", { style: {
     width: `${pct}%`
   } })), /* @__PURE__ */ React.createElement("div", { className: "flex justify-between mt-1 text-xs text-slate-600 dark:text-slate-400 tabular" }, /* @__PURE__ */ React.createElement("span", null, doneToday, " of ", total, " done"), /* @__PURE__ */ React.createElement("span", null, streak > 1 ? `${streak}-day streak` : ""))), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-1 lg:grid-cols-5 gap-4 items-start" }, /* @__PURE__ */ React.createElement("div", { className: "lg:col-span-3 space-y-4 min-w-0" }, /* @__PURE__ */ React.createElement(QuickAdd, { projects, inputRef: quickAddRef, onAdd: onQuickAdd, onOpenFull }), hasAnyActive && /* @__PURE__ */ React.createElement(NextActionCard, { tasks, onStart, onDone: onToggle, onOpen: onOpenTask }), model.overdue.length > 0 && /* @__PURE__ */ React.createElement(TriagePanel, { list: model.overdue, projects, onPostpone, onToggle, onOpen: onOpenTask, onWhy }), ["must", "should", "iftime"].map((k) => model[k].length > 0 && /* @__PURE__ */ React.createElement("section", { key: k, className: "panel", "aria-labelledby": `tier-${k}` }, /* @__PURE__ */ React.createElement("div", { className: "td-tier-h" }, /* @__PURE__ */ React.createElement("i", { className: "td-dot", style: {
     backgroundColor: TIER_META[k].color
-  }, "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("h3", { id: `tier-${k}` }, TIER_META[k].label), /* @__PURE__ */ React.createElement("span", { className: "badge tabular" }, model[k].length), /* @__PURE__ */ React.createElement("span", { className: "hint td-push hidden sm:inline" }, k === "must" && model.must.length > 5 ? "That is a lot of must-dos. Try keeping it to about 3." : TIER_META[k].hint), model[k].some((t) => t.estimate) && /* @__PURE__ */ React.createElement("span", { className: "hint tabular" }, fmtMins(model[k].reduce((n, t) => n + (t.estimate || 0), 0)))), /* @__PURE__ */ React.createElement("ul", null, model[k].map((t) => /* @__PURE__ */ React.createElement(TodayRow, { key: t.id, task: t, project: pOf(t), onToggle, onOpen: onOpenTask, onStart, onPostpone, onWhy }))))), model.todayAll.length === 0 && model.overdue.length === 0 && /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "empty" }, doneToday > 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Icon, { name: "party-popper", className: "w-7 h-7 mx-auto mb-2 text-emerald-600 dark:text-emerald-400" }), /* @__PURE__ */ React.createElement("b", null, "Everything for today is done."), "You finished ", doneToday, " task", doneToday === 1 ? "" : "s", ". Enjoy the rest of it.") : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Icon, { name: "calendar-check", className: "w-6 h-6 text-slate-400 mb-2 mx-auto" }), /* @__PURE__ */ React.createElement("b", null, "Nothing planned for today"), "Type a task above, or pull something in from Upcoming or your Inbox."), laterCount > 0 && /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm", onClick: () => setOpenLater(model.inbox.length ? "inbox" : "upcoming") }, "See what is coming up")))), !tasks.length && /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "empty" }, /* @__PURE__ */ React.createElement("b", null, "Bring your tasks with you"), "Already using another app? Paste a list or import a file from Todoist, Google Tasks, TickTick or a CSV.", /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm", onClick: onImport }, /* @__PURE__ */ React.createElement(Icon, { name: "upload", className: "w-4 h-4" }), " Import from another app")))), doneTodayList.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("button", { type: "button", className: "td-toggle", "aria-expanded": showDone, onClick: () => setShowDone((v) => !v) }, /* @__PURE__ */ React.createElement(Icon, { name: "chevron-down", className: "w-4 h-4 chev" }), " Done today (", doneTodayList.length, ")"), showDone && /* @__PURE__ */ React.createElement("ul", { className: "panel mt-2" }, doneTodayList.map((t) => /* @__PURE__ */ React.createElement("li", { key: t.id, className: "td-row" }, /* @__PURE__ */ React.createElement(CheckBox, { done: true, title: t.title, onToggle: () => onToggle(t.id) }), /* @__PURE__ */ React.createElement("span", { className: "td-title td-done-title truncate" }, t.title)))))), /* @__PURE__ */ React.createElement("div", { className: "lg:col-span-2 space-y-4 min-w-0" }, /* @__PURE__ */ React.createElement("section", { className: "panel", "aria-labelledby": "later-h" }, /* @__PURE__ */ React.createElement("div", { className: "panel-h" }, /* @__PURE__ */ React.createElement("h3", { id: "later-h" }, /* @__PURE__ */ React.createElement(Icon, { name: "calendar", className: "w-4 h-4 text-sky-600 dark:text-sky-400" }), " Coming up"), /* @__PURE__ */ React.createElement("span", { className: "hint tabular" }, laterCount ? `+${laterCount} later` : "")), laterCount === 0 ? /* @__PURE__ */ React.createElement("div", { className: "empty" }, /* @__PURE__ */ React.createElement("b", null, "Nothing parked"), "Tasks with a later date or no date land here, out of your way until you need them.") : /* @__PURE__ */ React.createElement("div", null, laterGroups.map((g) => g.list.length > 0 && /* @__PURE__ */ React.createElement("div", { key: g.id, className: "td-group" }, /* @__PURE__ */ React.createElement("button", { type: "button", className: "td-toggle td-pad", "aria-expanded": openLater === g.id, onClick: () => setOpenLater((o) => o === g.id ? "" : g.id) }, /* @__PURE__ */ React.createElement(Icon, { name: "chevron-down", className: "w-4 h-4 chev" }), " ", g.label, " ", /* @__PURE__ */ React.createElement("span", { className: "badge tabular td-push" }, g.list.length)), openLater === g.id && /* @__PURE__ */ React.createElement("ul", null, g.list.slice(0, 30).map((t) => /* @__PURE__ */ React.createElement(MiniRow, { key: t.id, task: t, project: pOf(t), showDate: g.date, onToggle, onOpen: onOpenTask, onPull })), g.list.length > 30 && /* @__PURE__ */ React.createElement("li", { className: "hint td-pad py-2" }, "And ", g.list.length - 30, " more. Use the Matrix or Calendar to see them all.")))))), /* @__PURE__ */ React.createElement("section", { className: "panel" }, /* @__PURE__ */ React.createElement("button", { type: "button", className: "td-toggle td-pad", "aria-expanded": showStats, onClick: () => setShowStats((v) => !v) }, /* @__PURE__ */ React.createElement(Icon, { name: "chevron-down", className: "w-4 h-4 chev" }), " Your numbers"), showStats && /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-3 p-3" }, /* @__PURE__ */ React.createElement("div", { className: "tile" }, /* @__PURE__ */ React.createElement("div", { className: "lbl" }, "Streak"), /* @__PURE__ */ React.createElement("div", { className: "val" }, streak), /* @__PURE__ */ React.createElement("div", { className: "note" }, streak === 1 ? "day" : "days", " in a row")), /* @__PURE__ */ React.createElement("div", { className: "tile" }, /* @__PURE__ */ React.createElement("div", { className: "lbl" }, "Last 7 days"), /* @__PURE__ */ React.createElement("div", { className: "val" }, week), /* @__PURE__ */ React.createElement("div", { className: "note" }, "tasks finished")), /* @__PURE__ */ React.createElement("div", { className: "tile" }, /* @__PURE__ */ React.createElement("div", { className: "lbl" }, "Focus time"), /* @__PURE__ */ React.createElement("div", { className: "val" }, fmtMins(totalFocus)), /* @__PURE__ */ React.createElement("div", { className: "note" }, "logged on tasks")), /* @__PURE__ */ React.createElement("div", { className: "tile" }, /* @__PURE__ */ React.createElement("div", { className: "lbl" }, "Completion"), /* @__PURE__ */ React.createElement("div", { className: "val" }, rate, "%"), /* @__PURE__ */ React.createElement("div", { className: "note" }, completedAll, " of ", tasks.length)))), /* @__PURE__ */ React.createElement("p", { className: "hint px-1" }, "Tiers follow your matrix: Do First and pinned tasks are Must do, Schedule and Delegate are Should do, Eliminate is If time. ", /* @__PURE__ */ React.createElement("button", { type: "button", className: "link text-xs", onClick: () => setActiveTab("tasks") }, "Open the matrix")))));
+  }, "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("h3", { id: `tier-${k}` }, TIER_META[k].label), /* @__PURE__ */ React.createElement("span", { className: "badge tabular" }, model[k].length), /* @__PURE__ */ React.createElement("span", { className: "hint td-push hidden sm:inline" }, k === "must" && model.must.length > 5 ? "That is a lot of must-dos. Try keeping it to about 3." : TIER_META[k].hint), model[k].some((t) => t.estimate) && /* @__PURE__ */ React.createElement("span", { className: "hint tabular" }, fmtMins(model[k].reduce((n, t) => n + (t.estimate || 0), 0)))), /* @__PURE__ */ React.createElement("ul", null, model[k].map((t) => /* @__PURE__ */ React.createElement(TodayRow, { key: t.id, task: t, project: pOf(t), onToggle, onOpen: onOpenTask, onStart, onPostpone, onWhy }))))), model.todayAll.length === 0 && model.overdue.length === 0 && /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "empty" }, doneToday > 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Icon, { name: "party-popper", className: "w-7 h-7 mx-auto mb-2 text-emerald-600 dark:text-emerald-400" }), /* @__PURE__ */ React.createElement("b", null, "Everything for today is done."), "You finished ", doneToday, " task", doneToday === 1 ? "" : "s", ". Enjoy the rest of it.") : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Icon, { name: "calendar-check", className: "w-6 h-6 text-slate-400 mb-2 mx-auto" }), /* @__PURE__ */ React.createElement("b", null, "Nothing planned for today"), "Type a task above, or pull something in from Upcoming or your Inbox."), laterCount > 0 && /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm", onClick: () => setOpenLater(model.inbox.length ? "inbox" : "upcoming") }, "See what is coming up")))), !tasks.length && /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "empty" }, /* @__PURE__ */ React.createElement("b", null, "Bring your tasks with you"), "Already using another app? Paste a list or import a file from Todoist, Google Tasks, TickTick or a CSV.", /* @__PURE__ */ React.createElement("div", { className: "mt-3" }, /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm", onClick: onImport }, /* @__PURE__ */ React.createElement(Icon, { name: "upload", className: "w-4 h-4" }), " Import from another app")))), doneTodayList.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("button", { type: "button", className: "td-toggle", "aria-expanded": showDone, onClick: () => setShowDone((v) => !v) }, /* @__PURE__ */ React.createElement(Icon, { name: "chevron-down", className: "w-4 h-4 chev" }), " Done today (", doneTodayList.length, ")"), showDone && /* @__PURE__ */ React.createElement("ul", { className: "panel mt-2" }, doneTodayList.map((t) => /* @__PURE__ */ React.createElement("li", { key: t.id, className: "td-row" }, /* @__PURE__ */ React.createElement(CheckBox, { done: true, title: t.title, onToggle: () => onToggle(t.id) }), /* @__PURE__ */ React.createElement("span", { className: "td-title td-done-title truncate" }, t.title)))))), /* @__PURE__ */ React.createElement("div", { className: "lg:col-span-2 space-y-4 min-w-0" }, /* @__PURE__ */ React.createElement("section", { className: "panel", "aria-labelledby": "later-h" }, /* @__PURE__ */ React.createElement("div", { className: "panel-h" }, /* @__PURE__ */ React.createElement("h3", { id: "later-h" }, /* @__PURE__ */ React.createElement(Icon, { name: "calendar", className: "w-4 h-4 text-sky-600 dark:text-sky-400" }), " Coming up"), /* @__PURE__ */ React.createElement("span", { className: "hint tabular" }, laterCount ? `+${laterCount} later` : "")), laterCount === 0 ? /* @__PURE__ */ React.createElement("div", { className: "empty" }, /* @__PURE__ */ React.createElement("b", null, "Nothing parked"), "Tasks with a later date or no date land here, out of your way until you need them.") : /* @__PURE__ */ React.createElement("div", null, laterGroups.map((g) => g.list.length > 0 && /* @__PURE__ */ React.createElement("div", { key: g.id, className: "td-group" }, /* @__PURE__ */ React.createElement("button", { type: "button", className: "td-toggle td-pad", "aria-expanded": openLater === g.id, onClick: () => setOpenLater((o) => o === g.id ? "" : g.id) }, /* @__PURE__ */ React.createElement(Icon, { name: "chevron-down", className: "w-4 h-4 chev" }), " ", g.label, " ", /* @__PURE__ */ React.createElement("span", { className: "badge tabular td-push" }, g.list.length)), openLater === g.id && /* @__PURE__ */ React.createElement("ul", null, g.list.slice(0, 30).map((t) => /* @__PURE__ */ React.createElement(MiniRow, { key: t.id, task: t, project: pOf(t), showDate: g.date, onToggle, onOpen: onOpenTask, onPull })), g.list.length > 30 && /* @__PURE__ */ React.createElement("li", { className: "hint td-pad py-2" }, "And ", g.list.length - 30, " more. Use the Matrix or Calendar to see them all.")))))), /* @__PURE__ */ React.createElement("section", { className: "panel" }, /* @__PURE__ */ React.createElement("button", { type: "button", className: "td-toggle td-pad", "aria-expanded": showStats, onClick: () => setShowStats((v) => !v) }, /* @__PURE__ */ React.createElement(Icon, { name: "chevron-down", className: "w-4 h-4 chev" }), " Your numbers"), showStats && /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-3 p-3" }, /* @__PURE__ */ React.createElement("div", { className: "tile" }, /* @__PURE__ */ React.createElement("div", { className: "lbl" }, "Streak"), /* @__PURE__ */ React.createElement("div", { className: "val" }, streak), /* @__PURE__ */ React.createElement("div", { className: "note" }, streak === 1 ? "day" : "days", " in a row")), /* @__PURE__ */ React.createElement("div", { className: "tile" }, /* @__PURE__ */ React.createElement("div", { className: "lbl" }, "Last 7 days"), /* @__PURE__ */ React.createElement("div", { className: "val" }, week), /* @__PURE__ */ React.createElement("div", { className: "note" }, "tasks finished")), /* @__PURE__ */ React.createElement("div", { className: "tile" }, /* @__PURE__ */ React.createElement("div", { className: "lbl" }, "Focus time"), /* @__PURE__ */ React.createElement("div", { className: "val" }, fmtMins(totalFocus)), /* @__PURE__ */ React.createElement("div", { className: "note" }, "logged on tasks")), /* @__PURE__ */ React.createElement("div", { className: "tile" }, /* @__PURE__ */ React.createElement("div", { className: "lbl" }, "Completion"), /* @__PURE__ */ React.createElement("div", { className: "val" }, rate, "%"), /* @__PURE__ */ React.createElement("div", { className: "note" }, completedAll, " of ", tasks.length))), showStats && canShare && /* @__PURE__ */ React.createElement("div", { className: "ap-share-row" }, /* @__PURE__ */ React.createElement("p", { className: "hint" }, "Share your streak and finished count as an image. Task names stay off it unless you turn them on."), /* @__PURE__ */ React.createElement("button", { type: "button", className: "btn sm mb-share-btn", onClick: shareProgress }, /* @__PURE__ */ React.createElement(Icon, { name: "share-2", className: "w-4 h-4" }), "Share"))), /* @__PURE__ */ React.createElement("p", { className: "hint px-1" }, "Tiers follow your matrix: Do First and pinned tasks are Must do, Schedule and Delegate are Should do, Eliminate is If time. ", /* @__PURE__ */ React.createElement("button", { type: "button", className: "link text-xs", onClick: () => setActiveTab("tasks") }, "Open the matrix")))));
 }
 function FocusMode({
   task,
@@ -4328,6 +4734,141 @@ function DataMenuExtras({
 }
 
 // ---------------- MAIN APP ----------------
+// ---- MB Suite v3: brand, Install card and the More view ----
+// The app badge (same drawing as favicon.svg). Each copy gets its own gradient/clip ids, because the brand
+// appears more than once on the page (sidebar, phone top bar) and shared ids make the hidden copy win.
+const brandLogoSvg = uid => `<defs><linearGradient id="ap-${uid}-g" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="54" y2="64"><stop offset="0" stop-color="#6860b2"/><stop offset=".55" stop-color="#4F46A5"/><stop offset="1" stop-color="#3f3884"/></linearGradient><clipPath id="ap-${uid}-c"><rect width="64" height="64" rx="18"/></clipPath></defs><g clip-path="url(#ap-${uid}-c)"><rect width="64" height="64" fill="url(#ap-${uid}-g)"/><rect x="15.5" y="15.5" width="33" height="33" rx="5" stroke="#fff" stroke-opacity=".55" stroke-width="4.5" fill="none"/><path d="m 23,32.000052 6.5,6.5 11.5,-13" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g>`;
+function BrandLogo({
+  uid,
+  className
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 64 64",
+    className: className,
+    "aria-hidden": "true",
+    focusable: "false",
+    dangerouslySetInnerHTML: {
+      __html: brandLogoSvg(uid)
+    }
+  });
+}
+// Logo, name and subtitle are one link to Today. A normal click switches views without reloading;
+// Ctrl/Cmd/Shift/middle click still open a new tab as usual.
+function BrandLink({
+  uid,
+  className = '',
+  onHome
+}) {
+  return /*#__PURE__*/React.createElement("a", {
+    className: `brand ${className}`,
+    href: "./",
+    "aria-label": "mbactionplan.online: go to Today",
+    onClick: e => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      onHome();
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "logo"
+  }, /*#__PURE__*/React.createElement(BrandLogo, {
+    uid: uid
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "bt"
+  }, /*#__PURE__*/React.createElement("b", null, "mbactionplan", /*#__PURE__*/React.createElement("i", {
+    className: "tld"
+  }, ".online")), /*#__PURE__*/React.createElement("span", null, "Official Web App \xB7 v", BRAND_VERSION)));
+}
+// Install card (MB Suite v3 §7.2), drawn from the install state captured at startup (deferredInstall).
+// Returns null where installing isn't possible, so it never shows a button that does nothing.
+function InstallCard({
+  onInstall
+}) {
+  if (isStandalone()) return /*#__PURE__*/React.createElement("div", {
+    className: "mb-install is-done",
+    role: "status"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check-circle-2"
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Installed on this device"), /*#__PURE__*/React.createElement("p", null, "You are using the app version of Action Plan.")));
+  if (deferredInstall) return /*#__PURE__*/React.createElement("div", {
+    className: "mb-install"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "download"
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Install Action Plan"), /*#__PURE__*/React.createElement("p", null, "Opens in its own window with its own icon. Works offline after the first visit.")), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "btn primary",
+    onClick: onInstall
+  }, "Install"));
+  if (isIOSDevice()) return /*#__PURE__*/React.createElement("div", {
+    className: "mb-install"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "download"
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Add Action Plan to your Home Screen"), /*#__PURE__*/React.createElement("p", null, "On iPhone or iPad: tap ", /*#__PURE__*/React.createElement("b", null, "Share"), ", then ", /*#__PURE__*/React.createElement("b", null, "Add to Home Screen"), ". It opens full screen with its own icon.")));
+  return null;
+}
+function MoreView({
+  renderThemeSwitch,
+  onInstall,
+  backupText,
+  backupWarn,
+  onBackup,
+  onLegal,
+  onWelcome
+}) {
+  const card = InstallCard({
+    onInstall
+  });
+  const links = [['Welcome guide', 'sunrise', onWelcome], ['Release notes', 'file-text', () => onLegal('notes')], ['Privacy Policy', 'shield-check', () => onLegal('privacy')], ['Terms of Use', 'file-text', () => onLegal('terms')], ['Disclaimer', 'scale', () => onLegal('disclaimer')], ['Credits', 'info', () => onLegal('credits')]];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "more-grid animate-fade-in-up"
+  }, /*#__PURE__*/React.createElement("section", {
+    className: "panel",
+    "aria-labelledby": "more-app"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "panel-h"
+  }, /*#__PURE__*/React.createElement("h2", {
+    id: "more-app"
+  }, "App")), /*#__PURE__*/React.createElement("div", {
+    className: "more-body"
+  }, card || /*#__PURE__*/React.createElement("p", {
+    className: "hint"
+  }, "No install option here: this browser doesn't offer installing apps (for example Firefox on a computer, or a page opened from a file). Action Plan works the same in the browser."), /*#__PURE__*/React.createElement("div", {
+    className: "more-row"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Dark theme"), /*#__PURE__*/React.createElement("p", null, "Remembered on this device.")), renderThemeSwitch()), /*#__PURE__*/React.createElement("div", {
+    className: "more-row"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Backup"), /*#__PURE__*/React.createElement("p", {
+    className: backupWarn ? 'hint warn' : ''
+  }, backupText, ". Your tasks live only in this browser. The Data menu has exports, imports and Clear all data.")), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "btn sm",
+    onClick: onBackup
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "download",
+    className: "w-4 h-4"
+  }), "Save backup")))), /*#__PURE__*/React.createElement("section", {
+    className: "panel",
+    "aria-labelledby": "more-help"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "panel-h"
+  }, /*#__PURE__*/React.createElement("h2", {
+    id: "more-help"
+  }, "Help and about")), /*#__PURE__*/React.createElement("div", {
+    className: "more-body"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "more-links"
+  }, links.map(([label, icon, fn]) => /*#__PURE__*/React.createElement("button", {
+    key: label,
+    type: "button",
+    onClick: fn
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: icon,
+    className: "w-4 h-4"
+  }), label, /*#__PURE__*/React.createElement(Icon, {
+    name: "chevron-right",
+    className: "w-4 h-4 go"
+  })))), /*#__PURE__*/React.createElement("p", {
+    className: "more-ver"
+  }, "mbactionplan.online \xB7 version ", APP_VERSION, " \xB7 free, no account, your data stays on this device."))));
+}
 function App() {
   const [theme, setTheme] = useState(() => store.get('ap_theme_v5') === 'dark' ? 'dark' : 'light');
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -5597,7 +6138,7 @@ function App() {
     credits: 'Credits',
     notes: 'Release Notes'
   };
-  const pageName = onboardOpen ? 'Welcome' : legalModalOpen ? LEGAL_TITLES[legalTab] || 'About' : focusTask ? 'Focus Mode' : NAV_TABS.find(t => t.id === activeTab)?.label || 'Today';
+  const pageName = onboardOpen ? 'Welcome' : legalModalOpen ? LEGAL_TITLES[legalTab] || 'About' : focusTask ? 'Focus Mode' : activeTab === 'more' ? 'More' : NAV_TABS.find(t => t.id === activeTab)?.label || 'Today';
   useEffect(() => {
     document.title = 'Action Plan | ' + pageName;
   }, [pageName]);
@@ -5621,43 +6162,15 @@ function App() {
       await ev.userChoice;
     } catch (e) {}
   };
-  // Shown only when it can help: a real Install button where the browser offers one, a how-to on iPhone/iPad,
-  // and nothing once the app is installed or in browsers that can't install.
-  const renderInstall = where => {
-    if (isStandalone()) return null;
-    const ios = !deferredInstall && isIOSDevice();
-    if (!deferredInstall && !ios) return null;
-    if (where === 'header') return /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      onClick: deferredInstall ? doInstall : () => showToast('On iPhone or iPad: tap Share, then Add to Home Screen.', 'info'),
-      className: "btn sm hidden lg:inline-flex",
-      title: "Install Action Plan as an app",
-      "aria-label": "Install Action Plan as an app"
-    }, /*#__PURE__*/React.createElement(Icon, {
-      name: "download",
-      className: "w-4 h-4"
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "hidden xl:block"
-    }, "Install"));
-    if (ios) return /*#__PURE__*/React.createElement("p", {
-      className: "hint"
-    }, "Install Action Plan: on iPhone or iPad, tap ", /*#__PURE__*/React.createElement("strong", null, "Share"), ", then ", /*#__PURE__*/React.createElement("strong", null, "Add to Home Screen"), ".");
-    return /*#__PURE__*/React.createElement("div", {
-      className: "space-y-1.5"
-    }, /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      onClick: () => {
-        setIsMobileMenuOpen(false);
-        doInstall();
-      },
-      className: "btn primary w-full justify-center"
-    }, /*#__PURE__*/React.createElement(Icon, {
-      name: "download",
-      className: "w-4 h-4"
-    }), " Install Action Plan"), /*#__PURE__*/React.createElement("p", {
-      className: "hint"
-    }, "Opens full screen, like an app. Works with no signal once it has loaded."));
+  // The Install card lives in More (MoreView): a real Install button where the browser offers one, a how-to
+  // on iPhone/iPad, "Installed" inside the installed app, and nothing in browsers that can't install.
+  // The brand (logo, name and subtitle) always goes back to Today, at every screen size.
+  const goHome = () => {
+    setActiveTab('dashboard');
+    setIsMobileMenuOpen(false);
+    if (mainRef.current) mainRef.current.scrollTop = 0;
   };
+  const viewTitle = activeTab === 'more' ? 'More' : NAV_TABS.find(t => t.id === activeTab)?.label || 'Today';
   const whyTask = whyTaskId ? tasks.find(t => t.id === whyTaskId) : null;
   const canUndo = historyIndex > 0;
   const canRedo = historyIndex < history.length - 1;
@@ -5708,9 +6221,9 @@ function App() {
     className: "w-3 h-3"
   }))));
   return /*#__PURE__*/React.createElement("div", {
-    className: "h-full flex flex-col relative overflow-hidden"
+    className: "mb-shell h-full flex flex-col relative overflow-hidden"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fixed top-0 left-0 h-0.5 bg-sky-500 z-50",
+    className: "ap-scrollprog fixed top-0 left-0 h-0.5 bg-sky-500 z-50",
     style: {
       width: `${scrollProgress}%`
     },
@@ -5738,31 +6251,50 @@ function App() {
   }), " ", toast.action.label)), /*#__PURE__*/React.createElement("a", {
     href: "#main-content",
     className: "sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[70] btn primary sm"
-  }, "Skip to main content"), /*#__PURE__*/React.createElement("header", {
-    className: "app-bar sticky top-0 z-40 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "max-w-7xl mx-auto px-3 sm:px-6 h-14 flex items-center gap-2 sm:gap-3"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => setIsMobileMenuOpen(!isMobileMenuOpen),
-    "aria-label": isMobileMenuOpen ? 'Close tools menu' : 'Open tools menu',
-    "aria-expanded": isMobileMenuOpen,
-    className: "btn ghost icon lg:hidden -ml-1"
+  }, "Skip to main content"), /*#__PURE__*/React.createElement("aside", {
+    className: "mb-side",
+    "aria-label": "App"
+  }, /*#__PURE__*/React.createElement(BrandLink, {
+    uid: "side",
+    onHome: goHome
+  }), /*#__PURE__*/React.createElement("nav", {
+    className: "side-nav",
+    "aria-label": "Sections"
+  }, NAV_TABS.map(tab => /*#__PURE__*/React.createElement("button", {
+    key: tab.id,
+    type: "button",
+    onClick: () => setActiveTab(tab.id),
+    "aria-current": activeTab === tab.id ? 'page' : undefined
   }, /*#__PURE__*/React.createElement(Icon, {
-    name: isMobileMenuOpen ? "x" : "menu",
+    name: tab.icon,
     className: "w-4 h-4"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center gap-2.5 min-w-0"
-  }, /*#__PURE__*/React.createElement("svg", {viewBox: "0 0 64 64", className: "app-logo shrink-0", "aria-hidden": "true", focusable: "false", dangerouslySetInnerHTML: {__html: "<defs><linearGradient id=\"g3\" gradientUnits=\"userSpaceOnUse\" x1=\"10\" y1=\"0\" x2=\"54\" y2=\"64\"><stop offset=\"0\" stop-color=\"#6860b2\"/><stop offset=\".55\" stop-color=\"#4F46A5\"/><stop offset=\"1\" stop-color=\"#3f3884\"/></linearGradient><clipPath id=\"c3\"><rect width=\"64\" height=\"64\" rx=\"18\"/></clipPath></defs><g clip-path=\"url(#c3)\"><rect width=\"64\" height=\"64\" fill=\"url(#g3)\"/><rect x=\"15.5\" y=\"15.5\" width=\"33\" height=\"33\" rx=\"5\" stroke=\"#fff\" stroke-opacity=\".55\" stroke-width=\"4.5\" fill=\"none\"/><path d=\"M23.5 32.5L30 39L41.5 26\" stroke=\"#fff\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/></g>"}}), /*#__PURE__*/React.createElement("div", {
-    className: "min-w-0 leading-tight"
-  }, /*#__PURE__*/React.createElement("h1", {
-    className: "text-[15px] font-bold text-slate-900 dark:text-slate-100 truncate"
-  }, "mbactionplan", /*#__PURE__*/React.createElement("span", {
-    className: "tld"
-  }, ".online")), /*#__PURE__*/React.createElement("p", {
-    className: "hdr-tagline text-[11px] text-slate-500 dark:text-slate-400"
-  }, "Official Web App \xB7 v1.1"))), /*#__PURE__*/React.createElement("div", {
-    className: "flex-1"
-  }), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "lbl-full"
+  }, tab.label), /*#__PURE__*/React.createElement("span", {
+    className: "lbl-short"
+  }, tab.short)))), /*#__PURE__*/React.createElement("nav", {
+    className: "side-nav side-end",
+    "aria-label": "More"
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: () => setActiveTab('more'),
+    "aria-current": activeTab === 'more' ? 'page' : undefined
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "ellipsis",
+    className: "w-4 h-4"
+  }), /*#__PURE__*/React.createElement("span", null, "More")))), /*#__PURE__*/React.createElement("div", {
+    className: "mb-main"
+  }, /*#__PURE__*/React.createElement("header", {
+    className: "page-bar"
+  }, /*#__PURE__*/React.createElement(BrandLink, {
+    uid: "phone",
+    className: "phone-brand",
+    onHome: goHome
+  }), /*#__PURE__*/React.createElement("h1", {
+    className: "page-title"
+  }, viewTitle), /*#__PURE__*/React.createElement("div", {
+    className: "actions"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "relative hidden md:block"
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "search",
@@ -5946,27 +6478,23 @@ function App() {
     })
   }, "Change location\u2026")) : /*#__PURE__*/React.createElement("div", {
     className: "mt-1"
-  }, "This browser can't pick a save location, so backups go to your Downloads folder.")))), renderInstall('header'), renderThemeSwitch('hidden sm:inline-flex'), /*#__PURE__*/React.createElement("button", {
+  }, "This browser can't pick a save location, so backups go to your Downloads folder.")))), renderThemeSwitch('hidden sm:inline-flex'), /*#__PURE__*/React.createElement("button", {
     onClick: () => openNewTask(),
     className: "btn primary sm hidden sm:inline-flex",
     title: "Add task (N)"
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "plus",
     className: "w-4 h-4"
-  }), /*#__PURE__*/React.createElement("span", null, "Add Task"))), /*#__PURE__*/React.createElement("nav", {
-    "aria-label": "Main",
-    className: "hidden lg:block"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tabs max-w-7xl mx-auto px-3 sm:px-6 flex -mb-px"
-  }, NAV_TABS.map(tab => /*#__PURE__*/React.createElement("button", {
-    key: tab.id,
-    onClick: () => setActiveTab(tab.id),
-    "aria-current": activeTab === tab.id ? 'page' : undefined
+  }), /*#__PURE__*/React.createElement("span", null, "Add Task")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setIsMobileMenuOpen(!isMobileMenuOpen),
+    "aria-label": isMobileMenuOpen ? 'Close tools menu' : 'Open tools menu',
+    "aria-expanded": isMobileMenuOpen,
+    className: "btn ghost icon lg:hidden"
   }, /*#__PURE__*/React.createElement(Icon, {
-    name: tab.icon,
+    name: isMobileMenuOpen ? "x" : "menu",
     className: "w-4 h-4"
-  }), /*#__PURE__*/React.createElement("span", null, tab.label))))), isMobileMenuOpen && /*#__PURE__*/React.createElement("div", {
-    className: "lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3 sm:px-6 py-3 space-y-3 animate-fade-in"
+  })))), isMobileMenuOpen && /*#__PURE__*/React.createElement("div", {
+    className: "ap-tools lg:hidden animate-fade-in"
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative md:hidden"
   }, /*#__PURE__*/React.createElement(Icon, {
@@ -5999,7 +6527,17 @@ function App() {
     className: "flex items-center justify-between gap-3 sm:hidden pt-1"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-sm font-medium text-slate-700 dark:text-slate-300"
-  }, "Dark theme"), renderThemeSwitch()), renderInstall('menu'), (hasData || lastBackup > 0) && /*#__PURE__*/React.createElement("button", {
+  }, "Dark theme"), renderThemeSwitch()), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "btn w-full",
+    onClick: () => {
+      setIsMobileMenuOpen(false);
+      setActiveTab('more');
+    }
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "ellipsis",
+    className: "w-4 h-4"
+  }), " More: install, help and privacy"), (hasData || lastBackup > 0) && /*#__PURE__*/React.createElement("button", {
     type: "button",
     onClick: () => {
       setIsMobileMenuOpen(false);
@@ -6009,7 +6547,7 @@ function App() {
   }, /*#__PURE__*/React.createElement(Icon, {
     name: backupWarn ? 'alert-triangle' : 'shield-check',
     className: "w-3.5 h-3.5"
-  }), hasData && !lastBackup ? 'Not backed up. Save a backup now' : `${bk.text}. Save a new one`))), /*#__PURE__*/React.createElement("main", {
+  }), hasData && !lastBackup ? 'Not backed up. Save a backup now' : `${bk.text}. Save a new one`)), /*#__PURE__*/React.createElement("main", {
     id: "main-content",
     tabIndex: -1,
     ref: mainRef,
@@ -6043,7 +6581,7 @@ function App() {
     className: "w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0"
   }), /*#__PURE__*/React.createElement("span", {
     className: "truncate"
-  }, "Filtering by \u201C", searchQuery, "\u201D \u2014 ", filteredTasks.length, " matching task", filteredTasks.length === 1 ? '' : 's')), /*#__PURE__*/React.createElement("button", {
+  }, "Filtering by \u201C", searchQuery, "\u201D: ", filteredTasks.length, " matching task", filteredTasks.length === 1 ? '' : 's')), /*#__PURE__*/React.createElement("button", {
     onClick: () => setSearchQuery(''),
     className: "btn ghost sm"
   }, "Clear")), activeTab === 'dashboard' && /*#__PURE__*/React.createElement(TodayView, {
@@ -6144,6 +6682,17 @@ function App() {
     wakeLockEnabled: wakeLockEnabled,
     setWakeLockEnabled: setWakeLockEnabled,
     onCompleteTask: completeSelectedTask
+  }), activeTab === 'more' && /*#__PURE__*/React.createElement(MoreView, {
+    renderThemeSwitch: renderThemeSwitch,
+    onInstall: doInstall,
+    backupText: hasData && !lastBackup ? 'Not backed up yet' : bk.text,
+    backupWarn: backupWarn,
+    onBackup: saveBackupNow,
+    onLegal: tab => {
+      setLegalTab(tab);
+      setLegalModalOpen(true);
+    },
+    onWelcome: () => setOnboardOpen(true)
   }), /*#__PURE__*/React.createElement("footer", {
     className: "pt-8 pb-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-500 dark:text-slate-400"
   }, /*#__PURE__*/React.createElement("span", null, "mbactionplan.online - a free, local-only productivity app."), /*#__PURE__*/React.createElement("button", {
@@ -6185,20 +6734,17 @@ function App() {
     type: "button",
     onClick: () => setOnboardOpen(true),
     className: "underline inline-flex items-center min-h-[32px] hover:text-sky-600 dark:hover:text-sky-400"
-  }, "Welcome guide")))), /*#__PURE__*/React.createElement("nav", {
-    "aria-label": "Main",
-    className: "lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white dark:bg-slate-900 border-t border-slate-300 dark:border-slate-750 grid grid-cols-5",
-    style: {
-      paddingBottom: 'env(safe-area-inset-bottom)'
-    }
+  }, "Welcome guide"))))), /*#__PURE__*/React.createElement("nav", {
+    className: "bnav",
+    "aria-label": "Sections"
   }, NAV_TABS.map(tab => /*#__PURE__*/React.createElement("button", {
     key: tab.id,
+    type: "button",
     onClick: () => {
       setActiveTab(tab.id);
       setIsMobileMenuOpen(false);
     },
-    "aria-current": activeTab === tab.id ? 'page' : undefined,
-    className: `min-h-[54px] flex flex-col items-center justify-center gap-1 text-[10.5px] font-medium transition-colors ${activeTab === tab.id ? 'text-sky-600 dark:text-sky-400 shadow-[inset_0_2px_0_currentColor] font-semibold' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'}`
+    "aria-current": activeTab === tab.id ? 'page' : undefined
   }, /*#__PURE__*/React.createElement(Icon, {
     name: tab.icon,
     className: "w-5 h-5"

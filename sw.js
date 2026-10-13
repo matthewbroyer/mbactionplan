@@ -1,13 +1,15 @@
 /* Action Plan service worker.
  *
  * What it does: keeps a copy of the app's own files so the app opens with no signal, and lets the browser offer
- * "Install". It never touches your tasks (those live in localStorage, which a service worker cannot see).
+ * "Install". It never touches your tasks (those live in localStorage, which a service worker cannot see), and it
+ * ignores requests to other sites.
  *
  * How it updates: it always asks the network first and only uses the saved copy when that fails (or is very
- * slow). So uploading new files to the host is enough. There is no version number to bump here.
+ * slow). Uploading new files is enough for visitors to get them. Still bump CACHE on every release (MB Suite
+ * rule): installed copies then drop the old saved files, including old icons.
  */
-const CACHE = 'actionplan-app-v18.1';
-const SHELL = ['./', 'index.html', 'manifest.json', 'favicon.svg', 'icon-192.png', 'icon-512.png',
+const CACHE = 'actionplan-app-v18.2.1';
+const SHELL = ['./', 'index.html', 'manifest.json', 'favicon.svg', 'favicon.ico', 'icon-192.png', 'icon-512.png',
   'icon-maskable-512.png', 'apple-touch-icon.png'];
 const SLOW_MS = 4000; // with a saved copy on hand, stop waiting on a bad connection after this long
 

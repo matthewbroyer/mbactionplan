@@ -9,10 +9,10 @@ The same credits and full licence texts are shown in the app under **About & Leg
 | React | 18.3.1 | UI rendering | MIT | Yes: copyright + licence notice kept |
 | React DOM | 18.3.1 | UI rendering in the browser | MIT | Yes: copyright + licence notice kept |
 | Modernizr (fragment bundled inside React DOM) | 3.0.0pre custom build | Feature detection inside React DOM | MIT | Yes: covered by the notice in React DOM's bundled source and the Credits tab |
-| Lucide icons (only the 51 icons used, embedded as SVG path data) | 1.47.0 | Interface icons | ISC; icons derived from Feather are MIT | Yes: copyright + licence notice kept |
+| Lucide icons (only the 52 icons used, embedded as SVG path data) | 1.47.0 | Interface icons | ISC; icons derived from Feather are MIT | Yes: copyright + licence notice kept |
 | Tailwind CSS (generated stylesheet) | 3.4.19 | Utility CSS classes, precompiled into the page | MIT | Header comment kept in the CSS; credited |
 
-No web fonts, images, stock photos, audio files, maps, analytics, or advertising libraries are used. Text uses the device's system fonts. The timer sound is generated in the browser with the Web Audio API, not from an audio file. The logo and favicon are an original 2×2 grid drawn in SVG.
+No web fonts, images, stock photos, audio files, maps, analytics, or advertising libraries are used. Text uses the device's system fonts. The timer sound is generated in the browser with the Web Audio API, not from an audio file. The logo and favicon (a checked box on an indigo badge) and the stone and cairn art are original drawings in SVG, from the developer's MB Suite design kit, as is the small script that draws share images on the device.
 
 ---
 
@@ -36,7 +36,7 @@ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH RE
 
 ### Feather-derived Lucide icons: MIT License
 
-Used in this app: alert-circle, alert-triangle, arrow-left, arrow-right, arrow-up, calendar, check, chevron-down, chevron-left, chevron-right, circle, database, download, info, moon, plus, search, trash-2, upload, x.
+Used in this app: alert-circle, alert-triangle, arrow-left, arrow-right, arrow-up, calendar, check, chevron-down, chevron-left, chevron-right, circle, database, download, ellipsis (was more-horizontal), info, moon, plus, search, trash-2, upload, x.
 
 Copyright (c) 2013-present Cole Bemis
 
