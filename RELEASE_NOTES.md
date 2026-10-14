@@ -2,6 +2,12 @@
 
 Newest first. The same notes appear in the app under **About & Legal → Release notes** (footer link).
 
+## 1.4 · 2026-10-14
+- On computers, the search box, backup status and logo spacing now look exactly like the other mb apps: same size, same "Search…" text, and the "/" key now jumps to search.
+- Tidier top bar that matches the other apps. On phones: search, Data and the light/dark switch are right in the bar as icons; the menu button keeps Undo, Redo and More.
+- Search on phones is now one tap: the magnifier opens the search box.
+- Today: the project picker, Wrap up and Explain sit on one even row, with your progress right underneath.
+
 ## 1.3 · 2026-10-14
 - About card at the bottom of More: version, release date, links and copyright in one place.
 - Installing from matthewbroyer.com: the hub's Install button opens the app with a short install prompt.
