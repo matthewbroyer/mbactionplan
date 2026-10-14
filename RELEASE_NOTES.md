@@ -2,6 +2,12 @@
 
 Newest first. The same notes appear in the app under **About & Legal → Release notes** (footer link).
 
+## 1.3 · 2026-10-14
+- About card at the bottom of More: version, release date, links and copyright in one place.
+- Installing from matthewbroyer.com: the hub's Install button opens the app with a short install prompt.
+- New "page not found" page that matches the app and links back to it.
+- Version numbers restart at 1.x with the suite's "Official Web App" label; earlier releases were numbered 18.x.
+
 ## Version 18.2 · October 13, 2026
 
 **Navigation**

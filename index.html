@@ -2,7 +2,7 @@
 <html lang="en" class="h-full" data-app-short="Action Plan" data-app-domain="mbactionplan.online">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-hT3TT5y0/5LlCEOsFX5X0h2fdS+uae6m/4urXZQjzFw=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-u2cWdPZx0s1jDg3+SMS+ZeCe2F7DzWnW1JprbBgIo6U='; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+zJBM4KFf2Q48acOjuITkdUxOmGa7lkbJbBmST4X/Zs=' 'sha256-hT3TT5y0/5LlCEOsFX5X0h2fdS+uae6m/4urXZQjzFw=' 'sha256-7+Hj6lc7nqQZCnR+2RH3nv+J7YXfinZUyU7zoiOYMfw=' 'sha256-WDA5Z0zolebYHGdCiyvZdQVMXIz33yBEgaQ4W38RUDg=' 'sha256-tCzbRCdL8qNqzOAoNWOd0q2VcIFtzI6vHvGxta7tG1c='; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#4F46A5">
@@ -895,6 +895,20 @@ dialog.mb-share::backdrop{background:var(--scrim)}
 /* install card: the app's Icon component wraps its svg in a span */
 .mb-install>span .lucide{width:22px;height:22px;color:var(--accent)}
 .mb-install.is-done>span .lucide{color:var(--good-ink)}
+/* ---- about card (bottom of Settings/More, below the Install card · SUITE-STANDARDS §1 · kit v3.1) ---- */
+.mb-about{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;margin-top:12px;border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:var(--r);background:var(--surface)}
+.mb-about>.uic{flex:none;width:22px;height:22px;color:var(--accent)}
+.mb-about>div{flex:1;min-width:0}
+.mb-about b{display:block;font-size:14px;font-weight:600;color:var(--ink)}
+.mb-about p{margin:2px 0 0;font-size:12.5px;color:var(--ink-2)}
+.mb-about .mb-about-links{display:flex;flex-wrap:wrap;gap:0 14px;margin-top:4px}
+.mb-about .mb-about-links a,.mb-about .mb-about-links button{display:inline-flex;align-items:center;min-height:28px;padding:0;border:0;background:none;
+  font:inherit;color:var(--accent);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.mb-about .mb-about-links a:hover,.mb-about .mb-about-links button:hover{color:var(--accent-hover)}
+.mb-about .mb-about-copy{margin-top:4px;color:var(--muted,var(--ink-2))}
+.more-end{grid-column:1/-1}
+.more-end>.hint{margin:0}
 /* splash fallback text when JavaScript is off */
 #splash .sp-ns-h{margin:0;font-size:17px;font-weight:650;text-align:center}
 #splash .sp-ns{max-width:420px;margin:6px auto 0;padding:0 16px;text-align:center;color:var(--ink-2)}
@@ -1512,6 +1526,78 @@ window.addEventListener('appinstalled', () => {
   deferredInstall = null;
   notifyInstall();
 });
+// ---- Install link (MB Suite kit v3.1) ----
+// Opening the app as mbactionplan.online/?install (the hub's Install buttons do this) shows a small install sheet
+// once, then removes ?install from the address bar. Same rules as the Install card in More: a real Install button
+// only when the browser offers install, iPhone steps on iOS, plain guidance otherwise, nothing inside the installed app.
+(function () {
+  var sheet = null, sheetUsed = false, sheetDone = false;
+  var ICON = '<svg class="uic" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>';
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var SHEET_CSS = '.mb-isheet{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:2147483000;width:min(460px,calc(100% - 24px));border-radius:var(--r,6px);box-shadow:0 12px 32px -8px rgba(20,24,31,.35),0 2px 6px rgba(20,24,31,.12);animation:mbis .16s ease-out}' +
+    '.mb-isheet .mb-install{align-items:flex-start;padding:14px 44px 14px 14px;position:relative;flex-wrap:nowrap}' +
+    '.mb-isheet-a{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.mb-isheet-a .btn{width:auto!important}' +
+    '.mb-isheet-x{position:absolute;top:6px;right:6px;width:32px;height:32px;display:grid;place-items:center;border:0;border-radius:4px;background:none;color:var(--ink-2,#48505c);font-size:22px;line-height:1;cursor:pointer}' +
+    '.mb-isheet-x:hover{background:var(--hover-band,rgba(20,24,31,.06))}' +
+    '@media (max-width:767px){.mb-isheet{bottom:calc(84px + env(safe-area-inset-bottom,0px))}.mb-isheet-x{width:44px;height:44px;top:2px;right:2px}}' +
+    '@keyframes mbis{from{opacity:0;transform:translate(-50%,8px)}}@media (prefers-reduced-motion:reduce){.mb-isheet{animation:none}}';
+  function appName() {
+    var m = document.querySelector('meta[name="application-name"]');
+    return (m && m.content) || (document.title.split('|')[0] || '').trim() || 'this app';
+  }
+  function wantSheet() {
+    try {
+      var u = new URL(location.href), hit = u.searchParams.has('install') || u.hash === '#install';
+      if (!hit) return false;
+      u.searchParams.delete('install'); if (u.hash === '#install') u.hash = '';
+      history.replaceState(history.state, '', u.pathname + u.search + u.hash);
+      return true;
+    } catch (e) { return false; }
+  }
+  function sheetBody(name) {
+    var n = esc(name), close = '<button type="button" class="btn" data-mb-isheet-close>Not now</button>';
+    if (sheetDone) return '<div><b id="mb-isheet-t">' + n + ' is installed</b><p>Open it from your home screen or app list.</p><div class="mb-isheet-a"><button type="button" class="btn primary" data-mb-isheet-close>Done</button></div></div>';
+    if (isStandalone()) return '';
+    if (deferredInstall) return '<div><b id="mb-isheet-t">Install ' + n + '</b><p>Opens in its own window with its own icon. Remove it any time like any other app.</p><div class="mb-isheet-a"><button type="button" class="btn primary" data-mb-install-btn>Install</button>' + close + '</div></div>';
+    if (sheetUsed) return '';                       // the prompt was answered; nothing more to say
+    if (isIOSDevice()) return '<div><b id="mb-isheet-t">Add ' + n + ' to your Home Screen</b><p>Tap <b>Share</b>, then <b>Add to Home Screen</b>. It opens full screen with its own icon.</p><div class="mb-isheet-a"><button type="button" class="btn primary" data-mb-isheet-close>Got it</button></div></div>';
+    return '<div><b id="mb-isheet-t">Install ' + n + '</b><p>This browser hasn’t offered to install the app. In Chrome or Edge, use the install icon in the address bar or the browser menu. Some browsers, like Firefox on a computer, can’t install web apps. Already installed? Open it from your apps.</p><div class="mb-isheet-a"><button type="button" class="btn primary" data-mb-isheet-close>OK</button></div></div>';
+  }
+  function closeSheet() { if (sheet) { sheet.remove(); sheet = null; } }
+  function showSheet() {
+    var body = sheetBody(appName());
+    if (!body) { closeSheet(); return; }
+    var fresh = !sheet;
+    if (fresh) {
+      if (!document.getElementById('mb-isheet-css')) { var st = document.createElement('style'); st.id = 'mb-isheet-css'; st.textContent = SHEET_CSS; document.head.appendChild(st); }
+      sheet = document.createElement('div'); sheet.className = 'mb-isheet';
+      sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-labelledby', 'mb-isheet-t');
+      document.body.appendChild(sheet);
+    }
+    sheet.innerHTML = '<div class="mb-install">' + ICON + body + '<button type="button" class="mb-isheet-x" data-mb-isheet-close aria-label="Close">×</button></div>';
+    var first = sheet.querySelector('.btn.primary'); if (first && (fresh || !sheet.contains(document.activeElement))) first.focus();
+  }
+  function installNow() {
+    var ev = deferredInstall;
+    sheetUsed = true;
+    setTimeout(closeSheet, 0);                      // the browser's own dialog takes over
+    if (!ev) return;
+    try { ev.prompt(); } catch (e) {}
+    deferredInstall = null;                         // the browser lets each prompt be used once
+    notifyInstall();
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('[data-mb-isheet-close]')) closeSheet();
+    else if (sheet && e.target.closest && e.target.closest('.mb-isheet [data-mb-install-btn]')) installNow();
+  });
+  document.addEventListener('keydown', function (e) { if (sheet && e.key === 'Escape') { e.stopImmediatePropagation(); closeSheet(); } }, true);   // Esc closes only the sheet, not the app's own dialog under it
+  window.addEventListener('appinstalled', function () { if (sheet) { sheetDone = true; showSheet(); } });
+  window.addEventListener('beforeinstallprompt', function () { if (sheet) setTimeout(showSheet, 0); });
+  if (wantSheet()) {
+    var go = function () { setTimeout(showSheet, deferredInstall ? 0 : 1200); };   // give the browser a moment to offer install
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  }
+})();
 
 // Every key this app writes (plus the older v4 keys it can still read). Used by "Clear all data".
 const APP_STORAGE_KEYS = ['ap_projects_v5', 'ap_tasks_v5', 'ap_projects_v4', 'ap_tasks_v4', 'ap_theme_v5', 'ap_onboarded', 'ap_last_backup', 'cookie_accepted', 'ap_done_log_v1', 'ap_timer_v1'];
@@ -2887,11 +2973,17 @@ function ProjectModal({
 // no cookies, no analytics, no ads, no network requests after the page loads.
 // If any of that changes, update this text first.
 const LEGAL_UPDATED = 'October 13, 2026';
-const APP_VERSION = '18.2';
-// Shown under the name in the brand block and in About & Legal ("Official Web App · v1.2").
-const BRAND_VERSION = '1.2';
+const APP_VERSION = '1.3';
+// Shown under the name in the brand block, in About & Legal and in the About card ("Official Web App · v1.3").
+// Version numbers restarted at 1.x with the suite label; releases up to October 13, 2026 were numbered 18.x.
+const BRAND_VERSION = '1.3';
+const RELEASE_DATE = 'Oct 14, 2026';
 // Newest first. Keep this in step with RELEASE_NOTES.md.
 const RELEASE_NOTES = [{
+  v: '1.3',
+  date: 'October 14, 2026',
+  items: ['About card at the bottom of More: version, release date, links and copyright in one place.', "Installing from matthewbroyer.com: the hub's Install button opens the app with a short install prompt.", 'New "page not found" page that matches the app and links back to it.', 'Version numbers restart at 1.x with the suite\'s "Official Web App" label; earlier releases were numbered 18.x.']
+}, {
   v: '18.2',
   date: 'October 13, 2026',
   items: ['When you install it, the app is now named Action Plan on your computer and phone.', 'Navigation moved to a sidebar on the left (an icon rail on tablets, the same bottom bar on phones). The logo and name always take you back to Today.', 'New More page with the Install card, the dark theme switch, a backup shortcut, the welcome guide, release notes and the legal pages. The Install button is no longer in the header.', 'Share your progress: in Your numbers on Today (and when you clear your day) you can make an image of your finished count and streak, drawn on your device. Task names stay off the image unless you turn them on.', 'New stone-cairn art on Today and the loading screen, a refreshed checkmark in the app icon, and a new link-preview image.', 'Your tasks, projects, settings and backups are unchanged.']
@@ -4829,9 +4921,7 @@ function MoreView({
     id: "more-app"
   }, "App")), /*#__PURE__*/React.createElement("div", {
     className: "more-body"
-  }, card || /*#__PURE__*/React.createElement("p", {
-    className: "hint"
-  }, "No install option here: this browser doesn't offer installing apps (for example Firefox on a computer, or a page opened from a file). Action Plan works the same in the browser."), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "more-row"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Dark theme"), /*#__PURE__*/React.createElement("p", null, "Remembered on this device.")), renderThemeSwitch()), /*#__PURE__*/React.createElement("div", {
     className: "more-row"
@@ -4867,7 +4957,61 @@ function MoreView({
     className: "w-4 h-4 go"
   })))), /*#__PURE__*/React.createElement("p", {
     className: "more-ver"
-  }, "mbactionplan.online \xB7 version ", APP_VERSION, " \xB7 free, no account, your data stays on this device."))));
+  }, "Free, no account, your data stays on this device."))), /*#__PURE__*/React.createElement("div", {
+    className: "more-end"
+  }, card || /*#__PURE__*/React.createElement("p", {
+    className: "hint"
+  }, "No install option here: this browser doesn't offer installing apps (for example Firefox on a computer, or a page opened from a file). Action Plan works the same in the browser."), /*#__PURE__*/React.createElement(AboutCard, {
+    onWhatsNew: () => onLegal('notes'),
+    onPrivacy: () => onLegal('privacy'),
+    onTerms: () => onLegal('terms')
+  })));
+}
+// About card (MB Suite §1): the last thing on More, right below the Install card. It is the app's footer:
+// name, version and release date, What's new, the hub link and the copyright line.
+function AboutCard({
+  onWhatsNew,
+  onPrivacy,
+  onTerms
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "mb-about",
+    role: "group",
+    "aria-label": "About this app"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "uic",
+    viewBox: "0 0 24 24",
+    width: "20",
+    height: "20",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true",
+    focusable: "false"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "12",
+    r: "9.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M12 11v6M12 7.5v.01"
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "mbactionplan.online™"), /*#__PURE__*/React.createElement("p", null, "Version ", BRAND_VERSION, " \xB7 ", RELEASE_DATE), /*#__PURE__*/React.createElement("p", {
+    className: "mb-about-links"
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onWhatsNew
+  }, "What's new"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onPrivacy
+  }, "Privacy"), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: onTerms
+  }, "Terms"), /*#__PURE__*/React.createElement("a", {
+    href: "https://matthewbroyer.com/"
+  }, "More free apps at matthewbroyer.com")), /*#__PURE__*/React.createElement("p", {
+    className: "mb-about-copy"
+  }, "\xA9 2026 Matthew Broyer. All rights reserved.")));
 }
 function App() {
   const [theme, setTheme] = useState(() => store.get('ap_theme_v5') === 'dark' ? 'dark' : 'light');
